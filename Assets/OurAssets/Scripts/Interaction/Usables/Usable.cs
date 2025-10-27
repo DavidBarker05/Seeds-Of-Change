@@ -1,0 +1,1 @@
+public abstract class Usable : Holdable { public abstract bool Use(Interactable targetInteractable); }

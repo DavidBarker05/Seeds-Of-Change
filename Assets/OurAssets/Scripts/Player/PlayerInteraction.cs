@@ -24,10 +24,15 @@ public class PlayerInteraction : MonoBehaviour
 
     public bool IsHolding { get; private set; }
 
-    void Start() => InputManagerScript.Instance?.AddInteractAction(Interact);
+    void Start()
+    {
+        InputManagerScript.Instance?.AddInteractAction(Interact);
+        InputManagerScript.Instance?.AddUseAction(Use);
+    }
 
     void Update()
     {
+        if (GameManager.Instance?.IsPaused ?? false) return;
         if (currentInteraction == null) return;
         if (currentInteraction is Holdable heldObject)
         {
@@ -46,13 +51,22 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    void OnDestroy() => InputManagerScript.Instance?.RemoveInteractAction(Interact);
+    void OnDestroy()
+    {
+        InputManagerScript.Instance?.RemoveInteractAction(Interact);
+        InputManagerScript.Instance?.RemoveUseAction(Use);
+    }
 
-    void Interact(InputAction.CallbackContext obj)
+    Interactable CheckForInteraction()
     {
         Interactable targetInteraction = null;
         if (Physics.SphereCast(cam.transform.position, interactionRadius, cam.transform.forward, out RaycastHit interactHit, maxInteractionDistance, interactableLayer)) targetInteraction = interactHit.collider.GetComponent<Interactable>();
+        return targetInteraction;
+    }
 
+    void Interact(InputAction.CallbackContext ctx)
+    {
+        Interactable targetInteraction = CheckForInteraction();
         if (targetInteraction != null)
         {
             if (currentInteraction != null)
@@ -79,6 +93,17 @@ public class PlayerInteraction : MonoBehaviour
             bool drop = holdable.Interact(holdPos, holdLayer, GetComponent<Collider>(), cam);
             IsHolding = !drop;
             if (drop) currentInteraction = null;
+        }
+    }
+
+    void Use(InputAction.CallbackContext ctx)
+    {
+        if (currentInteraction == null) return;
+        if (currentInteraction is Usable usable)
+        {
+            Interactable targetInteraction = CheckForInteraction();
+            bool finishedUsing = usable.Use(targetInteraction);
+            if (finishedUsing) Destroy(usable.gameObject);
         }
     }
 }

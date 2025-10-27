@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnDestroy() => InputManagerScript.Instance?.RemoveJumpAction(Jump);
 
-    void Jump(InputAction.CallbackContext obj)
+    void Jump(InputAction.CallbackContext ctx)
     {
         if (isGrounded) vVel = Mathf.Sqrt(2f * -GRAVITY * jumpHeight);
     }

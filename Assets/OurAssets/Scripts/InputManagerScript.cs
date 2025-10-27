@@ -16,6 +16,8 @@ public class InputManagerScript : MonoBehaviour
     InputActionReference interactAction;
     [SerializeField]
     InputActionReference pauseAction;
+    [SerializeField]
+    InputActionReference useAction;
 
     public InputDevice CurrentInputDevice { get; private set; }
     public InputDevice CurrentLookDevice { get; private set; }
@@ -28,6 +30,8 @@ public class InputManagerScript : MonoBehaviour
     public void RemoveInteractAction(System.Action<InputAction.CallbackContext> action) => interactAction.action.started -= action;
     public void AddPauseAction(System.Action<InputAction.CallbackContext> action) => pauseAction.action.started += action;
     public void RemovePauseAction(System.Action<InputAction.CallbackContext> action) => pauseAction.action.started -= action;
+    public void AddUseAction(System.Action<InputAction.CallbackContext> action) => useAction.action.started += action;
+    public void RemoveUseAction(System.Action<InputAction.CallbackContext> action) => useAction.action.started -= action;
 
     void Awake()
     {
@@ -43,11 +47,13 @@ public class InputManagerScript : MonoBehaviour
         jumpAction.action.performed += DetectInputDevice;
         interactAction.action.performed += DetectInputDevice;
         pauseAction.action.performed += DetectInputDevice;
+        useAction.action.performed += DetectInputDevice;
         if (!moveAction.action.enabled) moveAction.action.Enable();
         if (!lookAction.action.enabled) lookAction.action.Enable();
         if (!jumpAction.action.enabled) jumpAction.action.Enable();
         if (!interactAction.action.enabled) interactAction.action.Enable();
         if (!pauseAction.action.enabled) pauseAction.action.Enable();
+        if (!useAction.action.enabled) useAction.action.Enable();
     }
 
     void OnDestroy()
@@ -58,6 +64,7 @@ public class InputManagerScript : MonoBehaviour
         jumpAction.action.performed -= DetectInputDevice;
         interactAction.action.performed -= DetectInputDevice;
         pauseAction.action.performed -= DetectInputDevice;
+        useAction.action.performed -= DetectInputDevice;
     }
 
     void DetectInputDevice(InputAction.CallbackContext ctx) => CurrentInputDevice = ctx.control.device;
