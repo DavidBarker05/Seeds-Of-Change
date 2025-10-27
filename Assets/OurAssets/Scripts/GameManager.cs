@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
             Instance.startCurrentScenePaused = startCurrentScenePaused;
             Instance.startCurrentSceneFocused = startCurrentSceneFocused;
             Instance.IsPaused = startCurrentScenePaused;
-            if (!startCurrentScenePaused && startCurrentSceneFocused) DisableMouse();
+            if (!Instance.IsPaused && startCurrentSceneFocused) DisableMouse();
             else EnableMouse();
             Destroy(gameObject);
         }
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     {
         InputManagerScript.Instance?.AddPauseAction(TogglePause);
         IsPaused = startCurrentScenePaused;
-        if (startCurrentSceneFocused) DisableMouse();
+        if (!IsPaused && startCurrentSceneFocused) DisableMouse();
         else EnableMouse();
     }
 
