@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     bool canPauseInCurrentScene = false;
     [SerializeField]
-    bool startCurrentScenePaused = false;
-    [SerializeField]
     bool startCurrentSceneFocused = false;
 
     bool _isPaused = false;
@@ -31,10 +29,8 @@ public class GameManager : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Instance.canPauseInCurrentScene = canPauseInCurrentScene;
-            Instance.startCurrentScenePaused = startCurrentScenePaused;
             Instance.startCurrentSceneFocused = startCurrentSceneFocused;
-            Instance.IsPaused = startCurrentScenePaused;
-            if (!Instance.IsPaused && startCurrentSceneFocused) DisableMouse();
+            if (startCurrentSceneFocused) DisableMouse();
             else EnableMouse();
             Destroy(gameObject);
         }
@@ -48,8 +44,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         InputManagerScript.Instance?.AddPauseAction(TogglePause);
-        IsPaused = startCurrentScenePaused;
-        if (!IsPaused && startCurrentSceneFocused) DisableMouse();
+        if (startCurrentSceneFocused) DisableMouse();
         else EnableMouse();
     }
 
