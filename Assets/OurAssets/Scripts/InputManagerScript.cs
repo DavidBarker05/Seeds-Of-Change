@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputScript : MonoBehaviour
+public class InputManagerScript : MonoBehaviour
 {
-    [Header("Input Actions")]
+    public static InputManagerScript Instance { get; private set; }
+
+    [Header("Player Actions")]
     [SerializeField]
     InputActionReference moveAction;
     [SerializeField]
@@ -15,49 +17,50 @@ public class PlayerInputScript : MonoBehaviour
     [SerializeField]
     InputActionReference pauseAction;
 
-    public InputDevice CurrentInputDevice { get; private set; } // This will be used to display on screen controls if I have time
-    public InputDevice CurrentLookDevice { get; private set; } // This is used for look sensitivity
-    public InputDevice CurrentPauseDevice { get; private set; } // This will be used unhide the mouse if used keyboard to pause or keep mouse hidden until moved if used a controller (if I have time to add controller menu functionality)
+    public InputDevice CurrentInputDevice { get; private set; }
+    public InputDevice CurrentLookDevice { get; private set; }
 
     public Vector2 MoveInput => moveAction.action.ReadValue<Vector2>();
-    public Vector2 LookAction => lookAction.action.ReadValue<Vector2>();
+    public Vector2 LookInput => lookAction.action.ReadValue<Vector2>();
     public void AddJumpAction(System.Action<InputAction.CallbackContext> action) => jumpAction.action.started += action;
     public void RemoveJumpAction(System.Action<InputAction.CallbackContext> action) => jumpAction.action.started -= action;
     public void AddInteractAction(System.Action<InputAction.CallbackContext> action) => interactAction.action.started += action;
     public void RemoveInteractAction(System.Action<InputAction.CallbackContext> action) => interactAction.action.started -= action;
-    public void AddPauseAction(System.Action<InputAction.CallbackContext> action) => interactAction.action.started += action;
-    public void RemovePauseAction(System.Action<InputAction.CallbackContext> action) => interactAction.action.started -= action;
+    public void AddPauseAction(System.Action<InputAction.CallbackContext> action) => pauseAction.action.started += action;
+    public void RemovePauseAction(System.Action<InputAction.CallbackContext> action) => pauseAction.action.started -= action;
 
     void Awake()
     {
+        if (Instance != null && Instance != this) Destroy(gameObject);
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         moveAction.action.performed += DetectInputDevice;
-        lookAction.action.performed += DetectLookDevice;
         lookAction.action.performed += DetectInputDevice;
+        lookAction.action.performed += DetectLookDevice;
         jumpAction.action.performed += DetectInputDevice;
         interactAction.action.performed += DetectInputDevice;
         pauseAction.action.performed += DetectInputDevice;
-        pauseAction.action.performed += DetectPauseDevice;
-        moveAction.action.Enable();
-        lookAction.action.Enable();
-        jumpAction.action.Enable();
-        interactAction.action.Enable();
-        pauseAction.action.Enable();
+        if (!moveAction.action.enabled) moveAction.action.Enable();
+        if (!lookAction.action.enabled) lookAction.action.Enable();
+        if (!jumpAction.action.enabled) jumpAction.action.Enable();
+        if (!interactAction.action.enabled) interactAction.action.Enable();
+        if (!pauseAction.action.enabled) pauseAction.action.Enable();
     }
 
     void OnDestroy()
     {
         moveAction.action.performed -= DetectInputDevice;
-        lookAction.action.performed -= DetectLookDevice;
         lookAction.action.performed -= DetectInputDevice;
+        lookAction.action.performed -= DetectLookDevice;
         jumpAction.action.performed -= DetectInputDevice;
         interactAction.action.performed -= DetectInputDevice;
         pauseAction.action.performed -= DetectInputDevice;
-        pauseAction.action.performed -= DetectPauseDevice;
     }
 
     void DetectInputDevice(InputAction.CallbackContext ctx) => CurrentInputDevice = ctx.control.device;
 
     void DetectLookDevice(InputAction.CallbackContext ctx) => CurrentLookDevice = ctx.control.device;
-
-    void DetectPauseDevice(InputAction.CallbackContext ctx) => CurrentPauseDevice = ctx.control.device;
 }

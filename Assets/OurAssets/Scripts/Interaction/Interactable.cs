@@ -1,0 +1,1 @@
+public abstract class Interactable : UnityEngine.MonoBehaviour { public abstract bool Interact(params object[] parameters); }
