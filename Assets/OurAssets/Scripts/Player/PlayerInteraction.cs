@@ -22,8 +22,6 @@ public class PlayerInteraction : MonoBehaviour
 
     Interactable currentInteraction;
 
-    public bool IsHolding { get; private set; }
-
     void Start()
     {
         InputManagerScript.Instance?.AddInteractAction(Interact);
@@ -88,10 +86,9 @@ public class PlayerInteraction : MonoBehaviour
 
     void InteractHoldable()
     {
-        if (currentInteraction is Holdable holdable) // Extra safety measure
+        if (currentInteraction is Holdable holdable)
         {
             bool drop = holdable.Interact(holdPos, holdLayer, GetComponent<Collider>(), cam);
-            IsHolding = !drop;
             if (drop) currentInteraction = null;
         }
     }
