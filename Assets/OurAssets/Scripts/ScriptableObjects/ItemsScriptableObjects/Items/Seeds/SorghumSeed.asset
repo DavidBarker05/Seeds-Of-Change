@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff26edf44cc34442a9af163cb84b54c, type: 3}
+  m_Name: SorghumSeed
+  m_EditorClassIdentifier: Assembly-CSharp::SeedScribtableObject
+  itemName: Sorghum Seed
+  isPurchasable: 1
+  isSellable: 1
+  purchasePrice: 9
+  sellPrice: 5
+  packetModel: {fileID: 0}
+  cropToPlant: {fileID: 11400000, guid: 7388df68f54fa694b9ec7a4475682cf2, type: 2}
+  numberOfUses: 3

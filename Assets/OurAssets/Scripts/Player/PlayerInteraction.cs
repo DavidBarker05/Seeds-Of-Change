@@ -38,12 +38,12 @@ public class PlayerInteraction : MonoBehaviour
             int bitMask = ~(holdLayer | gameObject.layer);
             if (Physics.Linecast(cam.transform.position, heldObject.transform.position, bitMask) || Physics.CheckBox(heldObject.transform.position, heldObject.GetComponent<Collider>().bounds.extents, heldObject.transform.rotation, bitMask))
             {
-                holdCamera.gameObject.SetActive(false);
+                holdCamera.gameObject.SetActive(true);
                 holdClipCamera.gameObject.SetActive(true);
             }
             else
             {
-                holdCamera.gameObject.SetActive(true);
+                holdCamera.gameObject.SetActive(false);
                 holdClipCamera.gameObject.SetActive(false);
             }
         }

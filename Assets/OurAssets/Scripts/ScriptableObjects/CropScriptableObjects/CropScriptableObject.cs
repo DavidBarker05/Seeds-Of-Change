@@ -10,10 +10,13 @@ public class CropScriptableObject : ScriptableObject
     GrowthStage[] growthStages;
     [SerializeField]
     LackOfWaterSetback[] lackOfWaterSetbacks;
+    [SerializeField]
+    bool isSusceptibleToDrought;
 
     public string CropName => cropName;
     public GrowthStage[] GrowthStages => (GrowthStage[])growthStages.Clone();
     public LackOfWaterSetback[] LackOfWaterSetbacks => (LackOfWaterSetback[])lackOfWaterSetbacks.Clone();
+    public bool IsSusceptibleToDrought => isSusceptibleToDrought;
 }
 
 [Serializable]

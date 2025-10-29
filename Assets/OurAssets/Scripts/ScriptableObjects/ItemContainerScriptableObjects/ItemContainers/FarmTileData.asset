@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemContainerScriptableObject
   acceptableItems:
   - {fileID: 11400000, guid: 2d5c340628f5e214d80376cee304c8d9, type: 2}
+  - {fileID: 11400000, guid: 026b489dc174635479779b39391ead56, type: 2}
   - {fileID: 11400000, guid: fb8c7b43c38c97b49b0f5eda893f2392, type: 2}
   containerCapacity: 2

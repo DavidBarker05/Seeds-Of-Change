@@ -109,7 +109,7 @@ public class FarmTile : ItemContainer, IEventListener
         else if (item.ItemName == "Watering Can")
         {
             ++timesWateredToday;
-            if (timesWateredToday < (isInDrought ? waterNeededPerDayInDrought : waterNeededPerDay)) return true; // Handled the watering and don't want to add it to the stored items
+            if (timesWateredToday < (isInDrought && (currentCrop?.IsSusceptibleToDrought ?? true) ? waterNeededPerDayInDrought : waterNeededPerDay)) return true; // Handled the watering and don't want to add it to the stored items
             daysWithoutWater = 0;
             growthIsPaused = false;
             IsWet = true;
