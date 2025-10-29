@@ -58,7 +58,7 @@ public class PlayerInteraction : MonoBehaviour
     Interactable CheckForInteraction()
     {
         Interactable targetInteraction = null;
-        if (Physics.SphereCast(cam.transform.position, interactionRadius, cam.transform.forward, out RaycastHit interactHit, maxInteractionDistance, interactableLayer)) targetInteraction = interactHit.collider.GetComponent<Interactable>();
+        if (Physics.SphereCast(cam.transform.position, interactionRadius, cam.transform.forward, out RaycastHit interactHit, maxInteractionDistance, interactableLayer, QueryTriggerInteraction.Collide)) targetInteraction = interactHit.collider.GetComponent<Interactable>();
         return targetInteraction;
     }
 
@@ -67,6 +67,11 @@ public class PlayerInteraction : MonoBehaviour
         Interactable targetInteraction = CheckForInteraction();
         if (targetInteraction != null)
         {
+            if (targetInteraction is HouseDoor)
+            {
+                targetInteraction.Interact(gameObject);
+                return;
+            }
             if (currentInteraction != null)
             {
                 if (currentInteraction is Holdable) InteractHoldable();

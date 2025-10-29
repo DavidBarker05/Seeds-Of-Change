@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24a36a8c9c6d6b45ae6e0f4cb71280e, type: 3}
+  m_Name: Cowpea
+  m_EditorClassIdentifier: Assembly-CSharp::CropScriptableObject
+  cropName: Cowpea
+  growthStages:
+  - aliveCrop:
+      cropPrefab: {fileID: 6527012688555190769, guid: 1f367e4b7682f5e4f81953f21b6304de, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+    deadCrop:
+      cropPrefab: {fileID: 6022430914221759758, guid: 4e439de27c3a5d54c8b06690cb74c408, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+  - aliveCrop:
+      cropPrefab: {fileID: 3146746852324661726, guid: 931efb100e892924c8e563cf532818ef, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+    deadCrop:
+      cropPrefab: {fileID: 1366468592335864336, guid: 18ce273889c92334f8d91c98bb99e0a7, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+  - aliveCrop:
+      cropPrefab: {fileID: 5870670411777605989, guid: 5fa7796139af9f74a8f00e680e4a79e6, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+    deadCrop:
+      cropPrefab: {fileID: 2578888624295960155, guid: f6f0323f4967dd148bff56c6b9bf1762, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+  - aliveCrop:
+      cropPrefab: {fileID: 2894880773294413020, guid: e6118c76fc54d464db620aa62f1e722b, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+    deadCrop:
+      cropPrefab: {fileID: 3981396358391881674, guid: 3f97fd2e6a109dd469e97ea8a4bb70d0, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+  lackOfWaterSetbacks:
+  - daysWithoutWater: 1
+    type: 0
+    chance: 100
+    strength: 0
+  - daysWithoutWater: 2
+    type: 2
+    chance: 50
+    strength: 0
+  - daysWithoutWater: 4
+    type: 2
+    chance: 100
+    strength: 0

@@ -1,5 +1,4 @@
-using UnityEngine;
-
+[System.Serializable]
 public class UserSettings
 {
     public int[] resolution = new int[2];
