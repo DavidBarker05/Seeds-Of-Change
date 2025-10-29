@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Renderer))]
 public class FarmTile : ItemContainer, IEventListener
 {
     [Header("Spawning")]
@@ -15,8 +16,18 @@ public class FarmTile : ItemContainer, IEventListener
     int waterNeededPerDay = 1;
     [SerializeField, Min(1)]
     int waterNeededPerDayInDrought = 2;
+    [Header("Materials")]
+    [SerializeField]
+    Material soilMaterial;
+    [SerializeField]
+    Material wetSoilMaterial;
+    [SerializeField]
+    Material farmlandMaterial;
+    [SerializeField]
+    Material wetFarmlandMaterial;
 
     CropScriptableObject currentCrop;
+    Renderer _renderer;
 
     GameObject currentCropPrefab;
     int currentGrowCycle;
@@ -27,6 +38,31 @@ public class FarmTile : ItemContainer, IEventListener
     bool isInDrought;
     int timesWateredToday = 0;
 
+    bool _isTilled;
+    bool _isWet;
+
+    bool IsTilled
+    {
+        get => _isTilled;
+        set
+        {
+            _isTilled = value;
+            UpdateMaterial();
+        }
+    }
+
+    bool IsWet
+    {
+        get => _isWet;
+        set
+        {
+            _isWet = value;
+            UpdateMaterial();
+        }
+    }
+
+    void Awake() => _renderer = GetComponent<Renderer>();
+
     void Start()
     {
         EventBus.Instance?.AddEventListener(GameEventType.NewDayEvent, this);
@@ -34,7 +70,12 @@ public class FarmTile : ItemContainer, IEventListener
         EventBus.Instance?.AddEventListener(GameEventType.RainWeatherEvent, this);
         EventBus.Instance?.AddEventListener(GameEventType.DroughtDisasterEventStart, this);
         EventBus.Instance?.AddEventListener(GameEventType.DroughtDisasterEventEnd, this);
-        if (startingSeed == null) return;
+        if (startingSeed == null)
+        {
+            IsTilled = false;
+            return;
+        }
+        IsTilled = true;
         currentCrop = startingSeed.CropToPlant;
         currentGrowCycle = Mathf.Clamp(startingGrowthStage, 1, currentCrop.GrowthStages.Length);
         currentCropPrefab = Instantiate(currentCrop.GrowthStages[currentGrowCycle - 1].aliveCrop.cropPrefab, spawnPosition.position, spawnPosition.rotation);
@@ -71,6 +112,7 @@ public class FarmTile : ItemContainer, IEventListener
             if (timesWateredToday < (isInDrought ? waterNeededPerDayInDrought : waterNeededPerDay)) return true; // Handled the watering and don't want to add it to the stored items
             daysWithoutWater = 0;
             growthIsPaused = false;
+            IsWet = true;
             return true; // Handled the watering and don't want to add it to the stored items
         }
         return false;
@@ -79,8 +121,11 @@ public class FarmTile : ItemContainer, IEventListener
     protected override void ExtraClearLogic()
     {
         currentCrop = null;
+        IsTilled = false;
         Destroy(currentCropPrefab);
     }
+
+    void UpdateMaterial() => _renderer.material = IsTilled ? (IsWet ? wetFarmlandMaterial : farmlandMaterial) : (IsWet ? wetSoilMaterial : soilMaterial);
 
     public void OnEventReceived(GameEventType eventType, params object[] parameters)
     {
@@ -91,9 +136,11 @@ public class FarmTile : ItemContainer, IEventListener
                 break;
             case GameEventType.ClearSkyWeatherEvent:
                 ++daysWithoutWater;
+                IsWet = false;
                 break;
             case GameEventType.RainWeatherEvent:
                 daysWithoutWater = 0;
+                IsWet = true;
                 break;
             case GameEventType.DroughtDisasterEventStart:
                 isInDrought = true;

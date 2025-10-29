@@ -43,7 +43,9 @@ public class WorldManager : MonoBehaviour, IEventListener
     public Season CurrentSeason => seasonManager.CurrentSeason;
     public Weather CurrentWeather => weatherManager.CurrentWeather;
 
+    bool canResetForcedWeather;
     Weather forcedWeather = Weather.None;
+    bool canResetForcedDisaster;
     Disaster forcedDisaster = Disaster.None;
 
     void Awake()
@@ -57,40 +59,67 @@ public class WorldManager : MonoBehaviour, IEventListener
 
     void Start()
     {
+        EventBus.Instance?.AddEventListener(GameEventType.DroughtDisasterEventStart, this);
+        EventBus.Instance?.AddEventListener(GameEventType.DroughtDisasterEventEnd, this);
+        canResetForcedWeather = true;
+        canResetForcedDisaster = true;
         CurrentDay = 1;
         CurrentDayInSeason = 1;
         weatherManager.DoWeather(CurrentSeason);
+    }
+
+    void OnDestroy()
+    {
+        EventBus.Instance?.RemoveEventListener(GameEventType.DroughtDisasterEventStart, this);
+        EventBus.Instance?.RemoveEventListener(GameEventType.DroughtDisasterEventEnd, this);
     }
 
     public void MoveToNextDay()
     {
         ++CurrentDay;
         ++CurrentDayInSeason;
-        if (CurrentDayInSeason > daysPerSeason)
-        {
-            seasonManager.DoSeasonChange();
-            CurrentDayInSeason = 1;
-        }
+        if (CurrentDayInSeason > daysPerSeason) DoSeasonChange();
+        DoWeather();
+        DoDisaster();
+        EventBus.Instance?.BroadcastEvent(GameEventType.NewDayEvent);
+    }
+
+    void DoSeasonChange()
+    {
+        seasonManager.DoSeasonChange();
+        CurrentDayInSeason = 1;
+    }
+
+    void DoWeather()
+    {
         if (forcedWeather == Weather.None) weatherManager.DoWeather(CurrentSeason);
         else
         {
             weatherManager.DoWeather(forcedWeather);
-            forcedWeather = Weather.None;
+            if (canResetForcedWeather) forcedWeather = Weather.None;
         }
+    }
+
+    void DoDisaster()
+    {
         if (forcedDisaster == Disaster.None) disasterManager.DoDisaster(CurrentSeason);
         else
         {
             disasterManager.DoDisaster(forcedDisaster);
-            forcedDisaster = Disaster.None;
+            if (canResetForcedDisaster) forcedDisaster = Disaster.None;
         }
-        EventBus.Instance?.BroadcastEvent(GameEventType.NewDayEvent);
     }
 
     public void OnEventReceived(GameEventType eventType, params object[] parameters)
     {
         switch (eventType)
         {
+            case GameEventType.DroughtDisasterEventStart:
+                canResetForcedWeather = false;
+                forcedWeather = Weather.ClearSky;
+                break;
             case GameEventType.DroughtDisasterEventEnd:
+                canResetForcedWeather = true;
                 forcedWeather = Weather.Rain;
                 break;
             default:
