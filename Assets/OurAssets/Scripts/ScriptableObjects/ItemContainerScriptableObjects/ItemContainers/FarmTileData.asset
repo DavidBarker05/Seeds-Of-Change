@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3137eac434d27c478310895797f2a03, type: 3}
   m_Name: FarmTileData
   m_EditorClassIdentifier: Assembly-CSharp::ItemContainerScriptableObject
-  acceptableItems:
+  <ContainerName>k__BackingField: Farmland Tile
+  <AcceptableItems>k__BackingField:
   - {fileID: 11400000, guid: 2d5c340628f5e214d80376cee304c8d9, type: 2}
   - {fileID: 11400000, guid: 026b489dc174635479779b39391ead56, type: 2}
   - {fileID: 11400000, guid: 0799cf61ac3bfd2468899430348dbdd1, type: 2}
-  containerCapacity: 1
+  <ContainerCapacity>k__BackingField: 1

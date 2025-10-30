@@ -44,7 +44,7 @@ public abstract class ItemContainer : Interactable
         if (containerData == null || currentCapacity >= containerData.ContainerCapacity) return false;
         ExtraAddLogic(item);
         int adjustedAmount = amount;
-        if (currentCapacity + amount > containerData.ContainerCapacity) adjustedAmount = currentCapacity + amount - containerData.ContainerCapacity;
+        if (currentCapacity + amount > containerData.ContainerCapacity) adjustedAmount = containerData.ContainerCapacity - currentCapacity;
         if (acceptedItems.ContainsKey(item))
         {
             acceptedItems[item] += adjustedAmount;

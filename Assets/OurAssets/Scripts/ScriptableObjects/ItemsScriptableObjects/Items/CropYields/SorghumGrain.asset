@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d3e836e6888cc44ba596a30e480dae9, type: 3}
-  m_Name: EmptyItem
+  m_Name: SorghumGrain
   m_EditorClassIdentifier: Assembly-CSharp::ItemScriptableObject
-  <ItemName>k__BackingField: Empty Item
-  <IsPurchasable>k__BackingField: 0
-  <IsSellable>k__BackingField: 0
+  itemName: Sorghum Grain
+  isPurchasable: 0
+  isSellable: 1
   purchasePrice: 0
   sellPrice: 0

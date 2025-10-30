@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff26edf44cc34442a9af163cb84b54c, type: 3}
   m_Name: SorghumSeed
   m_EditorClassIdentifier: Assembly-CSharp::SeedScribtableObject
-  itemName: Sorghum Seed
-  isPurchasable: 1
-  isSellable: 1
-  purchasePrice: 4
-  sellPrice: 2
-  packetModel: {fileID: 0}
-  cropToPlant: {fileID: 11400000, guid: 7388df68f54fa694b9ec7a4475682cf2, type: 2}
-  numberOfUses: 3
+  <ItemName>k__BackingField: Sorghum Seed
+  <IsPurchasable>k__BackingField: 1
+  <IsSellable>k__BackingField: 1
+  <PurchasePrice>k__BackingField: 4
+  <SellPrice>k__BackingField: 2
+  <Model>k__BackingField: {fileID: 0}
+  <CropToPlant>k__BackingField: {fileID: 11400000, guid: 7388df68f54fa694b9ec7a4475682cf2, type: 2}
+  <NumberOfUses>k__BackingField: 3

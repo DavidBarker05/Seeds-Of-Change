@@ -10,7 +10,8 @@ public enum GameEventType
     DroughtDisasterEventStart,
     DroughtDisasterEventEnd,
     PestDisasterEventStart,
-    PestDisasterEventEnd
+    PestDisasterEventEnd,
+    PlayerInventoryUpdate
 }
 
 public class EventBus : MonoBehaviour

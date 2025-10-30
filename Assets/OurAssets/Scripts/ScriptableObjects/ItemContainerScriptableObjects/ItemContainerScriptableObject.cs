@@ -4,11 +4,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ItemContainerScriptableObject", menuName = "Scriptable Objects/ItemContainerScriptableObject")]
 public class ItemContainerScriptableObject : ScriptableObject
 {
-    [SerializeField]
-    List<ItemScriptableObject> acceptableItems = new List<ItemScriptableObject>();
-    [SerializeField]
-    int containerCapacity;
-
-    public List<ItemScriptableObject> AcceptableItems => new List<ItemScriptableObject>(acceptableItems);
-    public int ContainerCapacity => containerCapacity;
+    [field: SerializeField]
+    public string ContainerName { get; set; }
+    [field: SerializeField]
+    public List<ItemScriptableObject> AcceptableItems { get; private set; }
+    [field: SerializeField]
+    public int ContainerCapacity { get; private set; }
 }

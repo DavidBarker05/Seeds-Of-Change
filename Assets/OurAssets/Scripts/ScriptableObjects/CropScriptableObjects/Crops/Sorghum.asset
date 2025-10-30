@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24a36a8c9c6d6b45ae6e0f4cb71280e, type: 3}
   m_Name: Sorghum
   m_EditorClassIdentifier: Assembly-CSharp::CropScriptableObject
-  cropName: Sorghum
-  growthStages:
+  <CropName>k__BackingField: Sorghum Crop
+  <GrowthStages>k__BackingField:
   - aliveCrop:
       cropPrefab: {fileID: 200636035382649317, guid: dcaed0845c60467428f4bf7b879fcf53, type: 3}
       cropYield:
@@ -44,7 +44,7 @@ MonoBehaviour:
       cropYield:
         yieldItem: {fileID: 0}
         yieldAmount: 0
-  lackOfWaterSetbacks:
+  <LackOfWaterSetbacks>k__BackingField:
   - daysWithoutWater: 1
     type: 1
     chance: 100
@@ -53,4 +53,4 @@ MonoBehaviour:
     type: 2
     chance: 100
     strength: 0
-  isSusceptibleToDrought: 0
+  <IsSusceptibleToDrought>k__BackingField: 0

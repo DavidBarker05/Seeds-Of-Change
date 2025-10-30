@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24a36a8c9c6d6b45ae6e0f4cb71280e, type: 3}
   m_Name: Tomato
   m_EditorClassIdentifier: Assembly-CSharp::CropScriptableObject
-  cropName: Tomato
-  growthStages:
+  <CropName>k__BackingField: Tomato Crop
+  <GrowthStages>k__BackingField:
   - aliveCrop:
       cropPrefab: {fileID: 4199144359805978696, guid: c2b4dc55a38d6394f94988eb9386e937, type: 3}
       cropYield:
@@ -64,9 +64,9 @@ MonoBehaviour:
       cropYield:
         yieldItem: {fileID: 0}
         yieldAmount: 0
-  lackOfWaterSetbacks:
+  <LackOfWaterSetbacks>k__BackingField:
   - daysWithoutWater: 1
     type: 2
     chance: 100
     strength: 0
-  isSusceptibleToDrought: 1
+  <IsSusceptibleToDrought>k__BackingField: 1

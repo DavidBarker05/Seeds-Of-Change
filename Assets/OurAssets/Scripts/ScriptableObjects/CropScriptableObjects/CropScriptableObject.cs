@@ -4,19 +4,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CropScriptableObject", menuName = "Scriptable Objects/CropScriptableObject")]
 public class CropScriptableObject : ScriptableObject
 {
-    [SerializeField]
-    string cropName;
-    [SerializeField]
-    GrowthStage[] growthStages;
-    [SerializeField]
-    LackOfWaterSetback[] lackOfWaterSetbacks;
-    [SerializeField]
-    bool isSusceptibleToDrought;
-
-    public string CropName => cropName;
-    public GrowthStage[] GrowthStages => (GrowthStage[])growthStages.Clone();
-    public LackOfWaterSetback[] LackOfWaterSetbacks => (LackOfWaterSetback[])lackOfWaterSetbacks.Clone();
-    public bool IsSusceptibleToDrought => isSusceptibleToDrought;
+    [field: SerializeField]
+    public string CropName { get; private set; }
+    [field: SerializeField]
+    public GrowthStage[] GrowthStages { get; private set; }
+    [field: SerializeField]
+    public LackOfWaterSetback[] LackOfWaterSetbacks { get; private set; }
+    [field: SerializeField]
+    public bool IsSusceptibleToDrought { get; private set; }
 }
 
 [Serializable]

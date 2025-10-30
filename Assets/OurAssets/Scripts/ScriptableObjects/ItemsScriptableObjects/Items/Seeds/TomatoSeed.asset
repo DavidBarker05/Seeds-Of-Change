@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff26edf44cc34442a9af163cb84b54c, type: 3}
   m_Name: TomatoSeed
   m_EditorClassIdentifier: Assembly-CSharp::SeedScribtableObject
-  itemName: Tomato Seed
-  isPurchasable: 1
-  isSellable: 1
-  purchasePrice: 5
-  sellPrice: 2
-  packetModel: {fileID: 0}
-  cropToPlant: {fileID: 11400000, guid: 1694085bd1d43c142a4ada7b68815018, type: 2}
-  numberOfUses: 3
+  <ItemName>k__BackingField: Tomato Seed
+  <IsPurchasable>k__BackingField: 1
+  <IsSellable>k__BackingField: 1
+  <PurchasePrice>k__BackingField: 5
+  <SellPrice>k__BackingField: 2
+  <Model>k__BackingField: {fileID: 0}
+  <CropToPlant>k__BackingField: {fileID: 11400000, guid: 1694085bd1d43c142a4ada7b68815018, type: 2}
+  <NumberOfUses>k__BackingField: 3
