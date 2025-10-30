@@ -22,7 +22,11 @@ public abstract class ItemContainer : Interactable
         {
             if (parameters[0] is ItemScriptableObject item)
             {
-                if (containerData?.AcceptableItems.Contains(item) ?? false) return AddItem(item);
+                if (containerData?.AcceptableItems.Contains(item) ?? false)
+                {
+                    if (parameters[1] is int amount) return AddItem(item, amount);
+                    else return AddItem(item);
+                }
             }
             else if (parameters[0] is bool clearItems) ClearItems(); // This will be used for stuff like harvesting
             else
@@ -35,19 +39,21 @@ public abstract class ItemContainer : Interactable
         return false;
     }
 
-    bool AddItem(ItemScriptableObject item)
+    public bool AddItem(ItemScriptableObject item, int amount = 1)
     {
         if (containerData == null || currentCapacity >= containerData.ContainerCapacity) return false;
-        if (ExtraAddLogic(item)) return true; // Adding was already handled
+        ExtraAddLogic(item);
+        int adjustedAmount = amount;
+        if (currentCapacity + amount > containerData.ContainerCapacity) adjustedAmount = currentCapacity + amount - containerData.ContainerCapacity;
         if (acceptedItems.ContainsKey(item))
         {
-            ++acceptedItems[item];
-            ++currentCapacity;
+            acceptedItems[item] += adjustedAmount;
+            currentCapacity += adjustedAmount;
         }
         else
         {
-            acceptedItems.Add(item, 1);
-            ++currentCapacity;
+            acceptedItems.Add(item, adjustedAmount);
+            currentCapacity += adjustedAmount;
         }
         return true;
     }
@@ -59,7 +65,7 @@ public abstract class ItemContainer : Interactable
         currentCapacity = 0;
     }
 
-    protected abstract bool ExtraAddLogic(ItemScriptableObject item);
+    protected abstract void ExtraAddLogic(ItemScriptableObject item);
 
     protected abstract void ExtraClearLogic();
 }

@@ -79,8 +79,8 @@ public class FarmTile : ItemContainer, IEventListener
         currentCrop = startingSeed.CropToPlant;
         currentGrowCycle = Mathf.Clamp(startingGrowthStage, 1, currentCrop.GrowthStages.Length);
         currentCropPrefab = Instantiate(currentCrop.GrowthStages[currentGrowCycle - 1].aliveCrop.cropPrefab, spawnPosition.position, spawnPosition.rotation);
-        daysWithoutWater = 1;
-        waterNeededPerDay = 1;
+        daysWithoutWater = 0; // 0 because then sunny day gets called and sets it to 1
+        timesWateredToday = 0;
         acceptedItems.Add(startingSeed, 1);
     }
 
@@ -93,29 +93,18 @@ public class FarmTile : ItemContainer, IEventListener
         EventBus.Instance?.RemoveEventListener(GameEventType.DroughtDisasterEventEnd, this);
     }
 
-    protected override bool ExtraAddLogic(ItemScriptableObject item)
+    protected override void ExtraAddLogic(ItemScriptableObject item)
     {
         if (item is SeedScribtableObject seed)
         {
-            if (currentCapacity > 0) return true; // Handled because can't take more crops
+            if (currentCapacity > 0) return;
             currentCrop = seed.CropToPlant;
             currentGrowCycle = 0;
             daysWithoutWater = 1;
             growthIsPaused = false;
             currentYield = 100f;
             isDead = false;
-            waterNeededPerDay = 1;
         }
-        else if (item.ItemName == "Watering Can")
-        {
-            ++timesWateredToday;
-            if (timesWateredToday < (isInDrought && (currentCrop?.IsSusceptibleToDrought ?? true) ? waterNeededPerDayInDrought : waterNeededPerDay)) return true; // Handled the watering and don't want to add it to the stored items
-            daysWithoutWater = 0;
-            growthIsPaused = false;
-            IsWet = true;
-            return true; // Handled the watering and don't want to add it to the stored items
-        }
-        return false;
     }
 
     protected override void ExtraClearLogic()
@@ -123,6 +112,15 @@ public class FarmTile : ItemContainer, IEventListener
         currentCrop = null;
         IsTilled = false;
         Destroy(currentCropPrefab);
+    }
+
+    public void WaterPlant()
+    {
+        ++timesWateredToday;
+        if (timesWateredToday < (isInDrought && (currentCrop?.IsSusceptibleToDrought ?? true) ? waterNeededPerDayInDrought : waterNeededPerDay)) return;
+        daysWithoutWater = 0;
+        growthIsPaused = false;
+        IsWet = true;
     }
 
     void UpdateMaterial() => _renderer.material = IsTilled ? (IsWet ? wetFarmlandMaterial : farmlandMaterial) : (IsWet ? wetSoilMaterial : soilMaterial);
@@ -167,6 +165,7 @@ public class FarmTile : ItemContainer, IEventListener
 
     void CheckForWaterSetbacks()
     {
+        if (daysWithoutWater == 0) growthIsPaused = false;
         foreach (LackOfWaterSetback lackOfWaterSetback in currentCrop.LackOfWaterSetbacks)
         {
             if (daysWithoutWater < lackOfWaterSetback.daysWithoutWater) continue;

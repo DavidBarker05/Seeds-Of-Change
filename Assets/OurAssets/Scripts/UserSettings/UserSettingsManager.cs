@@ -15,8 +15,8 @@ public class UserSettingsManager : MonoBehaviour
         get => currentSettings.resolution;
         set
         {
-            int width = value.Length > 0 ? Mathf.Min(value[0], 1024) : currentSettings.resolution[0];
-            int height = value.Length >= 2 ? Mathf.Min(value[1], 576) : width * 9 / 16;
+            int width = value.Length > 0 ? Mathf.Max(value[0], 1024) : currentSettings.resolution[0];
+            int height = value.Length >= 2 ? Mathf.Max(value[1], 576) : width * 9 / 16;
             currentSettings.resolution = new int[2] { width, height };
             Screen.SetResolution(width, height, true);
         }

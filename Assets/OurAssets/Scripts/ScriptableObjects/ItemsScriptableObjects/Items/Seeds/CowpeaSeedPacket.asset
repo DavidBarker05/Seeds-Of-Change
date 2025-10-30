@@ -15,8 +15,8 @@ MonoBehaviour:
   itemName: Cowpea Seed Packet
   isPurchasable: 1
   isSellable: 1
-  purchasePrice: 8
-  sellPrice: 5
+  purchasePrice: 3
+  sellPrice: 1
   packetModel: {fileID: 0}
   cropToPlant: {fileID: 11400000, guid: 0ff9853531197cd478bc7ac4f9c515a3, type: 2}
   numberOfUses: 3

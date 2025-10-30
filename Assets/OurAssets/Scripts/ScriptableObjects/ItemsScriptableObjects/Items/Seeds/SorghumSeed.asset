@@ -15,8 +15,8 @@ MonoBehaviour:
   itemName: Sorghum Seed
   isPurchasable: 1
   isSellable: 1
-  purchasePrice: 9
-  sellPrice: 5
+  purchasePrice: 4
+  sellPrice: 2
   packetModel: {fileID: 0}
   cropToPlant: {fileID: 11400000, guid: 7388df68f54fa694b9ec7a4475682cf2, type: 2}
   numberOfUses: 3

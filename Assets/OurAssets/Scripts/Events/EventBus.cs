@@ -8,7 +8,9 @@ public enum GameEventType
     ClearSkyWeatherEvent,
     RainWeatherEvent,
     DroughtDisasterEventStart,
-    DroughtDisasterEventEnd
+    DroughtDisasterEventEnd,
+    PestDisasterEventStart,
+    PestDisasterEventEnd
 }
 
 public class EventBus : MonoBehaviour

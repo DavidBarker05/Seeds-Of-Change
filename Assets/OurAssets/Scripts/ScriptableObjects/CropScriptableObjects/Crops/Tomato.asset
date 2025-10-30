@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24a36a8c9c6d6b45ae6e0f4cb71280e, type: 3}
+  m_Name: Tomato
+  m_EditorClassIdentifier: Assembly-CSharp::CropScriptableObject
+  cropName: Tomato
+  growthStages:
+  - aliveCrop:
+      cropPrefab: {fileID: 4199144359805978696, guid: c2b4dc55a38d6394f94988eb9386e937, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+    deadCrop:
+      cropPrefab: {fileID: 8649068110952320295, guid: b3e9ed4c7d962634aa085b16a04524c5, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+  - aliveCrop:
+      cropPrefab: {fileID: 7255839491426191400, guid: 218d8d1b1aff8fa4981123a712f711fd, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+    deadCrop:
+      cropPrefab: {fileID: 4345276339845437689, guid: c821c48a9361ca349b52b42ec707b4f9, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+  - aliveCrop:
+      cropPrefab: {fileID: 6501070087505364472, guid: d9221971fc8f58c46a8626651d43b829, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+    deadCrop:
+      cropPrefab: {fileID: 3078659581037485301, guid: 24200541b33c676458977921ed8b78a6, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+  - aliveCrop:
+      cropPrefab: {fileID: 220532429232886098, guid: b9ef2a8f21da4db40bc6c9e08b6d163b, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+    deadCrop:
+      cropPrefab: {fileID: 5410842631302190416, guid: 02e4ca995109be64c93b049899a1b4e4, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+  - aliveCrop:
+      cropPrefab: {fileID: 5187557450143981699, guid: c77e75e285be5ab4683ebb8ed2790c2e, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+    deadCrop:
+      cropPrefab: {fileID: 5856141607206583216, guid: 34dfa37be012768428c5f517d5946362, type: 3}
+      cropYield:
+        yieldItem: {fileID: 0}
+        yieldAmount: 0
+  lackOfWaterSetbacks:
+  - daysWithoutWater: 1
+    type: 2
+    chance: 100
+    strength: 0
+  isSusceptibleToDrought: 1
