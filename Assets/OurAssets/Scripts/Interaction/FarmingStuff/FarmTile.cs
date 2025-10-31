@@ -95,18 +95,20 @@ public class FarmTile : ItemContainer, IEventListener
         EventBus.Instance?.RemoveEventListener(GameEventType.PlantWateredEvent, this);
     }
 
-    protected override void ExtraAddLogic(ItemScriptableObject item)
+    protected override bool ExtraAddLogic(ItemScriptableObject item)
     {
         if (item is SeedScribtableObject seed)
         {
-            if (currentCapacity > 0) return;
+            if (currentCapacity > 0 || !IsTilled) return false;
             currentCrop = seed.CropToPlant;
             currentGrowCycle = 0;
             daysWithoutWater = 1;
             growthIsPaused = false;
             currentYield = 100f;
             isDead = false;
+            return true;
         }
+        return false;
     }
 
     protected override void ExtraClearLogic()
@@ -124,6 +126,8 @@ public class FarmTile : ItemContainer, IEventListener
         growthIsPaused = false;
         IsWet = true;
     }
+
+    public void TillSoil() => IsTilled = true;
 
     void UpdateMaterial() => _renderer.material = IsTilled ? (IsWet ? wetFarmlandMaterial : farmlandMaterial) : (IsWet ? wetSoilMaterial : soilMaterial);
 
@@ -163,6 +167,7 @@ public class FarmTile : ItemContainer, IEventListener
         CheckForWaterSetbacks();
         if (currentCrop == null) return;
         if (!isDead && !growthIsPaused) currentGrowCycle = Mathf.Clamp(++currentGrowCycle, 1, currentCrop.GrowthStages.Length);
+        else if (currentGrowCycle == 0) ++currentGrowCycle;
         if (currentCropPrefab != null) Destroy(currentCropPrefab);
         GameObject cropPrefab = isDead ? currentCrop.GrowthStages[currentGrowCycle - 1].deadCrop.cropPrefab : currentCrop.GrowthStages[currentGrowCycle - 1].aliveCrop.cropPrefab;
         currentCropPrefab = Instantiate(cropPrefab, spawnPosition.position, spawnPosition.rotation);

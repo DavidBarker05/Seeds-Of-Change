@@ -45,7 +45,7 @@ public class Holdable : Interactable
         }
     }
 
-    void Awake()
+    protected void Awake()
     {
         rb = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
@@ -132,12 +132,18 @@ public class Holdable : Interactable
         // If ground layer does include own layer do the following
         if (checkedHoldables.Contains(this)) return false; // If already checked this object return false
         checkedHoldables.Add(this); // Since this wasn't checked before make sure it won't be checked again
+        System.Array.Clear(groundColliders, 0, groundColliders.Length);
         if (Physics.OverlapBoxNonAlloc(_collider.bounds.center + Vector3.down * groundDistance, _collider.bounds.extents, groundColliders, transform.rotation, groundLayer) > 1) // Ground check overlaps with more than seld
         {
             foreach (Collider groundCollider in groundColliders)
             {
+                if (groundCollider == null) continue;
                 // If the collider isn't holdable (normal ground) this object is grounded, or if checked holdables doesn't contain the holdable and it is grounded then this object is grounded
-                if (!groundCollider.TryGetComponent<Holdable>(out Holdable holdable) || !checkedHoldables.Contains(holdable) && holdable.IsGroundedInternal(checkedHoldables)) return true;
+                if (groundCollider.TryGetComponent<Holdable>(out Holdable holdable))
+                {
+                    if (!checkedHoldables.Contains(holdable) && holdable.IsGroundedInternal(checkedHoldables)) return true;
+                }
+                else return true;
             }
         }
         return false; // We're not on the ground or touching something that is grounded then not grounded
@@ -174,10 +180,12 @@ public class Holdable : Interactable
     {
         Vector3 totalOffset = Vector3.zero;
         int hitCount = 0;
+        System.Array.Clear(clippingColliders, 0, clippingColliders.Length);
         int clipCount = Physics.OverlapBoxNonAlloc(_collider.bounds.center, _collider.bounds.extents, clippingColliders, transform.rotation, bitMask);
         if (!isClipping && clipCount == 0) return; // Not clipping at all
         foreach (Collider clippingCollider in clippingColliders)
         {
+            if (clippingCollider == null) continue;
             isClipping = true;
             Vector3 closest = clippingCollider.ClosestPoint(transform.position);
             if (closest == transform.position) continue; // If the centre of the box is inside the collider skip it because the camera raycast will correct it

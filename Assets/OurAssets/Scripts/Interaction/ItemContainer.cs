@@ -12,10 +12,10 @@ public abstract class ItemContainer : Interactable
     public override bool Interact(params object[] parameters)
     {
         if (containerData == null) Debug.LogError($"ERROR: ItemContainer needs a valid ItemContainerScriptableObject");
-        if (parameters.Length != 1)
+        if (parameters.Length != 1 && parameters.Length != 2)
         {
             #if UNITY_EDITOR
-                Debug.LogWarning($"WARNING: ItemContainer objects need 1 parameter. Received {parameters.Length} parameter(s)");
+                Debug.LogWarning($"WARNING: ItemContainer objects need 1 or 2 parameters. Received {parameters.Length} parameter(s)");
             #endif
         }
         else
@@ -42,7 +42,7 @@ public abstract class ItemContainer : Interactable
     public bool AddItem(ItemScriptableObject item, int amount = 1)
     {
         if (containerData == null || currentCapacity >= containerData.ContainerCapacity) return false;
-        ExtraAddLogic(item);
+        if (!ExtraAddLogic(item)) return false;
         int adjustedAmount = amount;
         if (currentCapacity + amount > containerData.ContainerCapacity) adjustedAmount = containerData.ContainerCapacity - currentCapacity;
         if (acceptedItems.ContainsKey(item))
@@ -65,7 +65,7 @@ public abstract class ItemContainer : Interactable
         currentCapacity = 0;
     }
 
-    protected abstract void ExtraAddLogic(ItemScriptableObject item);
+    protected abstract bool ExtraAddLogic(ItemScriptableObject item);
 
     protected abstract void ExtraClearLogic();
 }

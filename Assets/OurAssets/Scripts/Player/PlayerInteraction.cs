@@ -91,7 +91,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (currentInteraction is Holdable holdable)
         {
-            bool drop = holdable.Interact(holdPos, holdLayer, GetComponent<Collider>(), cam);
+            bool drop = holdable.Interact(holdPos, holdLayer, GetComponent<CharacterController>() as Collider, cam);
             if (drop) currentInteraction = null;
         }
     }

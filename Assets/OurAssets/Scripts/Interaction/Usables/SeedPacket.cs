@@ -2,17 +2,16 @@ using UnityEngine;
 
 public class SeedPacket : Usable
 {
-    SeedScribtableObject _seedData;
-    public SeedScribtableObject SeedData
-    {
-        get => _seedData;
-        set
-        {
-            _seedData = value;
-        }
-    }
+    [field: SerializeField]
+    public SeedScribtableObject SeedData { get; private set; }
 
     int currentNumberOfUses;
+
+    new void Awake()
+    {
+        base.Awake();
+        currentNumberOfUses = SeedData?.NumberOfUses ?? 3;
+    }
 
     public override bool Use(Interactable targetInteractable)
     {
@@ -26,10 +25,10 @@ public class SeedPacket : Usable
         {
             if (targetInteractable is FarmTile farmTile)
             {
-
+                if (farmTile.Interact(SeedData, 1)) --currentNumberOfUses;
             }
         }
-        return currentNumberOfUses > 0;
+        return currentNumberOfUses <= 0;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
