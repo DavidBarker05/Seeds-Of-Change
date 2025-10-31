@@ -25,7 +25,7 @@ public class SeedPacket : Usable
         {
             if (targetInteractable is FarmTile farmTile)
             {
-                if (farmTile.Interact(SeedData, 1)) --currentNumberOfUses;
+                if (!farmTile.Interact(SeedData, 1)) --currentNumberOfUses;
             }
         }
         return currentNumberOfUses <= 0;

@@ -36,13 +36,13 @@ public abstract class ItemContainer : Interactable
                 #endif
             }
         }
-        return false;
+        return true;
     }
 
     public bool AddItem(ItemScriptableObject item, int amount = 1)
     {
         if (containerData == null || currentCapacity >= containerData.ContainerCapacity) return false;
-        if (!ExtraAddLogic(item)) return false;
+        if (!ExtraAddLogic(item)) return true;
         int adjustedAmount = amount;
         if (currentCapacity + amount > containerData.ContainerCapacity) adjustedAmount = containerData.ContainerCapacity - currentCapacity;
         if (acceptedItems.ContainsKey(item))
@@ -55,7 +55,7 @@ public abstract class ItemContainer : Interactable
             acceptedItems.Add(item, adjustedAmount);
             currentCapacity += adjustedAmount;
         }
-        return true;
+        return false;
     }
 
     public void ClearItems()
