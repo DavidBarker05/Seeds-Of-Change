@@ -70,6 +70,7 @@ public class FarmTile : ItemContainer, IEventListener
         EventBus.Instance?.AddEventListener(GameEventType.RainWeatherEvent, this);
         EventBus.Instance?.AddEventListener(GameEventType.DroughtDisasterEventStart, this);
         EventBus.Instance?.AddEventListener(GameEventType.DroughtDisasterEventEnd, this);
+        EventBus.Instance?.AddEventListener(GameEventType.PlantWateredEvent, this);
         if (startingSeed == null)
         {
             IsTilled = false;
@@ -91,6 +92,7 @@ public class FarmTile : ItemContainer, IEventListener
         EventBus.Instance?.RemoveEventListener(GameEventType.RainWeatherEvent, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.DroughtDisasterEventStart, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.DroughtDisasterEventEnd, this);
+        EventBus.Instance?.RemoveEventListener(GameEventType.PlantWateredEvent, this);
     }
 
     protected override void ExtraAddLogic(ItemScriptableObject item)
@@ -145,6 +147,9 @@ public class FarmTile : ItemContainer, IEventListener
                 break;
             case GameEventType.DroughtDisasterEventEnd:
                 isInDrought = false;
+                break;
+            case GameEventType.PlantWateredEvent:
+                if (parameters[0] is GameObject crop && crop == currentCropPrefab) WaterPlant();
                 break;
             default:
                 break;

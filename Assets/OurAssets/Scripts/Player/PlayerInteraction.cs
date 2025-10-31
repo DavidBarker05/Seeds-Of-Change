@@ -67,14 +67,12 @@ public class PlayerInteraction : MonoBehaviour
         Interactable targetInteraction = CheckForInteraction();
         if (targetInteraction != null)
         {
-            if (targetInteraction is HouseDoor)
+            if (targetInteraction is HouseDoor) targetInteraction.Interact(gameObject);
+            else if (targetInteraction is Market) targetInteraction.Interact();
+            else if (currentInteraction != null)
             {
-                targetInteraction.Interact(gameObject);
-                return;
-            }
-            if (currentInteraction != null)
-            {
-                if (currentInteraction is Holdable) InteractHoldable();
+                if (targetInteraction is WaterTank) targetInteraction.Interact(currentInteraction);
+                else if (currentInteraction is Holdable) InteractHoldable();
             }
             else
             {

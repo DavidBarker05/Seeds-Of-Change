@@ -39,6 +39,8 @@ public class WorldManager : MonoBehaviour, IEventListener
 {
     public static WorldManager Instance { get; private set; }
 
+    [SerializeField]
+    GameObject rainVolume;
     [SerializeField, Min(1)]
     int daysPerSeason = 10;
     [SerializeField]
@@ -78,6 +80,8 @@ public class WorldManager : MonoBehaviour, IEventListener
     {
         EventBus.Instance?.AddEventListener(GameEventType.DroughtDisasterEventStart, this);
         EventBus.Instance?.AddEventListener(GameEventType.DroughtDisasterEventEnd, this);
+        EventBus.Instance?.AddEventListener(GameEventType.ClearSkyWeatherEvent, this);
+        EventBus.Instance?.AddEventListener(GameEventType.RainWeatherEvent, this);
         canResetForcedWeather = true;
         canResetForcedDisaster = true;
         CurrentDay = 1;
@@ -91,6 +95,8 @@ public class WorldManager : MonoBehaviour, IEventListener
     {
         EventBus.Instance?.RemoveEventListener(GameEventType.DroughtDisasterEventStart, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.DroughtDisasterEventEnd, this);
+        EventBus.Instance?.RemoveEventListener(GameEventType.ClearSkyWeatherEvent, this);
+        EventBus.Instance?.RemoveEventListener(GameEventType.RainWeatherEvent, this);
     }
 
     public void MoveToNextDay()
@@ -150,6 +156,12 @@ public class WorldManager : MonoBehaviour, IEventListener
             case GameEventType.DroughtDisasterEventEnd:
                 canResetForcedWeather = true;
                 forcedWeather = Weather.Rain;
+                break;
+            case GameEventType.ClearSkyWeatherEvent:
+                if (rainVolume != null) rainVolume.SetActive(false);
+                break;
+            case GameEventType.RainWeatherEvent:
+                if (rainVolume != null) rainVolume.SetActive(true);
                 break;
             default:
                 break;
