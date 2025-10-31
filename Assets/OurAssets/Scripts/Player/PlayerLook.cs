@@ -27,8 +27,8 @@ public class PlayerLook : MonoBehaviour
         float mY = InputManagerScript.Instance?.LookInput.y ?? 0f;
         float hSens = (InputManagerScript.Instance?.CurrentLookDevice is Mouse) ? mouseHorizontalSensitivity : (controllerHorizontalSensitivity * Time.deltaTime);
         float vSens = (InputManagerScript.Instance?.CurrentLookDevice is Mouse) ? mouseVerticalSensitivity : (controllerVerticalSensitivity * Time.deltaTime);
-        float yaw = mX * hSens * (UserSettingsManager.Instance?.HorizontalSensitivityMultiplier ?? 1);
-        pitch -= mY * vSens * (UserSettingsManager.Instance?.VerticalSensitivityMultiplier ?? 1);
+        float yaw = mX * hSens;
+        pitch -= mY * vSens;
         pitch = Mathf.Clamp(pitch, minVerticalAngle, maxVerticalAngle);
         if (cam != null) cam.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
         transform.Rotate(Vector3.up, yaw);

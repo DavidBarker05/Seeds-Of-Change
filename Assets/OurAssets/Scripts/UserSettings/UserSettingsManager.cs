@@ -33,26 +33,6 @@ public class UserSettingsManager : MonoBehaviour
         }
     }
 
-    public float HorizontalSensitivityMultiplier
-    {
-        get => currentSettings.horizontalSensitivityMultiplier;
-        set
-        {
-            float multiplier = Mathf.Clamp(value, 0.5f, 2f);
-            currentSettings.horizontalSensitivityMultiplier = multiplier;
-        }
-    }
-
-    public float VerticalSensitivityMultiplier
-    {
-        get => currentSettings.verticalSensitivityMultiplier;
-        set
-        {
-            float multiplier = Mathf.Clamp(value, 0.5f, 2f);
-            currentSettings.verticalSensitivityMultiplier = multiplier;
-        }
-    }
-
     void Awake()
     {
         if (Instance != null && Instance != this) Destroy(gameObject);
@@ -87,7 +67,5 @@ public class UserSettingsManager : MonoBehaviour
         // Make sure the settings are valid before actually using them for the game
         Resolution = new int[2] { settings.resolution[0], settings.resolution[1] };
         VSyncCount = settings.vSyncCount;
-        HorizontalSensitivityMultiplier = settings.horizontalSensitivityMultiplier;
-        VerticalSensitivityMultiplier = settings.verticalSensitivityMultiplier;
     }
 }
