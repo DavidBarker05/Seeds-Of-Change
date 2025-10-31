@@ -2036,8 +2036,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b547d7d2fe72241ba6e078c0b396e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  canPauseInCurrentScene: 1
-  startCurrentSceneFocused: 1
+  canPauseInCurrentScene: 0
+  startCurrentSceneFocused: 0
 --- !u!4 &480637016
 Transform:
   m_ObjectHideFlags: 0
