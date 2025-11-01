@@ -16,6 +16,7 @@ public class PurchasableItemSlot : MonoBehaviour
     Button purchaseButton;
 
     ItemScriptableObject item;
+    string lastPurchaseQuantityText;
 
     void Awake()
     {
@@ -38,6 +39,7 @@ public class PurchasableItemSlot : MonoBehaviour
     {
         itemName.text = item.ItemName;
         purchaseCost.text = $"{item.PurchasePrice}";
+        lastPurchaseQuantityText = "0";
         purchaseQuantity.text = "0";
         totalCost.text = "0";
     }
@@ -46,6 +48,7 @@ public class PurchasableItemSlot : MonoBehaviour
     {
         purchaseQuantity.onValueChanged.RemoveAllListeners();
         string cleaned = System.Text.RegularExpressions.Regex.Replace(value, @"[^\d]", "");
+        if (lastPurchaseQuantityText == "0" && cleaned.Length > 1) cleaned = cleaned.Replace("0", "");
         if (string.IsNullOrEmpty(cleaned)) cleaned = "0";
         if (purchaseQuantity.text != cleaned) purchaseQuantity.text = cleaned;
         if (int.TryParse(cleaned, out int amountSold))

@@ -17,6 +17,7 @@ public class SellableItemSlot : MonoBehaviour
 
     ItemScriptableObject item;
     int amount;
+    string lastSellQuantityText;
 
     void Awake()
     {
@@ -40,6 +41,7 @@ public class SellableItemSlot : MonoBehaviour
     {
         itemName.text = $"{item.ItemName} ({amount})";
         sellAmount.text = $"{item.SellPrice}";
+        lastSellQuantityText = "0";
         sellQuantity.text = "0";
         totalSellAmount.text = "0";
     }
@@ -48,6 +50,7 @@ public class SellableItemSlot : MonoBehaviour
     {
         sellQuantity.onValueChanged.RemoveAllListeners();
         string cleaned = System.Text.RegularExpressions.Regex.Replace(value, @"[^\d]", "");
+        if (lastSellQuantityText == "0" && cleaned.Length > 1) cleaned = cleaned.Replace("0", "");
         if (string.IsNullOrEmpty(cleaned)) cleaned = "0";
         if (sellQuantity.text != cleaned) sellQuantity.text = cleaned;
         if (int.TryParse(cleaned, out int amountSold))
@@ -57,6 +60,7 @@ public class SellableItemSlot : MonoBehaviour
             totalSellAmount.text = $"{amountSold * item.SellPrice}";
         }
         else totalSellAmount.text = "0";
+        lastSellQuantityText = sellQuantity.text;
         sellQuantity.onValueChanged.AddListener(SellQuantityChanged);
     }
 }

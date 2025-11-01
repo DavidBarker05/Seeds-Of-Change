@@ -90,6 +90,7 @@ public class WorldManager : MonoBehaviour, IEventListener
         EventBus.Instance?.AddEventListener(GameEventType.ClearSkyWeatherEvent, this);
         EventBus.Instance?.AddEventListener(GameEventType.RainWeatherEvent, this);
         EventBus.Instance?.AddEventListener(GameEventType.SuccessfulSaleEvent, this);
+        EventBus.Instance?.AddEventListener(GameEventType.SuccessfulStoreEvent, this);
     }
 
     void Start()
@@ -110,13 +111,14 @@ public class WorldManager : MonoBehaviour, IEventListener
         EventBus.Instance?.RemoveEventListener(GameEventType.ClearSkyWeatherEvent, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.RainWeatherEvent, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.SuccessfulSaleEvent, this);
+        EventBus.Instance?.RemoveEventListener(GameEventType.SuccessfulStoreEvent, this);
     }
 
     public void MoveToNextDay()
     {
+        if (CurrentDay == daysNeededToWin) EventBus.Instance?.BroadcastEvent(GameEventType.GameWinEvent); // Only do once
         ++CurrentDay;
         ++CurrentDayInSeason;
-        if (CurrentDay > daysNeededToWin) EventBus.Instance?.BroadcastEvent(GameEventType.GameWinEvent);
         if (CurrentDayInSeason > daysPerSeason) DoSeasonChange();
         EventBus.Instance?.BroadcastEvent(GameEventType.NewDayEvent);
         DoDisaster();
@@ -179,7 +181,10 @@ public class WorldManager : MonoBehaviour, IEventListener
                 if (rainVolume != null) rainVolume.SetActive(true);
                 break;
             case GameEventType.SuccessfulSaleEvent:
-                if (parameters[0] is ItemScriptableObject item && parameters[1] is int amount) foodManager.AddCommunityFood(item, amount);
+                if (parameters[0] is ItemScriptableObject soldItem && parameters[1] is int soldAmount) foodManager.AddCommunityFood(soldItem, soldAmount);
+                break;
+            case GameEventType.SuccessfulStoreEvent:
+                if (parameters[0] is ItemScriptableObject storedItem && parameters[1] is int storedAmount) foodManager.AddFamilyFood(storedItem, storedAmount);
                 break;
             default:
                 break;
@@ -509,6 +514,9 @@ public class WorldManager : MonoBehaviour, IEventListener
         }
     }
 
+    // For the food manager we want it to be more consistent in how much food is used up
+    // We don't randomise it every day like the others but it does get harder for every difficulty
+    // Unlike the others this does scale forever though
     private class FoodManager
     {
         private static readonly Dictionary<Season, (int familyNeeds, int communityNeeds)> dailyFoodNeededPerSeason = new Dictionary<Season, (int familyNeeds, int communityNeeds)>()
@@ -519,12 +527,29 @@ public class WorldManager : MonoBehaviour, IEventListener
             { Season.DrySeason, (familyNeeds: 3, communityNeeds: 9) }
         };
 
+        private static readonly Dictionary<Difficulty, float> difficultyModifiers = new Dictionary<Difficulty, float>()
+        {
+            { Difficulty.Easy, 1f },
+            { Difficulty.Normal, 1.1f },
+            { Difficulty.Hard, 1.2f }
+        };
+
+        private static readonly Dictionary<Difficulty, int> interestStartingYears = new Dictionary<Difficulty, int>()
+        {
+            { Difficulty.Easy, 4 }, // Started on easy means years 4+ apply interest
+            { Difficulty.Normal, 3 }, // Started on normal means years 3+ apply interest
+            { Difficulty.Hard, 2 } // Started on hard means years 2+ apply interest
+        };
+
+        private static readonly float COMPOUND_INTEREST = 1.05f; // 5% more food every year after 3rd year
+
         public int FamilyFood { get; private set; }
         public int CommunityFood { get; private set; }
 
         Dictionary<ItemScriptableObject, int> itemFoodValues = new Dictionary<ItemScriptableObject, int>();
+        int interestStartingYear;
 
-        public FoodManager(int startingFamilyFood, int startingCommunityFood, List<ItemFoodValue> itemFoodValueList)
+        public FoodManager(int startingFamilyFood, int startingCommunityFood, List<ItemFoodValue> itemFoodValueList, Difficulty startingDifficulty = Difficulty.Easy)
         {
             FamilyFood = startingFamilyFood;
             CommunityFood = startingCommunityFood;
@@ -532,18 +557,24 @@ public class WorldManager : MonoBehaviour, IEventListener
             {
                 if (!itemFoodValues.ContainsKey(itemFoodValue.item)) itemFoodValues.Add(itemFoodValue.item, itemFoodValue.foodValue);
             }
+            interestStartingYear = interestStartingYears[startingDifficulty];
         }
 
-        public void DoFoodUsed(Season currentSeason)
+        public void DoFoodUsed(Season currentSeason, Difficulty currentDifficulty = Difficulty.Normal, int currentYear = 1)
         {
-            //FamilyFood -= dailyFoodNeededPerSeason[currentSeason].familyNeeds;
-            CommunityFood -= dailyFoodNeededPerSeason[currentSeason].communityNeeds;
+            float difficultyModifier = difficultyModifiers[currentDifficulty];
+            float interest = currentYear < interestStartingYear ? 1f : COMPOUND_INTEREST; // First three years it doesn't scale after that it scales exponentially
+            int familyNeeds = (int)(dailyFoodNeededPerSeason[currentSeason].familyNeeds * difficultyModifier * interest); // Truncation is fine
+            int communityNeeds = (int)(dailyFoodNeededPerSeason[currentSeason].communityNeeds * difficultyModifier * interest); // Truncation is fine
+            FamilyFood -= familyNeeds;
+            CommunityFood -= communityNeeds;
             if (FamilyFood <= 0 || CommunityFood <= 0) EventBus.Instance?.BroadcastEvent(GameEventType.GameLoseEvent, FamilyFood, CommunityFood);
         }
 
         public void AddFamilyFood(ItemScriptableObject food, int amount)
         {
             if (itemFoodValues.ContainsKey(food)) FamilyFood += itemFoodValues[food] * amount;
+            Debug.Log(FamilyFood);
         }
 
         public void AddCommunityFood(ItemScriptableObject food, int amount)

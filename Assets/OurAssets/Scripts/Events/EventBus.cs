@@ -21,7 +21,9 @@ public enum GameEventType
     CropHarvestedEvent,
     GainCropEvent,
     ItemSpawnEvent,
-    SuccessfulSaleEvent
+    SuccessfulSaleEvent,
+    ItemStoredEvent,
+    SuccessfulStoreEvent
 }
 
 public class EventBus : MonoBehaviour

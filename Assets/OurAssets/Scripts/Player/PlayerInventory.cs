@@ -29,6 +29,7 @@ public class PlayerInventory : MonoBehaviour, IEventListener
         EventBus.Instance?.AddEventListener(GameEventType.ItemPurchasedEvent, this);
         EventBus.Instance?.AddEventListener(GameEventType.ItemSoldEvent, this);
         EventBus.Instance?.AddEventListener(GameEventType.GainCropEvent, this);
+        EventBus.Instance?.AddEventListener(GameEventType.ItemStoredEvent, this);
     }
 
     private void OnDestroy()
@@ -36,6 +37,7 @@ public class PlayerInventory : MonoBehaviour, IEventListener
         EventBus.Instance?.RemoveEventListener(GameEventType.ItemPurchasedEvent, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.ItemSoldEvent, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.GainCropEvent, this);
+        EventBus.Instance?.RemoveEventListener(GameEventType.ItemStoredEvent, this);
     }
 
     public void AddItem(ItemScriptableObject item, int amount = 1)
@@ -117,6 +119,13 @@ public class PlayerInventory : MonoBehaviour, IEventListener
                     int amount = (int)((float)(isDead ? crop.GrowthStages[currentGrowStage - 1].deadCrop.cropYield.yieldAmount : crop.GrowthStages[currentGrowStage - 1].aliveCrop.cropYield.yieldAmount) * (currentYield / 100f));
                     if (amount <= 0) return;
                     AddItem(harvest, amount);
+                }
+                break;
+            case GameEventType.ItemStoredEvent:
+                if (parameters[0] is ItemScriptableObject storedItem)
+                {
+                    if (parameters[1] is int amount && TryRemoveItem(storedItem, amount)) EventBus.Instance?.BroadcastEvent(GameEventType.SuccessfulStoreEvent, storedItem, amount);
+                    else if (TryRemoveItem(storedItem)) EventBus.Instance?.BroadcastEvent(GameEventType.SuccessfulStoreEvent, storedItem, 1);
                 }
                 break;
             default:
