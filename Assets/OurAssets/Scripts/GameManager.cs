@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IEventListener
 {
     public static GameManager Instance { get; private set; }
 
@@ -14,7 +13,10 @@ public class GameManager : MonoBehaviour
     GameObject pauseBackground;
     [SerializeField]
     GameObject pauseMenu;
-
+    [SerializeField]
+    GameObject winMenu;
+    [SerializeField]
+    LoseMenu loseMenu;
 
     bool _isPaused = false;
     public bool IsPaused
@@ -26,7 +28,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = canPauseInCurrentScene && _isPaused ? 0f : 1f;
             if (_isPaused) EnableMouse();
             else DisableMouse();
-            pauseBackground.SetActive(_isPaused);
+            if (pauseBackground != null) pauseBackground.SetActive(_isPaused);
             if (!_isPaused) pauseButtonMadePaused = false;
         }
     }
@@ -35,19 +37,10 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Instance.canPauseInCurrentScene = canPauseInCurrentScene;
-            Instance.startCurrentSceneFocused = startCurrentSceneFocused;
-            if (startCurrentSceneFocused) DisableMouse();
-            else EnableMouse();
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        if (Instance != null && Instance != this) Destroy(gameObject);
+        else Instance = this;
+        EventBus.Instance?.AddEventListener(GameEventType.GameWinEvent, this);
+        EventBus.Instance?.AddEventListener(GameEventType.GameLoseEvent, this);
     }
 
     void Start()
@@ -57,14 +50,21 @@ public class GameManager : MonoBehaviour
         else EnableMouse();
     }
 
-    void OnDestroy() => InputManagerScript.Instance?.RemovePauseAction(TogglePause);
+    void OnDestroy()
+    {
+        IsPaused = false;
+        EnableMouse();
+        InputManagerScript.Instance?.RemovePauseAction(TogglePause);
+        EventBus.Instance?.RemoveEventListener(GameEventType.GameWinEvent, this);
+        EventBus.Instance?.RemoveEventListener(GameEventType.GameLoseEvent, this);
+    }
 
     void TogglePause(InputAction.CallbackContext ctx)
     {
         if (IsPaused && !pauseButtonMadePaused) return;
         pauseButtonMadePaused = true;
         IsPaused = !IsPaused;
-        pauseMenu.SetActive(true);
+        if (pauseMenu != null) pauseMenu.SetActive(true);
     }
 
     public void DisableMouse()
@@ -77,5 +77,28 @@ public class GameManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+    }
+
+    public void OnEventReceived(GameEventType eventType, params object[] parameters)
+    {
+        switch (eventType)
+        {
+            case GameEventType.GameWinEvent:
+                if (winMenu == null) return;
+                IsPaused = true;
+                winMenu.SetActive(true);
+                break;
+            case GameEventType.GameLoseEvent:
+                if (loseMenu == null) return;
+                if (parameters[0] is int familyFood && parameters[1] is int communityFood)
+                {
+                    IsPaused = true;
+                    loseMenu.UpdateLoseText(familyFood, communityFood);
+                    loseMenu.gameObject.SetActive(true);
+                }
+                break;
+            default:
+                break;
+        }
     }
 }
