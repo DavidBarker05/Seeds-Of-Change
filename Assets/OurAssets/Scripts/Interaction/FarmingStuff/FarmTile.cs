@@ -308,6 +308,7 @@ public class FarmTile : ItemContainer, IEventListener
 
     void SpawnPest(Difficulty currentDifficulty = Difficulty.Easy)
     {
+        if (currentCrop == null) return;
         float susceptibility = Mathf.Clamp01(currentCrop.SusceptibilityToPests / 100f);
 
         float deviation = Mathf.Max(Random.Range(1f - DEVIATION, 1f + DEVIATION), TOLERANCE); // Ensure the value > 0 for multiplication

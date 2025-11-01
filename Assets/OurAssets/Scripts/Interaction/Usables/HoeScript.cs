@@ -8,7 +8,7 @@ public class HoeScript : Usable
         if (targetInteractable == null)
         {
             #if UNITY_EDITOR
-                Debug.LogWarning("Seed packet needs to be used on farm land, you used it on nothing");
+                Debug.LogWarning("Hoes needs to be used on farm land, you used it on nothing");
             #endif
         }
         else

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 [System.Serializable]
 public enum Season
@@ -39,6 +39,12 @@ public class WorldManager : MonoBehaviour, IEventListener
 {
     public static WorldManager Instance { get; private set; }
 
+    [SerializeField]
+    TextMeshProUGUI dateText;
+    [SerializeField]
+    TextMeshProUGUI foodText;
+    [SerializeField]
+    TextMeshProUGUI disastersText;
     [SerializeField]
     GameObject rainVolume;
     [SerializeField, Min(1)]
@@ -124,6 +130,9 @@ public class WorldManager : MonoBehaviour, IEventListener
         DoDisaster();
         DoWeather();
         foodManager.DoFoodUsed(CurrentSeason);
+        dateText.text = $"CURRENT YEAR: {CurrentYear}\nCURRENT DAY: {CurrentDay}\nCURRENT SEASON: {CurrentSeason}";
+        foodText.text = $"Family has {foodManager.FamilyFood} food\nCommunity has {foodManager.CommunityFood} food";
+        disastersText.text = $"Drought = {(disasterManager.IsDroughtActive ? "Active" : "Inactive")}\n{(disasterManager.IsPestActive ? "Pests have spawned today" : "No pests spawned today")}";
     }
 
     void DoSeasonChange()
@@ -424,6 +433,9 @@ public class WorldManager : MonoBehaviour, IEventListener
 
         Dictionary<Disaster, int> activeDisasters = new Dictionary<Disaster, int>();
         Dictionary<Disaster, int> disastersOnCooldown = new Dictionary<Disaster, int>();
+
+        public bool IsDroughtActive => activeDisasters.ContainsKey(Disaster.Drought);
+        public bool IsPestActive => activeDisasters.ContainsKey(Disaster.Pest);
 
         public void DoDisaster(Disaster disaster, Difficulty currentDifficulty = Difficulty.Normal)
         {
