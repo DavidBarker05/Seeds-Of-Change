@@ -1,64 +1,87 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
-public class MarketMenu : MonoBehaviour, IEventListener
+public class MarketMenu : MonoBehaviour
 {
-    List<ItemScriptableObject> purchasableItems;
-    Dictionary<ItemScriptableObject, int> sellableItems;
+    [SerializeField]
+    TextMeshProUGUI availableBalanceText;
+    [SerializeField]
+    PurchasableItemSlot purchasableItemSlotPrefab;
+    [SerializeField]
+    RectTransform purchasableContent;
+    [SerializeField]
+    SellableItemSlot sellableItemSlotPrefab;
+    [SerializeField]
+    RectTransform sellableContent;
+    [SerializeField]
+    GameObject purchaseMenu;
+    [SerializeField]
+    GameObject sellMenu;
 
-    void Start()
-    {
-        EventBus.Instance?.AddEventListener(GameEventType.PlayerInventoryUpdateEvent, this);
-    }
+    int availableBalance;
+    List<ItemScriptableObject> purchasableItems;
+    List<PurchasableItemSlot> purchasableItemSlots = new List<PurchasableItemSlot>();
+    Dictionary<ItemScriptableObject, int> sellableItems = new Dictionary<ItemScriptableObject, int>();
+    Dictionary<ItemScriptableObject, SellableItemSlot> sellableItemSlots = new Dictionary<ItemScriptableObject, SellableItemSlot>();
 
     void OnEnable()
     {
-        if (GameManager.Instance != null) GameManager.Instance.IsPaused = true;
+        purchaseMenu.SetActive(true);
+        sellMenu.SetActive(false);
     }
 
-    void OnDestroy() => EventBus.Instance?.RemoveEventListener(GameEventType.PlayerInventoryUpdateEvent, this);
-
-    void UpdatePurchaseMenuList()
+    void CreateSellableItemSlot(ItemScriptableObject item, int amount)
     {
-
+        if (sellableItemSlots != null && sellableItemSlots.ContainsKey(item)) return;
+        SellableItemSlot slot = Instantiate(sellableItemSlotPrefab, sellableContent);
+        slot.SetData(item, amount);
+        slot.gameObject.SetActive(true);
+        sellableItemSlots.Add(item, slot);
     }
 
-    void UpdateSellMenuList()
+    public void SetAvailableBalance(int money)
     {
-
+        availableBalance = money;
+        if (availableBalanceText != null) availableBalanceText.text = $"AVAILABLE BALANCE: {availableBalance}";
     }
 
     public void PopulatePurchaseMenu(List<ItemScriptableObject> itemList)
     {
         purchasableItems = new List<ItemScriptableObject>(itemList);
-        UpdatePurchaseMenuList();
-    }
-
-    public void PopulateSellMenu(Dictionary<ItemScriptableObject, int> itemDictionary)
-    {
-        sellableItems = new Dictionary<ItemScriptableObject, int>(itemDictionary);
-        UpdateSellMenuList();
-    }
-
-    public void OnEventReceived(GameEventType eventType, params object[] parameters)
-    {
-        switch (eventType)
+        for (int i = purchasableContent.childCount - 1; i >= 0; --i)
         {
-            case GameEventType.PlayerInventoryUpdateEvent:
-                if (sellableItems == null) return;
-                if (parameters[0] is ItemScriptableObject item && parameters[1] is int amount)
-                {
-                    if (!item.IsSellable) return;
-                    if (sellableItems.ContainsKey(item))
-                    {
-                        sellableItems[item] += amount;
-                        if (sellableItems[item] <= 0) sellableItems.Remove(item);
-                    }
-                    else if (amount > 0) sellableItems.Add(item, amount);
-                }
-                break;
-            default:
-                break;
+            Destroy(purchasableContent.GetChild(i).gameObject);
+        }
+        sellableItemSlots.Clear();
+        foreach (ItemScriptableObject item in purchasableItems)
+        {
+            PurchasableItemSlot slot = Instantiate(purchasableItemSlotPrefab, purchasableContent);
+            slot.SetData(item);
+            slot.gameObject.SetActive(true);
+            purchasableItemSlots.Add(slot);
         }
     }
+
+    public void UpdatePlayerInventory(ItemScriptableObject item, int amount)
+    {
+        if (!item.IsSellable) return;
+        if (sellableItems.ContainsKey(item))
+        {
+            sellableItems[item] += amount;
+            if (sellableItems[item] <= 0)
+            {
+                sellableItems.Remove(item);
+                Destroy(sellableItemSlots[item].gameObject);
+                sellableItemSlots.Remove(item);
+            }
+            else sellableItemSlots[item].SetData(item, sellableItems[item]);
+        }
+        else if (amount > 0)
+        {
+            sellableItems.Add(item, amount);
+            CreateSellableItemSlot(item, amount);
+        }
+    }
+
 }

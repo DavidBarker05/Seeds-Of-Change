@@ -17,52 +17,52 @@ MonoBehaviour:
   - aliveCrop:
       cropPrefab: {fileID: 4199144359805978696, guid: c2b4dc55a38d6394f94988eb9386e937, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
+        yieldItem: {fileID: 11400000, guid: 5a368d7bfa0d7e84d8907987fc0d3e1e, type: 2}
         yieldAmount: 0
     deadCrop:
       cropPrefab: {fileID: 8649068110952320295, guid: b3e9ed4c7d962634aa085b16a04524c5, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
+        yieldItem: {fileID: 11400000, guid: 5a368d7bfa0d7e84d8907987fc0d3e1e, type: 2}
         yieldAmount: 0
   - aliveCrop:
       cropPrefab: {fileID: 7255839491426191400, guid: 218d8d1b1aff8fa4981123a712f711fd, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
+        yieldItem: {fileID: 11400000, guid: 5a368d7bfa0d7e84d8907987fc0d3e1e, type: 2}
         yieldAmount: 0
     deadCrop:
       cropPrefab: {fileID: 4345276339845437689, guid: c821c48a9361ca349b52b42ec707b4f9, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
+        yieldItem: {fileID: 11400000, guid: 5a368d7bfa0d7e84d8907987fc0d3e1e, type: 2}
         yieldAmount: 0
   - aliveCrop:
       cropPrefab: {fileID: 6501070087505364472, guid: d9221971fc8f58c46a8626651d43b829, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
+        yieldItem: {fileID: 11400000, guid: 5a368d7bfa0d7e84d8907987fc0d3e1e, type: 2}
         yieldAmount: 0
     deadCrop:
       cropPrefab: {fileID: 3078659581037485301, guid: 24200541b33c676458977921ed8b78a6, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
+        yieldItem: {fileID: 11400000, guid: 5a368d7bfa0d7e84d8907987fc0d3e1e, type: 2}
         yieldAmount: 0
   - aliveCrop:
       cropPrefab: {fileID: 220532429232886098, guid: b9ef2a8f21da4db40bc6c9e08b6d163b, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
+        yieldItem: {fileID: 11400000, guid: 5a368d7bfa0d7e84d8907987fc0d3e1e, type: 2}
         yieldAmount: 0
     deadCrop:
       cropPrefab: {fileID: 5410842631302190416, guid: 02e4ca995109be64c93b049899a1b4e4, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
+        yieldItem: {fileID: 11400000, guid: 5a368d7bfa0d7e84d8907987fc0d3e1e, type: 2}
         yieldAmount: 0
   - aliveCrop:
       cropPrefab: {fileID: 5187557450143981699, guid: c77e75e285be5ab4683ebb8ed2790c2e, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
-        yieldAmount: 0
+        yieldItem: {fileID: 11400000, guid: 4127256cbaf72904a9101bd1a6c13803, type: 2}
+        yieldAmount: 4
     deadCrop:
       cropPrefab: {fileID: 5856141607206583216, guid: 34dfa37be012768428c5f517d5946362, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
+        yieldItem: {fileID: 11400000, guid: 5a368d7bfa0d7e84d8907987fc0d3e1e, type: 2}
         yieldAmount: 0
   <LackOfWaterSetbacks>k__BackingField:
   - daysWithoutWater: 1

@@ -21,10 +21,9 @@ public class WaterTank : Interactable, IEventListener
 
     public float CurrentCapacity { get; private set; }
 
-    void Awake() => CurrentCapacity = startingCapacity;
-
-    void Start()
+    void Awake()
     {
+        CurrentCapacity = startingCapacity;
         EventBus.Instance?.AddEventListener(GameEventType.RainWeatherEvent, this);
         EventBus.Instance?.AddEventListener(GameEventType.ItemPurchasedEvent, this);
     }

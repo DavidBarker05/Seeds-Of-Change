@@ -61,16 +61,20 @@ public class FarmTile : ItemContainer, IEventListener
         }
     }
 
-    void Awake() => _renderer = GetComponent<Renderer>();
-
-    void Start()
+    void Awake()
     {
+        _renderer = GetComponent<Renderer>();
         EventBus.Instance?.AddEventListener(GameEventType.NewDayEvent, this);
         EventBus.Instance?.AddEventListener(GameEventType.ClearSkyWeatherEvent, this);
         EventBus.Instance?.AddEventListener(GameEventType.RainWeatherEvent, this);
         EventBus.Instance?.AddEventListener(GameEventType.DroughtDisasterEventStart, this);
         EventBus.Instance?.AddEventListener(GameEventType.DroughtDisasterEventEnd, this);
         EventBus.Instance?.AddEventListener(GameEventType.PlantWateredEvent, this);
+        EventBus.Instance?.AddEventListener(GameEventType.CropHarvestedEvent, this);
+    }
+
+    void Start()
+    {
         if (startingSeed == null)
         {
             IsTilled = false;
@@ -80,6 +84,7 @@ public class FarmTile : ItemContainer, IEventListener
         currentCrop = startingSeed.CropToPlant;
         currentGrowCycle = Mathf.Clamp(startingGrowthStage, 1, currentCrop.GrowthStages.Length);
         currentCropPrefab = Instantiate(currentCrop.GrowthStages[currentGrowCycle - 1].aliveCrop.cropPrefab, spawnPosition.position, spawnPosition.rotation);
+        currentYield = 100f;
         daysWithoutWater = 0; // 0 because then sunny day gets called and sets it to 1
         timesWateredToday = 0;
         acceptedItems.Add(startingSeed, 1);
@@ -93,6 +98,7 @@ public class FarmTile : ItemContainer, IEventListener
         EventBus.Instance?.RemoveEventListener(GameEventType.DroughtDisasterEventStart, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.DroughtDisasterEventEnd, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.PlantWateredEvent, this);
+        EventBus.Instance?.RemoveEventListener(GameEventType.CropHarvestedEvent, this);
     }
 
     protected override bool ExtraAddLogic(ItemScriptableObject item)
@@ -154,6 +160,14 @@ public class FarmTile : ItemContainer, IEventListener
                 break;
             case GameEventType.PlantWateredEvent:
                 if (parameters[0] is GameObject crop && crop == currentCropPrefab) WaterPlant();
+                break;
+            case GameEventType.CropHarvestedEvent:
+                if (parameters[0] is GameObject harvested && harvested == currentCropPrefab)
+                {
+                    EventBus.Instance?.BroadcastEvent(GameEventType.GainCropEvent, currentCrop, isDead, currentGrowCycle, currentYield);
+                    currentCrop = null;
+                    Destroy(currentCropPrefab);
+                }
                 break;
             default:
                 break;

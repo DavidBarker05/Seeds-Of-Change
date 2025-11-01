@@ -17,32 +17,32 @@ MonoBehaviour:
   - aliveCrop:
       cropPrefab: {fileID: 200636035382649317, guid: dcaed0845c60467428f4bf7b879fcf53, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
+        yieldItem: {fileID: 11400000, guid: 5a368d7bfa0d7e84d8907987fc0d3e1e, type: 2}
         yieldAmount: 0
     deadCrop:
       cropPrefab: {fileID: 2436986472797951454, guid: afd0ddc53a52f984091738a3626f48f9, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
+        yieldItem: {fileID: 11400000, guid: 5a368d7bfa0d7e84d8907987fc0d3e1e, type: 2}
         yieldAmount: 0
   - aliveCrop:
       cropPrefab: {fileID: 4432037874256166703, guid: a2f1e85da321a3d4fa61c403b7542b45, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
+        yieldItem: {fileID: 11400000, guid: 5a368d7bfa0d7e84d8907987fc0d3e1e, type: 2}
         yieldAmount: 0
     deadCrop:
       cropPrefab: {fileID: 2143835844470794403, guid: 411bcf9446abbf142be1481d10037f65, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
+        yieldItem: {fileID: 11400000, guid: 5a368d7bfa0d7e84d8907987fc0d3e1e, type: 2}
         yieldAmount: 0
   - aliveCrop:
       cropPrefab: {fileID: 2094959802566523336, guid: 99c7f3db15a17f94fb06acb11fbb16cb, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
-        yieldAmount: 0
+        yieldItem: {fileID: 11400000, guid: 5115957caeff3d44fa83ae5c0eb9494b, type: 2}
+        yieldAmount: 5
     deadCrop:
       cropPrefab: {fileID: 7056013909974274635, guid: 4ead7c857ee8d094591b5a0bb10453b0, type: 3}
       cropYield:
-        yieldItem: {fileID: 0}
+        yieldItem: {fileID: 11400000, guid: 5a368d7bfa0d7e84d8907987fc0d3e1e, type: 2}
         yieldAmount: 0
   <LackOfWaterSetbacks>k__BackingField:
   - daysWithoutWater: 1

@@ -10,8 +10,6 @@ public class Market : Interactable, IEventListener
     [SerializeField]
     MarketMenu marketMenu;
 
-    bool hasRequestedPlayerInventory = false;
-
     private void Awake()
     {
         List<ItemScriptableObject> _purchasableItems = new List<ItemScriptableObject>(purchasableItems);
@@ -24,26 +22,24 @@ public class Market : Interactable, IEventListener
         {
             if (!item.IsSellable) sellableItems.Remove(item);
         }
+        EventBus.Instance?.AddEventListener(GameEventType.PlayerInventoryUpdateEvent, this);
+        EventBus.Instance?.AddEventListener(GameEventType.MoneyChangedEvent, this);
     }
 
-    void Start()
+    void Start() => marketMenu?.PopulatePurchaseMenu(purchasableItems);
+
+    void OnDestroy()
     {
-        EventBus.Instance?.AddEventListener(GameEventType.PlayerInventoryReceiveEvent, this);
-        marketMenu?.PopulatePurchaseMenu(purchasableItems);
+        EventBus.Instance?.RemoveEventListener(GameEventType.PlayerInventoryUpdateEvent, this);
+        EventBus.Instance?.RemoveEventListener(GameEventType.MoneyChangedEvent, this);
     }
-
-    void OnDestroy() => EventBus.Instance?.RemoveEventListener(GameEventType.PlayerInventoryReceiveEvent, this);
 
     public override bool Interact(params object[] parameters)
     {
-        if (marketMenu != null)
+        if (marketMenu != null && GameManager.Instance != null)
         {
-            if (!hasRequestedPlayerInventory)
-            {
-                hasRequestedPlayerInventory = true;
-                EventBus.Instance?.BroadcastEvent(GameEventType.PlayerInventoryRequestEvent, gameObject);
-            }
-            else marketMenu.gameObject.SetActive(true);
+            GameManager.Instance.IsPaused = true;
+            marketMenu.gameObject.SetActive(true);
         }
         return true;
     }
@@ -52,17 +48,12 @@ public class Market : Interactable, IEventListener
     {
         switch (eventType)
         {
-            case GameEventType.PlayerInventoryReceiveEvent:
-                if (parameters[0] is GameObject requester && requester == gameObject && parameters[1] is Dictionary<ItemScriptableObject, int> inventory)
-                {
-                    Dictionary<ItemScriptableObject, int> sellableInventory = new Dictionary<ItemScriptableObject, int>();
-                    foreach (KeyValuePair<ItemScriptableObject, int> kvp in inventory)
-                    {
-                        if (kvp.Key.IsSellable) sellableInventory.Add(kvp.Key, kvp.Value);
-                    }
-                    marketMenu?.PopulateSellMenu(sellableInventory);
-                    marketMenu?.gameObject.SetActive(true);
-                }
+            case GameEventType.PlayerInventoryUpdateEvent:
+                if (sellableItems == null) return;
+                if (parameters[0] is ItemScriptableObject item && parameters[1] is int amount) marketMenu?.UpdatePlayerInventory(item, amount);
+                break;
+            case GameEventType.MoneyChangedEvent:
+                if (parameters[0] is int newMoney) marketMenu?.SetAvailableBalance(newMoney);
                 break;
             default:
                 break;

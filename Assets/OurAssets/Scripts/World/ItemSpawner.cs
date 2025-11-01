@@ -24,17 +24,16 @@ public class ItemSpawner : MonoBehaviour, IEventListener
         {
             if (itemObjectPair.item != null && itemObjectPair.itemObject != null && !itemObjectPairDictionary.ContainsKey(itemObjectPair.item)) itemObjectPairDictionary.Add(itemObjectPair.item, itemObjectPair.itemObject);
         }
+        EventBus.Instance?.AddEventListener(GameEventType.ItemSpawnEvent, this);
     }
 
-    void Start() => EventBus.Instance?.AddEventListener(GameEventType.ItemPurchasedEvent, this);
-
-    void OnDestroy() => EventBus.Instance?.RemoveEventListener(GameEventType.ItemPurchasedEvent, this);
+    void OnDestroy() => EventBus.Instance?.RemoveEventListener(GameEventType.ItemSpawnEvent, this);
 
     public void OnEventReceived(GameEventType eventType, params object[] parameters)
     {
         switch (eventType)
         {
-            case GameEventType.ItemPurchasedEvent:
+            case GameEventType.ItemSpawnEvent:
                 if (parameters[0] is ItemScriptableObject item && itemObjectPairDictionary.ContainsKey(item) && parameters[1] is int amount) StartCoroutine(SpawnObject(itemObjectPairDictionary[item], amount));
                 break;
             default:

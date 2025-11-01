@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
     bool canPauseInCurrentScene = false;
     [SerializeField]
     bool startCurrentSceneFocused = false;
+    [SerializeField]
+    GameObject pauseBackground;
+    [SerializeField]
+    GameObject pauseMenu;
+
 
     bool _isPaused = false;
     public bool IsPaused
@@ -17,12 +22,16 @@ public class GameManager : MonoBehaviour
         get => _isPaused;
         set
         {
-            Time.timeScale = canPauseInCurrentScene && value ? 0f : 1f;
-            if (value) EnableMouse();
-            else DisableMouse();
             _isPaused = canPauseInCurrentScene && value;
+            Time.timeScale = canPauseInCurrentScene && _isPaused ? 0f : 1f;
+            if (_isPaused) EnableMouse();
+            else DisableMouse();
+            pauseBackground.SetActive(_isPaused);
+            if (!_isPaused) pauseButtonMadePaused = false;
         }
     }
+
+    bool pauseButtonMadePaused = false;
 
     void Awake()
     {
@@ -50,7 +59,13 @@ public class GameManager : MonoBehaviour
 
     void OnDestroy() => InputManagerScript.Instance?.RemovePauseAction(TogglePause);
 
-    void TogglePause(InputAction.CallbackContext ctx) => IsPaused = !IsPaused;
+    void TogglePause(InputAction.CallbackContext ctx)
+    {
+        if (IsPaused && !pauseButtonMadePaused) return;
+        pauseButtonMadePaused = true;
+        IsPaused = !IsPaused;
+        pauseMenu.SetActive(true);
+    }
 
     public void DisableMouse()
     {

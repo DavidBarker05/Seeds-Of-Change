@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SeedScribtableObject
   <ItemName>k__BackingField: Tomato Seed
   <IsPurchasable>k__BackingField: 1
-  <IsSellable>k__BackingField: 1
+  <IsSellable>k__BackingField: 0
   <PurchasePrice>k__BackingField: 5
-  <SellPrice>k__BackingField: 2
-  <Model>k__BackingField: {fileID: 0}
+  <SellPrice>k__BackingField: 0
   <CropToPlant>k__BackingField: {fileID: 11400000, guid: 1694085bd1d43c142a4ada7b68815018, type: 2}
   <NumberOfUses>k__BackingField: 3

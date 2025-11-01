@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
-public class GroundScript : MonoBehaviour, IEventListener
+public class WetObject : MonoBehaviour, IEventListener
 {
     [SerializeField]
     Material dryMaterial;
@@ -10,10 +10,9 @@ public class GroundScript : MonoBehaviour, IEventListener
 
     Renderer _renderer;
 
-    private void Awake() => _renderer = GetComponent<Renderer>();
-
-    void Start()
+    private void Awake()
     {
+        _renderer = GetComponent<Renderer>();
         EventBus.Instance?.AddEventListener(GameEventType.ClearSkyWeatherEvent, this);
         EventBus.Instance?.AddEventListener(GameEventType.RainWeatherEvent, this);
     }

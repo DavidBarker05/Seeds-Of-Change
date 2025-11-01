@@ -1,1 +1,2 @@
+
 public interface IEventListener { public abstract void OnEventReceived(GameEventType eventType, params object[] parameters); }

@@ -49,10 +49,17 @@ public class WorldManager : MonoBehaviour, IEventListener
     Weather startingWeather = Weather.ClearSky;
     [SerializeField]
     Difficulty startingDifficulty = Difficulty.Easy;
+    [SerializeField]
+    List<ItemFoodValue> itemFoodValues = new List<ItemFoodValue>();
+    [SerializeField, Min(0)]
+    int familyStartingFood = 25;
+    [SerializeField, Min(0)]
+    int communityStartingFood = 60;
 
     SeasonManager seasonManager;
     WeatherManager weatherManager;
     DisasterManager disasterManager;
+    FoodManager foodManager;
 
     public int CurrentDay { get; private set; }
     public int CurrentDayInSeason { get; private set; }
@@ -65,6 +72,7 @@ public class WorldManager : MonoBehaviour, IEventListener
     Weather forcedWeather = Weather.None;
     bool canResetForcedDisaster;
     Disaster forcedDisaster = Disaster.None;
+    int daysNeededToWin;
 
     void Awake()
     {
@@ -73,15 +81,19 @@ public class WorldManager : MonoBehaviour, IEventListener
         seasonManager = new SeasonManager(startingSeason);
         weatherManager = new WeatherManager();
         disasterManager = new DisasterManager();
+        foodManager = new FoodManager(familyStartingFood, communityStartingFood, itemFoodValues);
         CurrentDifficulty = startingDifficulty;
-    }
-
-    void Start()
-    {
+        Season[] seasons = System.Enum.GetValues(typeof(Season)) as Season[];
+        daysNeededToWin = daysPerSeason * seasons.Length / 2;
         EventBus.Instance?.AddEventListener(GameEventType.DroughtDisasterEventStart, this);
         EventBus.Instance?.AddEventListener(GameEventType.DroughtDisasterEventEnd, this);
         EventBus.Instance?.AddEventListener(GameEventType.ClearSkyWeatherEvent, this);
         EventBus.Instance?.AddEventListener(GameEventType.RainWeatherEvent, this);
+        EventBus.Instance?.AddEventListener(GameEventType.SuccessfulSaleEvent, this);
+    }
+
+    void Start()
+    {
         canResetForcedWeather = true;
         canResetForcedDisaster = true;
         CurrentDay = 1;
@@ -97,16 +109,19 @@ public class WorldManager : MonoBehaviour, IEventListener
         EventBus.Instance?.RemoveEventListener(GameEventType.DroughtDisasterEventEnd, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.ClearSkyWeatherEvent, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.RainWeatherEvent, this);
+        EventBus.Instance?.RemoveEventListener(GameEventType.SuccessfulSaleEvent, this);
     }
 
     public void MoveToNextDay()
     {
         ++CurrentDay;
         ++CurrentDayInSeason;
+        if (CurrentDay > daysNeededToWin) EventBus.Instance?.BroadcastEvent(GameEventType.GameWinEvent);
         if (CurrentDayInSeason > daysPerSeason) DoSeasonChange();
         EventBus.Instance?.BroadcastEvent(GameEventType.NewDayEvent);
         DoDisaster();
         DoWeather();
+        foodManager.DoFoodUsed(CurrentSeason);
     }
 
     void DoSeasonChange()
@@ -162,6 +177,9 @@ public class WorldManager : MonoBehaviour, IEventListener
                 break;
             case GameEventType.RainWeatherEvent:
                 if (rainVolume != null) rainVolume.SetActive(true);
+                break;
+            case GameEventType.SuccessfulSaleEvent:
+                if (parameters[0] is ItemScriptableObject item && parameters[1] is int amount) foodManager.AddCommunityFood(item, amount);
                 break;
             default:
                 break;
@@ -490,4 +508,54 @@ public class WorldManager : MonoBehaviour, IEventListener
             EventBus.Instance?.BroadcastEvent(eventType);
         }
     }
+
+    private class FoodManager
+    {
+        private static readonly Dictionary<Season, (int familyNeeds, int communityNeeds)> dailyFoodNeededPerSeason = new Dictionary<Season, (int familyNeeds, int communityNeeds)>()
+        {
+            { Season.RainySeason, (familyNeeds: 5, communityNeeds: 15) },
+            { Season.CoolSeason, (familyNeeds: 4, communityNeeds: 12) },
+            { Season.HotSeason, (familyNeeds: 6, communityNeeds: 18) },
+            { Season.DrySeason, (familyNeeds: 3, communityNeeds: 9) }
+        };
+
+        public int FamilyFood { get; private set; }
+        public int CommunityFood { get; private set; }
+
+        Dictionary<ItemScriptableObject, int> itemFoodValues = new Dictionary<ItemScriptableObject, int>();
+
+        public FoodManager(int startingFamilyFood, int startingCommunityFood, List<ItemFoodValue> itemFoodValueList)
+        {
+            FamilyFood = startingFamilyFood;
+            CommunityFood = startingCommunityFood;
+            foreach (ItemFoodValue itemFoodValue in itemFoodValueList)
+            {
+                if (!itemFoodValues.ContainsKey(itemFoodValue.item)) itemFoodValues.Add(itemFoodValue.item, itemFoodValue.foodValue);
+            }
+        }
+
+        public void DoFoodUsed(Season currentSeason)
+        {
+            //FamilyFood -= dailyFoodNeededPerSeason[currentSeason].familyNeeds;
+            CommunityFood -= dailyFoodNeededPerSeason[currentSeason].communityNeeds;
+            if (FamilyFood <= 0 || CommunityFood <= 0) EventBus.Instance?.BroadcastEvent(GameEventType.GameLoseEvent, FamilyFood, CommunityFood);
+        }
+
+        public void AddFamilyFood(ItemScriptableObject food, int amount)
+        {
+            if (itemFoodValues.ContainsKey(food)) FamilyFood += itemFoodValues[food] * amount;
+        }
+
+        public void AddCommunityFood(ItemScriptableObject food, int amount)
+        {
+            if (itemFoodValues.ContainsKey(food)) CommunityFood += itemFoodValues[food] * amount;
+        }
+    }
+}
+
+[System.Serializable]
+public struct ItemFoodValue
+{
+    public ItemScriptableObject item;
+    public int foodValue;
 }

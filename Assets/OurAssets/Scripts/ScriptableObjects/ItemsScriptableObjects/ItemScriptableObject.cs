@@ -11,7 +11,7 @@ public class ItemScriptableObject : ScriptableObject
     [field: SerializeField]
     public bool IsSellable { get; private set; }
     [field: SerializeField, Tooltip("Only will be used if the item is purchasable")]
-    public float PurchasePrice { get; private set; }
+    public int PurchasePrice { get; private set; }
     [field: SerializeField, Tooltip("Only will be used if the item is sellable")]
-    public float SellPrice { get; private set; }
+    public int SellPrice { get; private set; }
 }

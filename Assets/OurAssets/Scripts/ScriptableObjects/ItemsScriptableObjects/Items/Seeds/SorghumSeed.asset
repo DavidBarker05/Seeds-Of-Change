@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SeedScribtableObject
   <ItemName>k__BackingField: Sorghum Seed
   <IsPurchasable>k__BackingField: 1
-  <IsSellable>k__BackingField: 1
+  <IsSellable>k__BackingField: 0
   <PurchasePrice>k__BackingField: 4
-  <SellPrice>k__BackingField: 2
-  <Model>k__BackingField: {fileID: 0}
+  <SellPrice>k__BackingField: 0
   <CropToPlant>k__BackingField: {fileID: 11400000, guid: 7388df68f54fa694b9ec7a4475682cf2, type: 2}
   <NumberOfUses>k__BackingField: 3
