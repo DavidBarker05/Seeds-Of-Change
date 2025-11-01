@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 714531324720144610}
-  m_Layer: 0
+  - component: {fileID: 8294269962513839699}
+  - component: {fileID: 2557697002356400487}
+  m_Layer: 6
   m_Name: SorghumStage1DeadPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +34,39 @@ Transform:
   - {fileID: 2742503151441536526}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8294269962513839699
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436986472797951454}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.25, y: 0.35, z: 0.25}
+  m_Center: {x: 0, y: 0.175, z: 0}
+--- !u!114 &2557697002356400487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436986472797951454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ed5a6d51328264438e3e8256ec143b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CropScript
 --- !u!1001 &2415597808363143653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87,6 +122,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b1a41188192f18341b48c26e1c9ff5a7, type: 3}
       propertyPath: m_Name
       value: SorghumStage1Dead
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b1a41188192f18341b48c26e1c9ff5a7, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

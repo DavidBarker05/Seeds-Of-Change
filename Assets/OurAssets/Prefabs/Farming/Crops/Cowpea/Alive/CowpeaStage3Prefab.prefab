@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2987568977861632280}
   - component: {fileID: 2892289562465794885}
   - component: {fileID: 8139670412282701754}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CowpeaStage3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5430779459466005044}
-  m_Layer: 0
+  - component: {fileID: 1192469104619408619}
+  - component: {fileID: -5868708483896358162}
+  m_Layer: 6
   m_Name: CowpeaStage3Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,6 +125,39 @@ Transform:
   - {fileID: 2987568977861632280}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1192469104619408619
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5870670411777605989}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8, y: 0.7, z: 0.8}
+  m_Center: {x: 0, y: 0.35, z: 0}
+--- !u!114 &-5868708483896358162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5870670411777605989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ed5a6d51328264438e3e8256ec143b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CropScript
 --- !u!1001 &837363399428580982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,6 +169,10 @@ PrefabInstance:
     - target: {fileID: 2533683571483271382, guid: a64dbc015e9a5a04c814c3345a3f40f3, type: 3}
       propertyPath: m_Name
       value: CowpeaStage3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2533683571483271382, guid: a64dbc015e9a5a04c814c3345a3f40f3, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2910067960623184492, guid: a64dbc015e9a5a04c814c3345a3f40f3, type: 3}
       propertyPath: m_LocalPosition.x

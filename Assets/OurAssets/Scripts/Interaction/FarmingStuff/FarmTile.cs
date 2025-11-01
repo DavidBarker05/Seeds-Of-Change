@@ -230,8 +230,7 @@ public class FarmTile : ItemContainer, IEventListener
                 if (parameters[0] is GameObject harvestedCrop && harvestedCrop == currentCropPrefab)
                 {
                     EventBus.Instance?.BroadcastEvent(GameEventType.GainCropEvent, currentCrop, isDead, currentGrowCycle, CurrentYield);
-                    currentCrop = null;
-                    Destroy(currentCropPrefab);
+                    ClearItems();
                 }
                 break;
             case GameEventType.PestDisasterEventStart:

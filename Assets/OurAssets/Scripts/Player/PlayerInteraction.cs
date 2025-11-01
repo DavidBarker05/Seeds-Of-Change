@@ -6,7 +6,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField]
     Camera cam;
     [SerializeField, Min(0f)]
-    float maxInteractionDistance = 2f;
+    float maxInteractionDistance = 2.5f;
     [SerializeField, Range(0.1f, 0.5f)]
     float interactionRadius;
     [SerializeField]

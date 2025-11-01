@@ -3,15 +3,15 @@
 --- !u!1 &2008406345284381509
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3584768682106215758, guid: 1f367e4b7682f5e4f81953f21b6304de, type: 3}
-  m_PrefabInstance: {fileID: 451593034730731620}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1196236475351653416}
   - component: {fileID: 7339458278088260439}
   - component: {fileID: 3067984069865238567}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CowpeaStage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21,8 +21,8 @@ GameObject:
 --- !u!4 &1196236475351653416
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4248153058717108212, guid: 1f367e4b7682f5e4f81953f21b6304de, type: 3}
-  m_PrefabInstance: {fileID: 451593034730731620}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008406345284381509}
   serializedVersion: 2
@@ -36,16 +36,16 @@ Transform:
 --- !u!33 &7339458278088260439
 MeshFilter:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 962542330158352465, guid: 1f367e4b7682f5e4f81953f21b6304de, type: 3}
-  m_PrefabInstance: {fileID: 451593034730731620}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008406345284381509}
   m_Mesh: {fileID: 3009663438640755768, guid: d593c8c7f5ca1394fbd713355d4d53d1, type: 3}
 --- !u!23 &3067984069865238567
 MeshRenderer:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3080273508753570971, guid: 1f367e4b7682f5e4f81953f21b6304de, type: 3}
-  m_PrefabInstance: {fileID: 451593034730731620}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008406345284381509}
   m_Enabled: 1
@@ -100,7 +100,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2370289055329827349}
-  m_Layer: 0
+  - component: {fileID: -261915148751431769}
+  - component: {fileID: -3269099550034132909}
+  m_Layer: 6
   m_Name: CowpeaStage1Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,60 +125,36 @@ Transform:
   - {fileID: 1196236475351653416}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &451593034730731620
-PrefabInstance:
+--- !u!65 &-261915148751431769
+BoxCollider:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2370289055329827349}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_Name
-      value: CowpeaStage1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalPosition.y
-      value: -0.00000011920929
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6527012688555190769}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.3, z: 0.4}
+  m_Center: {x: 0, y: 0.15, z: 0}
+--- !u!114 &-3269099550034132909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6527012688555190769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ed5a6d51328264438e3e8256ec143b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CropScript
