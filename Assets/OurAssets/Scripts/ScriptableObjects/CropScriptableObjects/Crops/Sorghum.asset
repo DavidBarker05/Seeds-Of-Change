@@ -38,7 +38,7 @@ MonoBehaviour:
       cropPrefab: {fileID: 2094959802566523336, guid: 99c7f3db15a17f94fb06acb11fbb16cb, type: 3}
       cropYield:
         yieldItem: {fileID: 11400000, guid: 5115957caeff3d44fa83ae5c0eb9494b, type: 2}
-        yieldAmount: 5
+        yieldAmount: 4
     deadCrop:
       cropPrefab: {fileID: 7056013909974274635, guid: 4ead7c857ee8d094591b5a0bb10453b0, type: 3}
       cropYield:
@@ -54,3 +54,4 @@ MonoBehaviour:
     chance: 100
     strength: 0
   <IsSusceptibleToDrought>k__BackingField: 0
+  <SusceptibilityToPests>k__BackingField: 25

@@ -6,7 +6,7 @@ public class PlayerInventory : MonoBehaviour, IEventListener
     [SerializeField]
     ItemScriptableObject emptyItem;
     [SerializeField, Min(0)]
-    int startingMoney = 15;
+    int startingMoney = 20;
 
     Dictionary<ItemScriptableObject, int> items = new Dictionary<ItemScriptableObject, int>();
 

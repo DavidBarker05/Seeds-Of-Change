@@ -103,7 +103,11 @@ public class PlayerInteraction : MonoBehaviour
         {
             Interactable targetInteraction = CheckForInteraction();
             bool finishedUsing = usable.Use(targetInteraction);
-            if (finishedUsing) Destroy(usable.gameObject);
+            if (finishedUsing)
+            {
+                Destroy(usable.gameObject);
+                currentInteraction = null;
+            }
         }
     }
 }

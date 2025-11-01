@@ -12,6 +12,8 @@ public class CropScriptableObject : ScriptableObject
     public LackOfWaterSetback[] LackOfWaterSetbacks { get; private set; }
     [field: SerializeField]
     public bool IsSusceptibleToDrought { get; private set; }
+    [field: SerializeField, Min(0f)]
+    public float SusceptibilityToPests { get; private set; }
 }
 
 [Serializable]

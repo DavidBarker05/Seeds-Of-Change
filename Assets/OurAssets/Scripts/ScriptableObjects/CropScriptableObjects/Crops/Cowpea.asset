@@ -68,3 +68,4 @@ MonoBehaviour:
     chance: 100
     strength: 0
   <IsSusceptibleToDrought>k__BackingField: 0
+  <SusceptibilityToPests>k__BackingField: 80

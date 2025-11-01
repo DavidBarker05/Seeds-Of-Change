@@ -19,9 +19,14 @@ public class WateringCan : Usable
                 farmTile.WaterPlant();
                 CurrentCapacity -= waterLostWhenWatering;
             }
-            else if (targetInteractable is CropScript)
+            else if (targetInteractable is CropScript crop)
             {
-                EventBus.Instance?.BroadcastEvent(GameEventType.PlantWateredEvent, targetInteractable.gameObject);
+                EventBus.Instance?.BroadcastEvent(GameEventType.PlantWateredEvent, crop.gameObject);
+                CurrentCapacity -= waterLostWhenWatering;
+            }
+            else if (targetInteractable is PestScript pest)
+            {
+                EventBus.Instance?.BroadcastEvent(GameEventType.PlantWateredEvent, pest.gameObject);
                 CurrentCapacity -= waterLostWhenWatering;
             }
         }

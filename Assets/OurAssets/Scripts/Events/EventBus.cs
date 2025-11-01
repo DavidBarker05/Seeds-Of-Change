@@ -13,6 +13,7 @@ public enum GameEventType
     PestDisasterEventEnd,
     PlayerInventoryUpdateEvent,
     PlantWateredEvent,
+    PestWateredEvent,
     ItemPurchasedEvent,
     ItemSoldEvent,
     MoneyChangedEvent,
@@ -23,7 +24,11 @@ public enum GameEventType
     ItemSpawnEvent,
     SuccessfulSaleEvent,
     ItemStoredEvent,
-    SuccessfulStoreEvent
+    SuccessfulStoreEvent,
+    CropPassivePestAppliedEvent,
+    PestPassivePestAppliedEvent,
+    CropActivePestAppliedEvent,
+    PestActivePestAppliedEvent
 }
 
 public class EventBus : MonoBehaviour

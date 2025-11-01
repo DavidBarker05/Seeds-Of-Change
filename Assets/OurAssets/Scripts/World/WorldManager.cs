@@ -52,9 +52,9 @@ public class WorldManager : MonoBehaviour, IEventListener
     [SerializeField]
     List<ItemFoodValue> itemFoodValues = new List<ItemFoodValue>();
     [SerializeField, Min(0)]
-    int familyStartingFood = 25;
+    int familyStartingFood = 30;
     [SerializeField, Min(0)]
-    int communityStartingFood = 60;
+    int communityStartingFood = 90;
 
     SeasonManager seasonManager;
     WeatherManager weatherManager;
@@ -521,10 +521,10 @@ public class WorldManager : MonoBehaviour, IEventListener
     {
         private static readonly Dictionary<Season, (int familyNeeds, int communityNeeds)> dailyFoodNeededPerSeason = new Dictionary<Season, (int familyNeeds, int communityNeeds)>()
         {
-            { Season.RainySeason, (familyNeeds: 5, communityNeeds: 15) },
-            { Season.CoolSeason, (familyNeeds: 4, communityNeeds: 12) },
-            { Season.HotSeason, (familyNeeds: 6, communityNeeds: 18) },
-            { Season.DrySeason, (familyNeeds: 3, communityNeeds: 9) }
+            { Season.RainySeason, (familyNeeds: 4, communityNeeds: 12) },
+            { Season.CoolSeason, (familyNeeds: 3, communityNeeds: 9) },
+            { Season.HotSeason, (familyNeeds: 5, communityNeeds: 15) },
+            { Season.DrySeason, (familyNeeds: 2, communityNeeds: 6) }
         };
 
         private static readonly Dictionary<Difficulty, float> difficultyModifiers = new Dictionary<Difficulty, float>()
@@ -574,7 +574,6 @@ public class WorldManager : MonoBehaviour, IEventListener
         public void AddFamilyFood(ItemScriptableObject food, int amount)
         {
             if (itemFoodValues.ContainsKey(food)) FamilyFood += itemFoodValues[food] * amount;
-            Debug.Log(FamilyFood);
         }
 
         public void AddCommunityFood(ItemScriptableObject food, int amount)

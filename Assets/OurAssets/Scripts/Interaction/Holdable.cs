@@ -94,18 +94,16 @@ public class Holdable : Interactable
             else
             {
                 rb.detectCollisions = true; // Re-enable collisions so that we can unclip the object
-                if (AttemptToUnclip(depth: maxUnclippingAttempts, holdLayer, cam)) // If we succesfully managed to unclip within the max attempts then release the object
+                bool unclipped = AttemptToUnclip(depth: maxUnclippingAttempts, holdLayer, cam);
+                if (!unclipped && Physics.CheckBox(_collider.bounds.center, _collider.bounds.extents * 0.1f, transform.rotation, ~(holdLayer | playerMask))) RespawnObject(); // If really stuck respawn
+                rb.isKinematic = false;
+                if (!rb.useGravity) rb.useGravity = true;
+                if (isClipping) // Try to prevent object from flying
                 {
-                    rb.isKinematic = false;
-                    if (!rb.useGravity) rb.useGravity = true;
-                    if (isClipping) // Try to prevent object from flying
-                    {
-                        if (rb.linearVelocity.sqrMagnitude > 0f) rb.linearVelocity = Vector3.zero;
-                        if (rb.angularVelocity.sqrMagnitude > 0f) rb.angularVelocity = Vector3.zero;
-                    }
-                    else if (rb.linearVelocity != releaseVel) rb.linearVelocity = releaseVel;
+                    if (rb.linearVelocity.sqrMagnitude > 0f) rb.linearVelocity = Vector3.zero;
+                    if (rb.angularVelocity.sqrMagnitude > 0f) rb.angularVelocity = Vector3.zero;
                 }
-                else RespawnObject(); // If we couldn't unclip just respawn it
+                else if (rb.linearVelocity != releaseVel) rb.linearVelocity = releaseVel;
             }
             int holdLayerIndex = ConvertLayerToIndex(holdLayer);
             gameObject.layer = held ? holdLayerIndex : startLayer;
@@ -157,7 +155,11 @@ public class Holdable : Interactable
         isClipping = false; // Reset is clipping for now to be able to exit early from checking collisions if needed
         UnblockLineOfSightToCamera(holdLayer, cam, bitMask, ref placePos);
         UnclipFromColliders(holdLayer, bitMask, ref placePos);
-        if (placePos != transform.position) transform.position = placePos;
+        if (placePos != transform.position)
+        {
+            transform.position = placePos;
+            Physics.SyncTransforms();
+        }
         if (!Physics.CheckBox(_collider.bounds.center, _collider.bounds.extents, transform.rotation, bitMask)) return true; // Successfully stopped clipping
         return (AttemptToUnclip(--depth, holdLayer, cam)); // Try again
     }

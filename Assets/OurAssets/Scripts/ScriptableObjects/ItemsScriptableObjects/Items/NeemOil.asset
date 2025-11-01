@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d3e836e6888cc44ba596a30e480dae9, type: 3}
-  m_Name: Water
+  m_Name: NeemOil
   m_EditorClassIdentifier: Assembly-CSharp::ItemScriptableObject
-  <ItemName>k__BackingField: Water
+  <ItemName>k__BackingField: Neem Oil (Passive Pesticide)
   <IsPurchasable>k__BackingField: 1
   <IsSellable>k__BackingField: 0
-  <PurchasePrice>k__BackingField: 3
+  <PurchasePrice>k__BackingField: 5
   <SellPrice>k__BackingField: 0
