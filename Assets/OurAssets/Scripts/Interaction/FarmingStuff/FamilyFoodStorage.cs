@@ -20,14 +20,14 @@ public class FamilyFoodStorage : Interactable, IEventListener
 
     void OnDestroy() => EventBus.Instance?.RemoveEventListener(GameEventType.PlayerInventoryUpdateEvent, this);
 
-    public override bool Interact(params object[] parameters)
+    public override InteractionInfo Interact(params object[] parameters)
     {
         if (foodMenu != null && GameManager.Instance != null)
         {
             GameManager.Instance.IsPaused = true;
             foodMenu.gameObject.SetActive(true);
         }
-        return true;
+        return new InteractionInfo() { DoEndInteraction = true };
     }
 
     public void OnEventReceived(GameEventType eventType, params object[] parameters)

@@ -70,14 +70,14 @@ public class Holdable : Interactable
 
     void OnCollisionEnter(Collision collision) { if (collision.gameObject.CompareTag("OutOfBounds")) RespawnObject(); }
 
-    public override bool Interact(params object[] parameters)
+    public override InteractionInfo Interact(params object[] parameters)
     {
         if (parameters.Length != 4)
         {
-            #if UNITY_EDITOR
-                Debug.LogWarning($"WARNING: Holdable objects needs 4 parameters. Received {parameters.Length} parameters");
-            #endif
-            return true; // Drop object
+#if UNITY_EDITOR
+            Debug.LogWarning($"WARNING: Holdable objects needs 4 parameters. Received {parameters.Length} parameters");
+#endif
+            return new InteractionInfo() { DoEndInteraction = true }; // Drop object
         }
         if (parameters[0] is Transform holdPos && parameters[1] is LayerMask holdLayer && parameters[2] is Collider playerCollider && parameters[3] is Camera cam)
         {
@@ -109,17 +109,17 @@ public class Holdable : Interactable
             gameObject.layer = held ? holdLayerIndex : startLayer;
             foreach (Transform child in childTransforms) child.gameObject.layer = gameObject.layer;
             if (isClipping) isClipping = false;
-            return !held; // Return true when drop, false when pick up
+            return new InteractionInfo() { DoEndInteraction = !held }; // Return true when drop, false when pick up
         }
         else
         {
-            #if UNITY_EDITOR
-                if (parameters[0] is not Transform) Debug.LogWarning($"WARNING: Parameter 0 needs to be the hold position transform. Received {parameters[0]} type {parameters[0].GetType()} as parameter 0");
-                if (parameters[1] is not LayerMask) Debug.LogWarning($"WARNING: Parameter 1 needs to be the hold layer to render on. Received {parameters[1]} type {parameters[1].GetType()} as parameter 1");
-                if (parameters[2] is not Collider) Debug.LogWarning($"WARNING: Parameter 2 needs to be the player collider. Received {parameters[2]} type {parameters[2].GetType()} as parameter 2");
-                if (parameters[3] is not Camera) Debug.LogWarning($"WARNING: Parameter 3 needs to be the player camera. Received {parameters[3]} type {parameters[3].GetType()} as parameter 3");
-            #endif
-            return true; // Drop object
+#if UNITY_EDITOR
+            if (parameters[0] is not Transform) Debug.LogWarning($"WARNING: Parameter 0 needs to be the hold position transform. Received {parameters[0]} type {parameters[0].GetType()} as parameter 0");
+            if (parameters[1] is not LayerMask) Debug.LogWarning($"WARNING: Parameter 1 needs to be the hold layer to render on. Received {parameters[1]} type {parameters[1].GetType()} as parameter 1");
+            if (parameters[2] is not Collider) Debug.LogWarning($"WARNING: Parameter 2 needs to be the player collider. Received {parameters[2]} type {parameters[2].GetType()} as parameter 2");
+            if (parameters[3] is not Camera) Debug.LogWarning($"WARNING: Parameter 3 needs to be the player camera. Received {parameters[3]} type {parameters[3].GetType()} as parameter 3");
+#endif
+            return new InteractionInfo() { DoEndInteraction = true }; // Drop object
         }
     }
 

@@ -34,14 +34,14 @@ public class Market : Interactable, IEventListener
         EventBus.Instance?.RemoveEventListener(GameEventType.MoneyChangedEvent, this);
     }
 
-    public override bool Interact(params object[] parameters)
+    public override InteractionInfo Interact(params object[] parameters)
     {
         if (marketMenu != null && GameManager.Instance != null)
         {
             GameManager.Instance.IsPaused = true;
             marketMenu.gameObject.SetActive(true);
         }
-        return true;
+        return new InteractionInfo() { DoEndInteraction = true };
     }
 
     public void OnEventReceived(GameEventType eventType, params object[] parameters)

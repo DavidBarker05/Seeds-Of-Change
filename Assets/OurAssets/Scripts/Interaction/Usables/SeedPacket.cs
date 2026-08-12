@@ -17,15 +17,15 @@ public class SeedPacket : Usable
     {
         if (targetInteractable == null)
         {
-            #if UNITY_EDITOR
-                Debug.LogWarning("Seed packet needs to be used on farm land, you used it on nothing");
-            #endif
+#if UNITY_EDITOR
+            Debug.LogWarning("Seed packet needs to be used on farm land, you used it on nothing");
+#endif
         }
         else
         {
             if (targetInteractable is FarmTile farmTile)
             {
-                if (!farmTile.Interact(SeedData, 1)) --currentNumberOfUses;
+                if (!farmTile.Interact(SeedData, 1).DoEndInteraction) --currentNumberOfUses;
             }
         }
         return currentNumberOfUses <= 0;
@@ -34,12 +34,12 @@ public class SeedPacket : Usable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

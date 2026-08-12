@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class HouseDoor : Interactable
 {
-    public override bool Interact(params object[] parameters)
+    public override InteractionInfo Interact(params object[] parameters)
     {
         if (parameters.Length != 1)
         {
-            #if UNITY_EDITOR
-                Debug.LogWarning($"WARNING: HouseDoor needs 1 parameters. Received {parameters.Length} parameters");
-            #endif
+#if UNITY_EDITOR
+            Debug.LogWarning($"WARNING: HouseDoor needs 1 parameters. Received {parameters.Length} parameters");
+#endif
 
         }
         else
@@ -23,18 +23,18 @@ public class HouseDoor : Interactable
                 }
                 else
                 {
-                    #if UNITY_EDITOR
-                        Debug.LogWarning($"WARNING: Parameter 0 needs to be a game object with a SpawnManager script attached");
-                    #endif
+#if UNITY_EDITOR
+                    Debug.LogWarning($"WARNING: Parameter 0 needs to be a game object with a SpawnManager script attached");
+#endif
                 }
             }
             else
             {
-                #if UNITY_EDITOR
-                    if (parameters[0] is not GameObject) Debug.LogWarning($"WARNING: Parameter 0 needs to be a game object. Received {parameters[0]} type {parameters[0].GetType()} as parameter 0");
-                #endif
+#if UNITY_EDITOR
+                if (parameters[0] is not GameObject) Debug.LogWarning($"WARNING: Parameter 0 needs to be a game object. Received {parameters[0]} type {parameters[0].GetType()} as parameter 0");
+#endif
             }
         }
-        return true;
+        return new InteractionInfo() { DoEndInteraction = true };
     }
 }

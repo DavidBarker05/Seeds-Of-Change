@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class ItemContainer : Interactable
 {
@@ -9,14 +9,14 @@ public abstract class ItemContainer : Interactable
     protected readonly Dictionary<ItemScriptableObject, int> acceptedItems = new Dictionary<ItemScriptableObject, int>();
     protected int currentCapacity = 0;
 
-    public override bool Interact(params object[] parameters)
+    public override InteractionInfo Interact(params object[] parameters)
     {
         if (containerData == null) Debug.LogError($"ERROR: ItemContainer needs a valid ItemContainerScriptableObject");
         if (parameters.Length != 1 && parameters.Length != 2)
         {
-            #if UNITY_EDITOR
-                Debug.LogWarning($"WARNING: ItemContainer objects need 1 or 2 parameters. Received {parameters.Length} parameter(s)");
-            #endif
+#if UNITY_EDITOR
+            Debug.LogWarning($"WARNING: ItemContainer objects need 1 or 2 parameters. Received {parameters.Length} parameter(s)");
+#endif
         }
         else
         {
@@ -24,19 +24,19 @@ public abstract class ItemContainer : Interactable
             {
                 if (containerData?.AcceptableItems.Contains(item) ?? false)
                 {
-                    if (parameters[1] is int amount) return AddItem(item, amount);
-                    else return AddItem(item);
+                    if (parameters[1] is int amount) return new InteractionInfo() { DoEndInteraction = AddItem(item, amount) };
+                    else return new InteractionInfo() { DoEndInteraction = AddItem(item) };
                 }
             }
             else if (parameters[0] is bool clearItems) ClearItems(); // This will be used for stuff like harvesting
             else
             {
-                #if UNITY_EDITOR
-                    if (parameters[0] is not ItemScriptableObject && parameters[0] is not bool) Debug.LogWarning($"WARNING: Parameter 0 needs to be an ItemScriptableObject or a bool. Received {parameters[0]} type {parameters[0].GetType()} as parameter 0");
-                #endif
+#if UNITY_EDITOR
+                if (parameters[0] is not ItemScriptableObject && parameters[0] is not bool) Debug.LogWarning($"WARNING: Parameter 0 needs to be an ItemScriptableObject or a bool. Received {parameters[0]} type {parameters[0].GetType()} as parameter 0");
+#endif
             }
         }
-        return true;
+        return new InteractionInfo() { DoEndInteraction = true };
     }
 
     public bool AddItem(ItemScriptableObject item, int amount = 1)

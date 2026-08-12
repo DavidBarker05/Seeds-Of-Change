@@ -78,7 +78,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 currentInteraction = targetInteraction;
                 if (currentInteraction is Holdable) InteractHoldable();
-                else if (currentInteraction.Interact()) currentInteraction = null;
+                else if (currentInteraction.Interact().DoEndInteraction) currentInteraction = null;
             }
         }
         else if (currentInteraction != null)
@@ -91,8 +91,8 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (currentInteraction is Holdable holdable)
         {
-            bool drop = holdable.Interact(holdPos, holdLayer, GetComponent<CharacterController>() as Collider, cam);
-            if (drop) currentInteraction = null;
+            InteractionInfo drop = holdable.Interact(holdPos, holdLayer, GetComponent<CharacterController>() as Collider, cam);
+            if (drop.DoEndInteraction) currentInteraction = null;
         }
     }
 

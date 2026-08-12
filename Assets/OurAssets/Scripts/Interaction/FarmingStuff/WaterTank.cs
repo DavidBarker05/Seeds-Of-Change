@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class WaterTank : Interactable, IEventListener
 {
@@ -39,13 +39,13 @@ public class WaterTank : Interactable, IEventListener
         if (CurrentCapacity != maxCapacity) CurrentCapacity = Mathf.Clamp(CurrentCapacity + amount, 0f, maxCapacity);
     }
 
-    public override bool Interact(params object[] parameters)
+    public override InteractionInfo Interact(params object[] parameters)
     {
         if (parameters.Length != 1)
         {
-            #if UNITY_EDITOR
-                Debug.LogWarning($"WARNING: WaterTank objects needs 1 parameter. Received {parameters.Length} parameters");
-            #endif
+#if UNITY_EDITOR
+            Debug.LogWarning($"WARNING: WaterTank objects needs 1 parameter. Received {parameters.Length} parameters");
+#endif
         }
         else if (parameters[0] is WateringCan wateringCan)
         {
@@ -65,11 +65,11 @@ public class WaterTank : Interactable, IEventListener
         }
         else
         {
-            #if UNITY_EDITOR
-                Debug.LogWarning($"WARNING: Parameter 0 needs to be a WateringCan. Received {parameters[0]} type {parameters[0].GetType()} as parameter 0");
-            #endif
+#if UNITY_EDITOR
+            Debug.LogWarning($"WARNING: Parameter 0 needs to be a WateringCan. Received {parameters[0]} type {parameters[0].GetType()} as parameter 0");
+#endif
         }
-        return true;
+        return new InteractionInfo() { DoEndInteraction = true };
     }
 
     public void OnEventReceived(GameEventType eventType, params object[] parameters)
