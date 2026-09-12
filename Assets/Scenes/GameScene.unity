@@ -260,10 +260,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &2408815
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -310,7 +310,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4882,10 +4882,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &136975512
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4932,7 +4932,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5266,10 +5266,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &147722810
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5316,7 +5316,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8853,10 +8853,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &250082396
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8903,7 +8903,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12220,10 +12220,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &343736997
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12270,7 +12270,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14151,10 +14151,10 @@ MonoBehaviour:
   startingGrowthStage: 2
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &408818485
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14201,7 +14201,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16156,10 +16156,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &476138429
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16206,7 +16206,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16633,10 +16633,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &488858441
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16683,7 +16683,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18378,10 +18378,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &528069891
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18428,7 +18428,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19424,10 +19424,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &558991087
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19474,7 +19474,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19647,10 +19647,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &562415052
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19697,7 +19697,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -20607,10 +20607,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &580189049
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20657,7 +20657,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21046,10 +21046,10 @@ MonoBehaviour:
   startingGrowthStage: 4
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &589398925
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21096,7 +21096,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -23304,10 +23304,10 @@ MonoBehaviour:
   startingGrowthStage: 3
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &670180000
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23354,7 +23354,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24317,10 +24317,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &712859927
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24367,7 +24367,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24454,10 +24454,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &726781451
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24504,7 +24504,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24622,10 +24622,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &728142993
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24672,7 +24672,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -25402,10 +25402,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &760757023
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25452,7 +25452,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -26682,10 +26682,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &789646783
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26732,7 +26732,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -26852,10 +26852,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &793944210
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26902,7 +26902,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28091,10 +28091,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &831023879
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28141,7 +28141,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -29107,10 +29107,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &865666637
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29157,7 +29157,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30917,10 +30917,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &938229834
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30967,7 +30967,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -35884,7 +35884,7 @@ MonoBehaviour:
   rainyDaySkybox: {fileID: 2100000, guid: 54fe2f000ad8f424fb63cc3ea0ae2bb2, type: 2}
   daysPerSeason: 10
   startingSeason: 0
-  startingWeather: 2
+  startingWeather: 1
   startingDifficulty: 0
   itemFoodValues:
   - item: {fileID: 11400000, guid: 3cd044a02db33924ea10a36b4cae0db5, type: 2}
@@ -36785,10 +36785,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1135435053
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36835,7 +36835,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -38547,10 +38547,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1195845270
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38597,7 +38597,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -39314,10 +39314,10 @@ MonoBehaviour:
   startingGrowthStage: 2
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1212208359
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39364,7 +39364,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -39681,10 +39681,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1221571990
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39731,7 +39731,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -45722,10 +45722,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1407622037
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -45772,7 +45772,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -47079,10 +47079,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1438544210
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -47129,7 +47129,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -48124,10 +48124,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1468270694
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48174,7 +48174,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -51736,10 +51736,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1590633697
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51786,7 +51786,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -52217,10 +52217,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1608333523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52267,7 +52267,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -52910,10 +52910,10 @@ MonoBehaviour:
   startingGrowthStage: 5
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1631306304
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52960,7 +52960,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -53305,10 +53305,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1640622591
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53355,7 +53355,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -54091,10 +54091,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1659047602
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -54141,7 +54141,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -56122,10 +56122,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1719617680
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -56172,7 +56172,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -64800,10 +64800,10 @@ MonoBehaviour:
   startingGrowthStage: 3
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1822862102
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -64850,7 +64850,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -64937,10 +64937,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1822870040
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -64987,7 +64987,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -65789,10 +65789,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1858667979
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -65839,7 +65839,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -66802,10 +66802,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1880356759
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -66852,7 +66852,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -67111,10 +67111,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1904169416
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67161,7 +67161,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -68438,10 +68438,10 @@ MonoBehaviour:
   startingGrowthStage: 3
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1961569157
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -68488,7 +68488,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -69774,10 +69774,10 @@ MonoBehaviour:
   startingGrowthStage: 3
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &1994381160
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -69824,7 +69824,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -71602,10 +71602,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &2031962657
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -71652,7 +71652,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -73112,10 +73112,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &2077554312
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -73162,7 +73162,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -73249,10 +73249,10 @@ MonoBehaviour:
   startingGrowthStage: 2
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &2081378186
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -73299,7 +73299,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -73386,10 +73386,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &2089321688
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -73436,7 +73436,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79189,10 +79189,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &2100759657
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -79239,7 +79239,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79452,10 +79452,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &2105445981
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -79502,7 +79502,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80309,10 +80309,10 @@ MonoBehaviour:
   startingGrowthStage: 1
   waterNeededPerDay: 1
   waterNeededPerDayInDrought: 2
-  soilMaterial: {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
-  wetSoilMaterial: {fileID: 2100000, guid: a9bead69daccd8f4ab9eaff988a4705d, type: 2}
-  farmlandMaterial: {fileID: 2100000, guid: 0ef33783b97b30b4899684a849ce127f, type: 2}
-  wetFarmlandMaterial: {fileID: 2100000, guid: bf8b8b0712e26cf438376a5bc561ef94, type: 2}
+  soilMaterial: {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
+  wetSoilMaterial: {fileID: 2100000, guid: b198dd37c305f304e91823ea8e76c271, type: 2}
+  farmlandMaterial: {fileID: 2100000, guid: 904a5cc58d3ef2a4f9b427647c37b3a5, type: 2}
+  wetFarmlandMaterial: {fileID: 2100000, guid: 936c164143523d64fb7ea7a38ae3b667, type: 2}
 --- !u!65 &2127275260
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -80359,7 +80359,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8aeff76a251a34ba0e032d1606afa1, type: 2}
+  - {fileID: 2100000, guid: 8a3fcb5c420f7d843bc46303356fb1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
