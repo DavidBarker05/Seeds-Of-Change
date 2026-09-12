@@ -16013,6 +16013,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cistern_big_green
       objectReference: {fileID: 0}
+    - target: {fileID: 1272924371097864, guid: 339be524d088d4d47b39a72cd1315473, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4154213630243164, guid: 339be524d088d4d47b39a72cd1315473, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -72122,7 +72126,7 @@ GameObject:
   - component: {fileID: 2040246062}
   - component: {fileID: 2040246061}
   - component: {fileID: 2040246060}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WaterTank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72143,7 +72147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaterTank
   waterItem: {fileID: 11400000, guid: 0c45428b27abb434c87700828e5de02e, type: 2}
   maxCapacity: 10
-  startingCapacity: 1
+  startingCapacity: 5
   waterGainedFromPurchasing: 2.5
 --- !u!136 &2040246061
 CapsuleCollider:
