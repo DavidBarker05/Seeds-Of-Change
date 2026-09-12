@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 [System.Serializable]
 public enum Season
@@ -47,6 +47,10 @@ public class WorldManager : MonoBehaviour, IEventListener
     TextMeshProUGUI disastersText;
     [SerializeField]
     GameObject rainVolume;
+    [SerializeField]
+    Material clearSkySkybox;
+    [SerializeField]
+    Material rainyDaySkybox;
     [SerializeField, Min(1)]
     int daysPerSeason = 10;
     [SerializeField]
@@ -185,9 +189,11 @@ public class WorldManager : MonoBehaviour, IEventListener
                 break;
             case GameEventType.ClearSkyWeatherEvent:
                 if (rainVolume != null) rainVolume.SetActive(false);
+                if (clearSkySkybox != null && RenderSettings.skybox != clearSkySkybox) RenderSettings.skybox = clearSkySkybox;
                 break;
             case GameEventType.RainWeatherEvent:
                 if (rainVolume != null) rainVolume.SetActive(true);
+                if (rainyDaySkybox != null && RenderSettings.skybox != rainyDaySkybox) RenderSettings.skybox = rainyDaySkybox;
                 break;
             case GameEventType.SuccessfulSaleEvent:
                 if (parameters[0] is ItemScriptableObject soldItem && parameters[1] is int soldAmount) foodManager.AddCommunityFood(soldItem, soldAmount);

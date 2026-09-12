@@ -100,9 +100,16 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _HeightStrength: 0.02
+    - _IsWet: 0
     - _Metallic: 0
+    - _NoiseBlend: 0.25
+    - _NoiseScale: 10
+    - _NormalStrength: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _ParallaxDepth: 0.03
+    - _ParallaxSteps: 12
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -112,14 +119,22 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _VoronoiAngleOffset: 2
+    - _VoronoiCellDensity: 5
+    - _WetDarken: 0.5
+    - _WetSmoothness: 0.5
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BrightColor: {r: 0.33018863, g: 0.21767825, b: 0.13861686, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DarkColor: {r: 0.14150935, g: 0.091104336, b: 0.056737244, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Specular: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - _SpecularColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &1946659657320710708

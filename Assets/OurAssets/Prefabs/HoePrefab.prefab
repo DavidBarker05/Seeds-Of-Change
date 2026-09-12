@@ -154,11 +154,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: b78750eed6179e54f85d89fd770e6cc9, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 459421ca2e270354c8d1b069ab8a1732, type: 2}
+      objectReference: {fileID: 2100000, guid: 765c2a12629583f4084c557c5c57ce17, type: 2}
     - target: {fileID: -7511558181221131132, guid: b78750eed6179e54f85d89fd770e6cc9, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: 54ac61b114e3f1a44a29f1832ba136d6, type: 2}
+      objectReference: {fileID: 2100000, guid: f662734abf9fb8943b1391bd1ae8ed02, type: 2}
     - target: {fileID: 919132149155446097, guid: b78750eed6179e54f85d89fd770e6cc9, type: 3}
       propertyPath: m_Name
       value: Hoe
