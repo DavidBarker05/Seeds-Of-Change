@@ -20805,6 +20805,9 @@ MonoBehaviour:
     foodValue: 2
   familyStartingFood: 30
   communityStartingFood: 90
+  seedPacket: {fileID: 11400000, guid: 2d5c340628f5e214d80376cee304c8d9, type: 2}
+  btSpray: {fileID: 11400000, guid: d88dc7f599ff51747baf601515f2f246, type: 2}
+  hudReticle: {fileID: 335725744}
 --- !u!4 &1113200233
 Transform:
   m_ObjectHideFlags: 0
@@ -40941,6 +40944,17 @@ MonoBehaviour:
   interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   pauseAction: {fileID: -7542254816387067402, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   useAction: {fileID: -1915240518732172146, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  trailerHotkeyActions:
+  - {fileID: -904921216818249736, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  - {fileID: 3078407170171714940, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  - {fileID: 2788559759401514001, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  - {fileID: -7959598750673443777, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  - {fileID: -9205570100729642926, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  - {fileID: 3335349310810781447, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  - {fileID: -6388588852758169420, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  - {fileID: 5760654843337214571, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  - {fileID: 640579120547909283, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  - {fileID: 2215151475139976430, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!4 &1974417341
 Transform:
   m_ObjectHideFlags: 0

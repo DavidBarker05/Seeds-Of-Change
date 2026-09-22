@@ -18,6 +18,8 @@ public class InputManagerScript : MonoBehaviour
     InputActionReference pauseAction;
     [SerializeField]
     InputActionReference useAction;
+    [SerializeField]
+    InputActionReference[] trailerHotkeyActions;
 
     public InputDevice CurrentInputDevice { get; private set; }
     public InputDevice CurrentLookDevice { get; private set; }
@@ -32,6 +34,8 @@ public class InputManagerScript : MonoBehaviour
     public void RemovePauseAction(System.Action<InputAction.CallbackContext> action) => pauseAction.action.started -= action;
     public void AddUseAction(System.Action<InputAction.CallbackContext> action) => useAction.action.started += action;
     public void RemoveUseAction(System.Action<InputAction.CallbackContext> action) => useAction.action.started -= action;
+    public void AddTrailerHotkeyAction(int index, System.Action<InputAction.CallbackContext> action) => trailerHotkeyActions[index].action.started += action;
+    public void RemoveTrailerHotkeyAction(int index, System.Action<InputAction.CallbackContext> action) => trailerHotkeyActions[index].action.started -= action;
 
     void Awake()
     {
@@ -54,6 +58,8 @@ public class InputManagerScript : MonoBehaviour
         if (!interactAction.action.enabled) interactAction.action.Enable();
         if (!pauseAction.action.enabled) pauseAction.action.Enable();
         if (!useAction.action.enabled) useAction.action.Enable();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void OnDestroy()

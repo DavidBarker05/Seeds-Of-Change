@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [System.Serializable]
 public enum Season
@@ -65,6 +66,13 @@ public class WorldManager : MonoBehaviour, IEventListener
     int familyStartingFood = 30;
     [SerializeField, Min(0)]
     int communityStartingFood = 90;
+    [Header("Trailer")]
+    [SerializeField]
+    ItemScriptableObject seedPacket;
+    [SerializeField]
+    ItemScriptableObject btSpray;
+    [SerializeField]
+    GameObject hudReticle;
 
     SeasonManager seasonManager;
     WeatherManager weatherManager;
@@ -105,6 +113,12 @@ public class WorldManager : MonoBehaviour, IEventListener
 
     void Start()
     {
+        InputManagerScript.Instance.AddTrailerHotkeyAction(3, DoRainTomorrow);
+        InputManagerScript.Instance.AddTrailerHotkeyAction(4, DoDroughtTomorrow);
+        InputManagerScript.Instance.AddTrailerHotkeyAction(5, DoPestTomorrow);
+        InputManagerScript.Instance.AddTrailerHotkeyAction(6, SpawnSeedPacket);
+        InputManagerScript.Instance.AddTrailerHotkeyAction(7, SpawnBtSpray);
+        InputManagerScript.Instance.AddTrailerHotkeyAction(8, ToggleReticle);
         canResetForcedWeather = true;
         canResetForcedDisaster = true;
         CurrentDay = 1;
@@ -116,6 +130,12 @@ public class WorldManager : MonoBehaviour, IEventListener
 
     void OnDestroy()
     {
+        InputManagerScript.Instance.RemoveTrailerHotkeyAction(3, DoRainTomorrow);
+        InputManagerScript.Instance.RemoveTrailerHotkeyAction(4, DoDroughtTomorrow);
+        InputManagerScript.Instance.RemoveTrailerHotkeyAction(5, DoPestTomorrow);
+        InputManagerScript.Instance.RemoveTrailerHotkeyAction(6, SpawnSeedPacket);
+        InputManagerScript.Instance.RemoveTrailerHotkeyAction(7, SpawnBtSpray);
+        InputManagerScript.Instance.RemoveTrailerHotkeyAction(8, ToggleReticle);
         EventBus.Instance?.RemoveEventListener(GameEventType.DroughtDisasterEventStart, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.DroughtDisasterEventEnd, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.ClearSkyWeatherEvent, this);
@@ -123,6 +143,26 @@ public class WorldManager : MonoBehaviour, IEventListener
         EventBus.Instance?.RemoveEventListener(GameEventType.SuccessfulSaleEvent, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.SuccessfulStoreEvent, this);
     }
+
+    void DoRainTomorrow(InputAction.CallbackContext ctx) => forcedWeather = Weather.Rain;
+
+    void DoDroughtTomorrow(InputAction.CallbackContext ctx)
+    {
+        CurrentDifficulty = Difficulty.Hard;
+        forcedDisaster = Disaster.Drought;
+    }
+
+    void DoPestTomorrow(InputAction.CallbackContext ctx)
+    {
+        CurrentDifficulty = Difficulty.Hard;
+        forcedDisaster = Disaster.Pest;
+    }
+
+    void SpawnSeedPacket(InputAction.CallbackContext ctx) => EventBus.Instance.BroadcastEvent(GameEventType.ItemSpawnEvent, seedPacket, 1);
+
+    void SpawnBtSpray(InputAction.CallbackContext ctx) => EventBus.Instance.BroadcastEvent(GameEventType.ItemSpawnEvent, btSpray, 1);
+
+    void ToggleReticle(InputAction.CallbackContext ctx) => hudReticle.SetActive(!hudReticle.activeSelf);
 
     public void MoveToNextDay()
     {

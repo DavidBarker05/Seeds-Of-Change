@@ -1,5 +1,7 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Renderer))]
 public class FarmTile : ItemContainer, IEventListener
@@ -57,6 +59,8 @@ public class FarmTile : ItemContainer, IEventListener
     bool growthIsPausedFromPest;
     float yieldReductionFromPest;
     float CurrentYield => 100f - yieldReductionFromWater - yieldReductionFromPest;
+
+    bool shouldDoWaterCheck = true;
 
     bool _isTilled;
     bool _isWet;
@@ -116,6 +120,14 @@ public class FarmTile : ItemContainer, IEventListener
         timesWateredToday = 0;
         daysWithPests = 0;
         acceptedItems.Add(startingSeed, 1);
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (sceneIndex == TrailerSceneManager.MAIN_SCENE_INDEX)
+            InputManagerScript.Instance.AddTrailerHotkeyAction(2, ToggleShouldDoWaterCheck);
+        else if (sceneIndex == TrailerSceneManager.CROP_SCENE_INDEX)
+        {
+            InputManagerScript.Instance.AddTrailerHotkeyAction(4, ResetGrowthStage);
+            InputManagerScript.Instance.AddTrailerHotkeyAction(5, GoToNextStage);
+        }
     }
 
     void OnDestroy()
@@ -133,6 +145,34 @@ public class FarmTile : ItemContainer, IEventListener
         EventBus.Instance?.RemoveEventListener(GameEventType.PestPassivePestAppliedEvent, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.CropActivePestAppliedEvent, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.PestActivePestAppliedEvent, this);
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (sceneIndex == TrailerSceneManager.MAIN_SCENE_INDEX)
+            InputManagerScript.Instance.RemoveTrailerHotkeyAction(2, ToggleShouldDoWaterCheck);
+        else if (sceneIndex == TrailerSceneManager.CROP_SCENE_INDEX)
+        {
+            InputManagerScript.Instance.RemoveTrailerHotkeyAction(4, ResetGrowthStage);
+            InputManagerScript.Instance.RemoveTrailerHotkeyAction(5, GoToNextStage);
+        }
+    }
+
+    void ToggleShouldDoWaterCheck(InputAction.CallbackContext ctx) => shouldDoWaterCheck = !shouldDoWaterCheck;
+
+    void ResetGrowthStage(InputAction.CallbackContext ctx)
+    {
+        currentGrowCycle = 1;
+        if (currentCropPrefab != null) Destroy(currentCropPrefab);
+        currentCropPrefab = Instantiate(currentCrop.GrowthStages[currentGrowCycle - 1].aliveCrop.cropPrefab, spawnPosition.position, spawnPosition.rotation);
+    }
+
+    void GoToNextStage(InputAction.CallbackContext ctx)
+    {
+        if (currentCropPrefab != null) Destroy(currentCropPrefab);
+        if (currentGrowCycle == currentCrop.GrowthStages.Length) currentCropPrefab = Instantiate(currentCrop.GrowthStages[currentGrowCycle - 1].deadCrop.cropPrefab, spawnPosition.position, spawnPosition.rotation);
+        else
+        {
+            ++currentGrowCycle;
+            currentCropPrefab = Instantiate(currentCrop.GrowthStages[currentGrowCycle - 1].aliveCrop.cropPrefab, spawnPosition.position, spawnPosition.rotation);
+        }
     }
 
     protected override bool ExtraAddLogic(ItemScriptableObject item)
@@ -275,6 +315,7 @@ public class FarmTile : ItemContainer, IEventListener
 
     void CheckForWaterSetbacks()
     {
+        if (!shouldDoWaterCheck) return;
         if (daysWithoutWater == 0) growthIsPausedFromWater = false;
         foreach (LackOfWaterSetback lackOfWaterSetback in currentCrop.LackOfWaterSetbacks)
         {
