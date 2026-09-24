@@ -17,11 +17,14 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/HouseScene.unity
     guid: 5504032ea2b5d874ba13d9aab70a73c5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MarketScene.unity
     guid: fe863eb622cd70d40a861971c0b7ff54
   - enabled: 0
     path: Assets/Scenes/ScreenshotScene.unity
     guid: 82437c9b862f78e4ea80106be43ee3c6
+  - enabled: 1
+    path: Assets/Scenes/CropGrowingVideo.unity
+    guid: a44e37aa10859834dbef5f21bcaedde9
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
