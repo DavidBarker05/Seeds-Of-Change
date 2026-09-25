@@ -91,7 +91,7 @@ PrefabInstance:
     - target: {fileID: 866341337171690325, guid: f7dd1671c8e620646bc179f1d75c0893, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: fdfcb5707382ba24aab1e835db24cb81, type: 2}
+      objectReference: {fileID: 2100000, guid: aa45548d5f9a9334aaab58c5af10140a, type: 2}
     - target: {fileID: 919132149155446097, guid: f7dd1671c8e620646bc179f1d75c0893, type: 3}
       propertyPath: m_Name
       value: Clouds_01_LOD
@@ -99,11 +99,11 @@ PrefabInstance:
     - target: {fileID: 2636042516486842071, guid: f7dd1671c8e620646bc179f1d75c0893, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: fdfcb5707382ba24aab1e835db24cb81, type: 2}
+      objectReference: {fileID: 2100000, guid: aa45548d5f9a9334aaab58c5af10140a, type: 2}
     - target: {fileID: 8395242992846852129, guid: f7dd1671c8e620646bc179f1d75c0893, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: fdfcb5707382ba24aab1e835db24cb81, type: 2}
+      objectReference: {fileID: 2100000, guid: aa45548d5f9a9334aaab58c5af10140a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
