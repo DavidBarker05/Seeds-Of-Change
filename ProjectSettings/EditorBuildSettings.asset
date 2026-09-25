@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/CropScene.unity
     guid: 6a5c8af64bd76cc45a4166e7c93e05b0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GameScene.unity
     guid: 9fa757012468b0c45acf9ea9708e74fc
   - enabled: 0
@@ -29,5 +29,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/BugScene.unity
     guid: 07de987d5919dc3469311602066441b8
+  - enabled: 1
+    path: Assets/Scenes/CropStaticScene.unity
+    guid: f90f3a0839ce261459c694b96c415edc
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
