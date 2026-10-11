@@ -3,11 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class WetObject : MonoBehaviour, IEventListener
 {
-    [SerializeField]
-    Material dryMaterial;
-    [SerializeField]
-    Material wetMaterial;
-
     Renderer _renderer;
 
     private void Awake()
@@ -28,10 +23,10 @@ public class WetObject : MonoBehaviour, IEventListener
         switch (eventType)
         {
             case GameEventType.ClearSkyWeatherEvent:
-                _renderer.material = dryMaterial;
+                _renderer.material.SetInt("_IsWet", 0);
                 break;
             case GameEventType.RainWeatherEvent:
-                _renderer.material = wetMaterial;
+                _renderer.material.SetInt("_IsWet", 1);
                 break;
             default:
                 break;

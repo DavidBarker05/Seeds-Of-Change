@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Renderer))]
 public class FarmTile : ItemContainer, IEventListener
@@ -25,11 +24,7 @@ public class FarmTile : ItemContainer, IEventListener
     [SerializeField]
     Material soilMaterial;
     [SerializeField]
-    Material wetSoilMaterial;
-    [SerializeField]
     Material farmlandMaterial;
-    [SerializeField]
-    Material wetFarmlandMaterial;
 
     private static readonly Dictionary<Difficulty, float> difficultyModifiers = new Dictionary<Difficulty, float>()
     {
@@ -59,8 +54,6 @@ public class FarmTile : ItemContainer, IEventListener
     bool growthIsPausedFromPest;
     float yieldReductionFromPest;
     float CurrentYield => 100f - yieldReductionFromWater - yieldReductionFromPest;
-
-    bool shouldDoWaterCheck = true;
 
     bool _isTilled;
     bool _isWet;
@@ -120,14 +113,6 @@ public class FarmTile : ItemContainer, IEventListener
         timesWateredToday = 0;
         daysWithPests = 0;
         acceptedItems.Add(startingSeed, 1);
-        //int sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        //if (sceneIndex == TrailerSceneManager.MAIN_SCENE_INDEX)
-        //    InputManagerScript.Instance.AddTrailerHotkeyAction(2, ToggleShouldDoWaterCheck);
-        //else if (sceneIndex == TrailerSceneManager.CROP_SCENE_INDEX)
-        //{
-        //    InputManagerScript.Instance.AddTrailerHotkeyAction(4, ResetGrowthStage);
-        //    InputManagerScript.Instance.AddTrailerHotkeyAction(5, GoToNextStage);
-        //}
     }
 
     #region For Video
@@ -169,18 +154,7 @@ public class FarmTile : ItemContainer, IEventListener
         EventBus.Instance?.RemoveEventListener(GameEventType.PestPassivePestAppliedEvent, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.CropActivePestAppliedEvent, this);
         EventBus.Instance?.RemoveEventListener(GameEventType.PestActivePestAppliedEvent, this);
-        //int sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        //if (sceneIndex == TrailerSceneManager.MAIN_SCENE_INDEX)
-        //    InputManagerScript.Instance.RemoveTrailerHotkeyAction(2, ToggleShouldDoWaterCheck);
-        //else if (sceneIndex == TrailerSceneManager.CROP_SCENE_INDEX)
-        //{
-        //    InputManagerScript.Instance.RemoveTrailerHotkeyAction(4, ResetGrowthStage);
-        //    InputManagerScript.Instance.RemoveTrailerHotkeyAction(5, GoToNextStage);
-        //}
     }
-
-    void ToggleShouldDoWaterCheck(InputAction.CallbackContext ctx) => shouldDoWaterCheck = !shouldDoWaterCheck;
-
     void ResetGrowthStage(InputAction.CallbackContext ctx)
     {
         currentGrowCycle = 1;
@@ -259,7 +233,11 @@ public class FarmTile : ItemContainer, IEventListener
         }
     }
 
-    void UpdateMaterial() => _renderer.material = IsTilled ? (IsWet ? wetFarmlandMaterial : farmlandMaterial) : (IsWet ? wetSoilMaterial : soilMaterial);
+    void UpdateMaterial()
+    {
+        _renderer.material = IsTilled ? farmlandMaterial : soilMaterial;
+        _renderer.material.SetInt("_IsWet", IsWet ? 1 : 0);
+    }
 
     public void OnEventReceived(GameEventType eventType, params object[] parameters)
     {
@@ -339,7 +317,6 @@ public class FarmTile : ItemContainer, IEventListener
 
     void CheckForWaterSetbacks()
     {
-        if (!shouldDoWaterCheck) return;
         if (daysWithoutWater == 0) growthIsPausedFromWater = false;
         foreach (LackOfWaterSetback lackOfWaterSetback in currentCrop.LackOfWaterSetbacks)
         {
