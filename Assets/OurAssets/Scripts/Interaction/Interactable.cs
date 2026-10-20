@@ -1,6 +1,6 @@
 public struct InteractionInfo
 {
-    public bool DoEndInteraction { get; set; }
+    public bool EndInteraction { get; set; }
     public object[] OutArguments { get; set; }
 }
 

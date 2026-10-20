@@ -1,45 +1,43 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class FamilyFoodStorage : Interactable, IEventListener
 {
-    [SerializeField]
-    List<ItemScriptableObject> storableItems = new List<ItemScriptableObject>();
-    [SerializeField]
-    FamilyFoodMenu foodMenu;
+    [SerializeField, FormerlySerializedAs("storableItems")]
+    List<ItemScriptableObject> m_StorableItems;
+    [SerializeField, FormerlySerializedAs("foodMenu")]
+    FamilyFoodMenu m_FoodMenu;
 
     private void Awake()
     {
-        List<ItemScriptableObject> _sellableItems = new List<ItemScriptableObject>(storableItems);
+        List<ItemScriptableObject> _sellableItems = new List<ItemScriptableObject>(m_StorableItems);
         foreach (ItemScriptableObject item in _sellableItems)
         {
-            if (!item.IsSellable) storableItems.Remove(item);
+            if (!item.IsSellable) m_StorableItems.Remove(item);
         }
-        EventBus.Instance?.AddEventListener(GameEventType.PlayerInventoryUpdateEvent, this);
+        EventBus.Instance?.AddEventListener("PlayerInventoryUpdateEvent", this);
     }
 
-    void OnDestroy() => EventBus.Instance?.RemoveEventListener(GameEventType.PlayerInventoryUpdateEvent, this);
+    void OnDestroy() => EventBus.Instance?.RemoveEventListener("PlayerInventoryUpdateEvent", this);
 
     public override InteractionInfo Interact(params object[] parameters)
     {
-        if (foodMenu != null && GameManager.Instance != null)
+        return new InteractionInfo()
         {
-            GameManager.Instance.IsPaused = true;
-            foodMenu.gameObject.SetActive(true);
-        }
-        return new InteractionInfo() { DoEndInteraction = true };
+            EndInteraction = true,
+            OutArguments = new object[]
+            {
+                m_FoodMenu
+            }
+        };
     }
 
-    public void OnEventReceived(GameEventType eventType, params object[] parameters)
+    public void OnEventReceived(string eventName, params object[] parameters)
     {
-        switch (eventType)
+        if (eventName == "PlayerInventoryUpdateEvent")
         {
-            case GameEventType.PlayerInventoryUpdateEvent:
-                if (storableItems == null) return;
-                if (parameters[0] is ItemScriptableObject item && parameters[1] is int amount) foodMenu?.UpdatePlayerInventory(item, amount);
-                break;
-            default:
-                break;
+            if (parameters[0] is ItemScriptableObject item && parameters[1] is int amount) m_FoodMenu.UpdatePlayerInventory(item, amount);
         }
     }
 }

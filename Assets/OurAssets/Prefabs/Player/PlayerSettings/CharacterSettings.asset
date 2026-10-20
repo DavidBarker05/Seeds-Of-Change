@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b1be08cbede42469a1111b48532dc6, type: 3}
+  m_Name: CharacterSettings
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSettings
+  <CanSprintInAir>k__BackingField: 1
+  <MovementSpeed>k__BackingField: 4.5
+  <SprintSpeed>k__BackingField: 10
+  <SprintSpeedUpgrade1>k__BackingField: 11
+  <SprintSpeedUpgrade2>k__BackingField: 12.5
+  <SprintSpeedUpgrade3>k__BackingField: 14
+  <StepsPerSecond>k__BackingField: 2
+  <SprintStepsPerSecond>k__BackingField: 4
+  <VerticalFieldOfView>k__BackingField: 60
+  <SprintVerticalFieldOfView>k__BackingField: 75
+  <FieldOfViewTransitionDuration>k__BackingField: 0.25
+  <JumpHeight>k__BackingField: 1
+  <TimeToReachJumpHeight>k__BackingField: 0.25
+  <JumpBuffer>k__BackingField: 0.125
+  <CoyoteTime>k__BackingField: 0.1

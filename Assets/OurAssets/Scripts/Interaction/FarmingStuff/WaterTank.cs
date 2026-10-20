@@ -1,18 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WaterTank : Interactable, IEventListener
 {
-    [SerializeField]
-    ItemScriptableObject waterItem;
-    [SerializeField, Min(0f)]
-    float maxCapacity = 10f;
-    [SerializeField, Min(0f)]
-    float startingCapacity = 1f;
-    [SerializeField, Min(0f)]
-    float waterGainedFromPurchasing = 2.5f;
+    [SerializeField, FormerlySerializedAs("waterItem")]
+    ItemScriptableObject m_WaterItem;
+    [SerializeField, Min(0f), FormerlySerializedAs("maxCapacity")]
+    float m_MaxCapacity = 10f;
+    [SerializeField, Min(0f), FormerlySerializedAs("startingCapacity")]
+    float m_StartingCapacity = 1f;
+    [SerializeField, Min(0f), FormerlySerializedAs("waterGainedFromPurchasing")]
+    float m_WaterGainedFromPurchasing = 2.5f;
 
-    private static readonly Dictionary<Difficulty, float> waterGainedWhileRaining = new Dictionary<Difficulty, float>()
+    private static readonly Dictionary<Difficulty, float> s_WaterGainedWhileRaining = new Dictionary<Difficulty, float>()
     {
         { Difficulty.Easy, 1.5f },
         { Difficulty.Normal, 1f },
@@ -23,20 +24,20 @@ public class WaterTank : Interactable, IEventListener
 
     void Awake()
     {
-        CurrentCapacity = startingCapacity;
-        EventBus.Instance?.AddEventListener(GameEventType.RainWeatherEvent, this);
-        EventBus.Instance?.AddEventListener(GameEventType.ItemPurchasedEvent, this);
+        CurrentCapacity = m_StartingCapacity;
+        EventBus.Instance?.AddEventListener("RainWeatherEvent", this);
+        EventBus.Instance?.AddEventListener("ItemPurchasedEvent", this);
     }
 
     void OnDestroy()
     {
-        EventBus.Instance?.RemoveEventListener(GameEventType.RainWeatherEvent, this);
-        EventBus.Instance?.RemoveEventListener(GameEventType.ItemPurchasedEvent, this);
+        EventBus.Instance?.RemoveEventListener("RainWeatherEvent", this);
+        EventBus.Instance?.RemoveEventListener("ItemPurchasedEvent", this);
     }
 
     void AddWater(float amount)
     {
-        if (CurrentCapacity != maxCapacity) CurrentCapacity = Mathf.Clamp(CurrentCapacity + amount, 0f, maxCapacity);
+        if (CurrentCapacity != m_MaxCapacity) CurrentCapacity = Mathf.Clamp(CurrentCapacity + amount, 0f, m_MaxCapacity);
     }
 
     public override InteractionInfo Interact(params object[] parameters)
@@ -69,18 +70,18 @@ public class WaterTank : Interactable, IEventListener
             Debug.LogWarning($"WARNING: Parameter 0 needs to be a WateringCan. Received {parameters[0]} type {parameters[0].GetType()} as parameter 0");
 #endif
         }
-        return new InteractionInfo() { DoEndInteraction = true };
+        return new InteractionInfo() { EndInteraction = true };
     }
 
-    public void OnEventReceived(GameEventType eventType, params object[] parameters)
+    public void OnEventReceived(string eventName, params object[] parameters)
     {
-        switch (eventType)
+        switch (eventName)
         {
-            case GameEventType.RainWeatherEvent:
-                AddWater(waterGainedWhileRaining[WorldManager.Instance?.CurrentDifficulty ?? Difficulty.Normal]);
+            case "RainWeatherEvent":
+                AddWater(s_WaterGainedWhileRaining[WorldManager.Instance?.CurrentDifficulty ?? Difficulty.Normal]);
                 break;
-            case GameEventType.ItemPurchasedEvent:
-                if (parameters[0] is ItemScriptableObject item && item == waterItem && parameters[1] is int amount) AddWater(waterGainedFromPurchasing * amount);
+            case "ItemPurchasedEvent":
+                if (parameters[0] is ItemScriptableObject item && item == m_WaterItem && parameters[1] is int amount) AddWater(m_WaterGainedFromPurchasing * amount);
                 break;
             default:
                 break;

@@ -3,33 +3,24 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class WetObject : MonoBehaviour, IEventListener
 {
-    Renderer _renderer;
+    Renderer m_Renderer;
 
     private void Awake()
     {
-        _renderer = GetComponent<Renderer>();
-        EventBus.Instance?.AddEventListener(GameEventType.ClearSkyWeatherEvent, this);
-        EventBus.Instance?.AddEventListener(GameEventType.RainWeatherEvent, this);
+        m_Renderer = GetComponent<Renderer>();
+        EventBus.Instance?.AddEventListener("ClearSkyWeatherEvent", this);
+        EventBus.Instance?.AddEventListener("RainWeatherEvent", this);
     }
 
     void OnDestroy()
     {
-        EventBus.Instance?.RemoveEventListener(GameEventType.ClearSkyWeatherEvent, this);
-        EventBus.Instance?.RemoveEventListener(GameEventType.RainWeatherEvent, this);
+        EventBus.Instance?.RemoveEventListener("ClearSkyWeatherEvent", this);
+        EventBus.Instance?.RemoveEventListener("RainWeatherEvent", this);
     }
 
-    public void OnEventReceived(GameEventType eventType, params object[] parameters)
+    public void OnEventReceived(string eventName, params object[] parameters)
     {
-        switch (eventType)
-        {
-            case GameEventType.ClearSkyWeatherEvent:
-                _renderer.material.SetInt("_IsWet", 0);
-                break;
-            case GameEventType.RainWeatherEvent:
-                _renderer.material.SetInt("_IsWet", 1);
-                break;
-            default:
-                break;
-        }
+        if (eventName == "ClearSkyWeatherEvent") m_Renderer.material.SetInt("_IsWet", 0);
+        else if (eventName == "RainWeatherEvent") m_Renderer.material.SetInt("_IsWet", 1);
     }
 }

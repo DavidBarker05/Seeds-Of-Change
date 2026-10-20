@@ -1,6 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct AddItemInfo
+{
+    public bool WasAdded { get; set; }
+}
+
 public abstract class ItemContainer : Interactable
 {
     [SerializeField]
@@ -12,6 +17,10 @@ public abstract class ItemContainer : Interactable
     public override InteractionInfo Interact(params object[] parameters)
     {
         if (containerData == null) Debug.LogError($"ERROR: ItemContainer needs a valid ItemContainerScriptableObject");
+        InteractionInfo interactionInfo = new InteractionInfo()
+        {
+            EndInteraction = true
+        };
         if (parameters.Length != 1 && parameters.Length != 2)
         {
 #if UNITY_EDITOR
@@ -22,13 +31,17 @@ public abstract class ItemContainer : Interactable
         {
             if (parameters[0] is ItemScriptableObject item)
             {
-                if (containerData?.AcceptableItems.Contains(item) ?? false)
+                if (containerData && containerData.AcceptableItems.Contains(item))
                 {
-                    if (parameters[1] is int amount) return new InteractionInfo() { DoEndInteraction = AddItem(item, amount) };
-                    else return new InteractionInfo() { DoEndInteraction = AddItem(item) };
+                    int amount = 1;
+                    if (parameters[1] is int inAmount) amount = inAmount;
+                    interactionInfo.OutArguments = new object[]
+                    {
+                        AddItem(item, amount)
+                    };
                 }
             }
-            else if (parameters[0] is bool clearItems) ClearItems(); // This will be used for stuff like harvesting
+            else if (parameters[0] is bool bClearItems) ClearItems(); // This will be used for stuff like harvesting
             else
             {
 #if UNITY_EDITOR
@@ -36,26 +49,32 @@ public abstract class ItemContainer : Interactable
 #endif
             }
         }
-        return new InteractionInfo() { DoEndInteraction = true };
+        return interactionInfo;
     }
 
-    public bool AddItem(ItemScriptableObject item, int amount = 1)
+    public AddItemInfo AddItem(ItemScriptableObject item, int amount = 1)
     {
-        if (containerData == null || currentCapacity >= containerData.ContainerCapacity) return false;
-        if (!ExtraAddLogic(item)) return true;
-        int adjustedAmount = amount;
-        if (currentCapacity + amount > containerData.ContainerCapacity) adjustedAmount = containerData.ContainerCapacity - currentCapacity;
-        if (acceptedItems.ContainsKey(item))
+        if (containerData == null || currentCapacity >= containerData.ContainerCapacity) return new AddItemInfo()
         {
-            acceptedItems[item] += adjustedAmount;
-            currentCapacity += adjustedAmount;
-        }
-        else
+            WasAdded = false
+        };
+        AddItemInfo info = ExtraAddLogic(item);
+        if (info.WasAdded)
         {
-            acceptedItems.Add(item, adjustedAmount);
-            currentCapacity += adjustedAmount;
+            int adjustedAmount = amount;
+            if (currentCapacity + amount > containerData.ContainerCapacity) adjustedAmount = containerData.ContainerCapacity - currentCapacity;
+            if (acceptedItems.ContainsKey(item))
+            {
+                acceptedItems[item] += adjustedAmount;
+                currentCapacity += adjustedAmount;
+            }
+            else
+            {
+                acceptedItems.Add(item, adjustedAmount);
+                currentCapacity += adjustedAmount;
+            }
         }
-        return false;
+        return info;
     }
 
     public void ClearItems()
@@ -65,7 +84,7 @@ public abstract class ItemContainer : Interactable
         currentCapacity = 0;
     }
 
-    protected abstract bool ExtraAddLogic(ItemScriptableObject item);
+    protected abstract AddItemInfo ExtraAddLogic(ItemScriptableObject item);
 
     protected abstract void ExtraClearLogic();
 }

@@ -1,53 +1,51 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ItemSpawner : MonoBehaviour, IEventListener
 {
     public static ItemSpawner Instance { get; private set; }
 
-    [SerializeField]
-    List<ItemObjectPair> itemObjectPairs = new List<ItemObjectPair>();
-    [SerializeField]
-    Transform spawnPoint;
-    [SerializeField, Min(0f)]
-    float spawnTime = 0.1f;
-    [SerializeField, Range(0f, 0.5f)]
-    float spawnRadius = 0.2f;
+    [SerializeField, FormerlySerializedAs("itemObjectPairs")]
+    List<ItemObjectPair> m_ItemObjectPairs;
+    [SerializeField, FormerlySerializedAs("spawnPoint")]
+    Transform m_SpawnPoint;
+    [SerializeField, Min(0f), FormerlySerializedAs("spawnTime")]
+    float m_SpawnTime = 0.1f;
+    [SerializeField, Range(0f, 0.5f), FormerlySerializedAs("spawnRadius")]
+    float m_SpawnRadius = 0.2f;
 
-    Dictionary<ItemScriptableObject, GameObject> itemObjectPairDictionary = new Dictionary<ItemScriptableObject, GameObject>();
+    readonly Dictionary<ItemScriptableObject, GameObject> m_ItemObjectPairDictionary = new Dictionary<ItemScriptableObject, GameObject>();
 
     void Awake()
     {
         if (Instance != null && Instance != this) Destroy(gameObject);
-        else Instance = this;
-        foreach (ItemObjectPair itemObjectPair in itemObjectPairs)
+        else
         {
-            if (itemObjectPair.item != null && itemObjectPair.itemObject != null && !itemObjectPairDictionary.ContainsKey(itemObjectPair.item)) itemObjectPairDictionary.Add(itemObjectPair.item, itemObjectPair.itemObject);
+            Instance = this;
+            foreach (ItemObjectPair itemObjectPair in m_ItemObjectPairs)
+            {
+                if (itemObjectPair.Item != null && itemObjectPair.ItemObject != null && !m_ItemObjectPairDictionary.ContainsKey(itemObjectPair.Item)) m_ItemObjectPairDictionary.Add(itemObjectPair.Item, itemObjectPair.ItemObject);
+            }
+            EventBus.Instance?.AddEventListener("ItemSpawnEvent", this);
         }
-        EventBus.Instance?.AddEventListener(GameEventType.ItemSpawnEvent, this);
     }
 
-    void OnDestroy() => EventBus.Instance?.RemoveEventListener(GameEventType.ItemSpawnEvent, this);
+    void OnDestroy() => EventBus.Instance?.RemoveEventListener("ItemSpawnEvent", this);
 
-    public void OnEventReceived(GameEventType eventType, params object[] parameters)
+    public void OnEventReceived(string eventName, params object[] parameters)
     {
-        switch (eventType)
-        {
-            case GameEventType.ItemSpawnEvent:
-                if (parameters[0] is ItemScriptableObject item && itemObjectPairDictionary.ContainsKey(item) && parameters[1] is int amount) StartCoroutine(SpawnObject(itemObjectPairDictionary[item], amount));
-                break;
-            default:
-                break;
-        }
+        if (eventName != "ItemSpawnEvent") return;
+        if (parameters[0] is ItemScriptableObject item && m_ItemObjectPairDictionary.ContainsKey(item) && parameters[1] is int amount) StartCoroutine(SpawnObject(m_ItemObjectPairDictionary[item], amount));
     }
 
     System.Collections.IEnumerator SpawnObject(GameObject itemObject, int amount)
     {
         for (int i = 0; i < amount; ++i)
         {
-            yield return new WaitForSeconds(spawnTime);
-            Vector3 offset = Random.insideUnitSphere * spawnRadius;
-            if (spawnPoint != null) Instantiate(itemObject, spawnPoint.position + offset, spawnPoint.rotation);
+            yield return new WaitForSeconds(m_SpawnTime);
+            Vector3 offset = Random.insideUnitSphere * m_SpawnRadius;
+            if (m_SpawnPoint != null) Instantiate(itemObject, m_SpawnPoint.position + offset, m_SpawnPoint.rotation);
         }
     }
 }
@@ -55,6 +53,8 @@ public class ItemSpawner : MonoBehaviour, IEventListener
 [System.Serializable]
 public struct ItemObjectPair
 {
-    public ItemScriptableObject item;
-    public GameObject itemObject;
+    [FormerlySerializedAs("item")]
+    public ItemScriptableObject Item;
+    [FormerlySerializedAs("itemObject")]
+    public GameObject ItemObject;
 }

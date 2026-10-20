@@ -1,59 +1,62 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Market : Interactable, IEventListener
 {
-    [SerializeField]
-    List<ItemScriptableObject> purchasableItems = new List<ItemScriptableObject>();
-    [SerializeField]
-    List<ItemScriptableObject> sellableItems = new List<ItemScriptableObject>();
-    [SerializeField]
-    MarketMenu marketMenu;
+    [SerializeField, FormerlySerializedAs("purchasableItems")]
+    List<ItemScriptableObject> m_PurchasableItems;
+    [SerializeField, FormerlySerializedAs("sellableItems")]
+    List<ItemScriptableObject> m_SellableItems;
+    [SerializeField, FormerlySerializedAs("marketMenu")]
+    MarketMenu m_MarketMenu;
 
     private void Awake()
     {
-        List<ItemScriptableObject> _purchasableItems = new List<ItemScriptableObject>(purchasableItems);
+        EventBus.Instance?.AddEventListener("PlayerInventoryUpdateEvent", this);
+        EventBus.Instance?.AddEventListener("MoneyChangedEvent", this);
+        List<ItemScriptableObject> _purchasableItems = new List<ItemScriptableObject>(m_PurchasableItems);
         foreach (ItemScriptableObject item in _purchasableItems)
         {
-            if (!item.IsPurchasable) purchasableItems.Remove(item);
+            if (!item.IsPurchasable) m_PurchasableItems.Remove(item);
         }
-        List<ItemScriptableObject> _sellableItems = new List<ItemScriptableObject>(sellableItems);
+        List<ItemScriptableObject> _sellableItems = new List<ItemScriptableObject>(m_SellableItems);
         foreach (ItemScriptableObject item in _sellableItems)
         {
-            if (!item.IsSellable) sellableItems.Remove(item);
+            if (!item.IsSellable) m_SellableItems.Remove(item);
         }
-        EventBus.Instance?.AddEventListener(GameEventType.PlayerInventoryUpdateEvent, this);
-        EventBus.Instance?.AddEventListener(GameEventType.MoneyChangedEvent, this);
     }
 
-    void Start() => marketMenu?.PopulatePurchaseMenu(purchasableItems);
+    void Start() => m_MarketMenu.PopulatePurchaseMenu(m_PurchasableItems);
 
     void OnDestroy()
     {
-        EventBus.Instance?.RemoveEventListener(GameEventType.PlayerInventoryUpdateEvent, this);
-        EventBus.Instance?.RemoveEventListener(GameEventType.MoneyChangedEvent, this);
+        EventBus.Instance?.RemoveEventListener("PlayerInventoryUpdateEvent", this);
+        EventBus.Instance?.RemoveEventListener("MoneyChangedEvent", this);
     }
 
     public override InteractionInfo Interact(params object[] parameters)
     {
-        if (marketMenu != null && GameManager.Instance != null)
+        return new InteractionInfo()
         {
-            GameManager.Instance.IsPaused = true;
-            marketMenu.gameObject.SetActive(true);
-        }
-        return new InteractionInfo() { DoEndInteraction = true };
+            EndInteraction = true,
+            OutArguments = new object[]
+            {
+                m_MarketMenu
+            }
+        };
     }
 
-    public void OnEventReceived(GameEventType eventType, params object[] parameters)
+    public void OnEventReceived(string eventName, params object[] parameters)
     {
-        switch (eventType)
+        switch (eventName)
         {
-            case GameEventType.PlayerInventoryUpdateEvent:
-                if (sellableItems == null) return;
-                if (parameters[0] is ItemScriptableObject item && parameters[1] is int amount) marketMenu?.UpdatePlayerInventory(item, amount);
+            case "PlayerInventoryUpdateEvent":
+                if (m_SellableItems == null) return;
+                if (parameters[0] is ItemScriptableObject item && parameters[1] is int amount) m_MarketMenu.UpdatePlayerInventory(item, amount);
                 break;
-            case GameEventType.MoneyChangedEvent:
-                if (parameters[0] is int newMoney) marketMenu?.SetAvailableBalance(newMoney);
+            case "MoneyChangedEvent":
+                if (parameters[0] is int newMoney) m_MarketMenu.SetAvailableBalance(newMoney);
                 break;
             default:
                 break;

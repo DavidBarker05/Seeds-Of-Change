@@ -1,112 +1,127 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
+using Util.SystemUtils;
+
+public struct InteractionInitData
+{
+    public Camera Camera { get; set; }
+    public CharacterController CharacterController { get; set; }
+
+    public MenuPlayerCharacter MenuPlayerCharacter { get; set; }
+    public FirstPersonPlayerCharacter FirstPersonPlayerCharacter { get; set; }
+}
+
+public struct InteractionUpdateData
+{
+    public float DeltaTime { get; set; }
+}
 
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField]
-    Camera cam;
-    [SerializeField, Min(0f)]
-    float maxInteractionDistance = 2.5f;
-    [SerializeField, Range(0.1f, 0.5f)]
-    float interactionRadius;
+    InteractSettings m_InteractSettings;
+    [SerializeField, FormerlySerializedAs("holdPos")]
+    Transform m_HoldPos;
     [SerializeField]
-    LayerMask interactableLayer;
-    [SerializeField]
-    Transform holdPos;
-    [SerializeField]
-    LayerMask holdLayer;
-    [SerializeField]
-    Camera holdCamera;
-    [SerializeField]
-    Camera holdClipCamera;
+    GameObject m_HUD;
 
-    Interactable currentInteraction;
+    bool m_bInitialised = false;
+    Camera m_Camera;
+    CharacterController m_CharacterController;
+    MenuPlayerCharacter m_MenuPC;
+    FirstPersonPlayerCharacter m_FirstPersonPC;
 
-    void Start()
+    Interactable m_CurrentInteraction;
+
+    public void Init(InteractionInitData initData)
     {
-        InputManagerScript.Instance?.AddInteractAction(Interact);
-        InputManagerScript.Instance?.AddUseAction(Use);
+        m_bInitialised = true;
+        m_Camera = initData.Camera;
+        m_CharacterController = initData.CharacterController;
+        m_MenuPC = initData.MenuPlayerCharacter;
+        m_FirstPersonPC = initData.FirstPersonPlayerCharacter;
     }
 
-    void Update()
+    public void UpdateInteraction(ref InteractionUpdateData updateData)
     {
-        if (GameManager.Instance?.IsPaused ?? false) return;
-        if (currentInteraction == null) return;
-        if (currentInteraction is Holdable heldObject)
-        {
+        Sys.Assert(m_bInitialised, "Player Interaction hasn't been initialised");
+        if (m_CurrentInteraction == null) return;
+        if (m_CurrentInteraction is Holdable heldObject)
             heldObject.LookAtPlayer(transform.position);
-            int bitMask = ~(holdLayer | gameObject.layer);
-            if (Physics.Linecast(cam.transform.position, heldObject.transform.position, bitMask) || Physics.CheckBox(heldObject.transform.position, heldObject.GetComponent<Collider>().bounds.extents, heldObject.transform.rotation, bitMask))
-            {
-                holdCamera.gameObject.SetActive(true);
-                holdClipCamera.gameObject.SetActive(true);
-            }
-            else
-            {
-                holdCamera.gameObject.SetActive(false);
-                holdClipCamera.gameObject.SetActive(false);
-            }
-        }
-    }
-
-    void OnDestroy()
-    {
-        InputManagerScript.Instance?.RemoveInteractAction(Interact);
-        InputManagerScript.Instance?.RemoveUseAction(Use);
     }
 
     Interactable CheckForInteraction()
     {
         Interactable targetInteraction = null;
-        if (Physics.SphereCast(cam.transform.position, interactionRadius, cam.transform.forward, out RaycastHit interactHit, maxInteractionDistance, interactableLayer, QueryTriggerInteraction.Collide)) targetInteraction = interactHit.collider.GetComponent<Interactable>();
+        if (Physics.SphereCast(
+            origin: m_Camera.transform.position,
+            radius: m_InteractSettings.InteractionRadius,
+            direction: m_Camera.transform.forward,
+            hitInfo: out RaycastHit hitInfo,
+            maxDistance: m_InteractSettings.InteractionDistance,
+            layerMask: m_InteractSettings.InteractableLayer,
+            queryTriggerInteraction: QueryTriggerInteraction.Collide)
+        ) targetInteraction = hitInfo.collider.GetComponent<Interactable>();
         return targetInteraction;
     }
 
-    void Interact(InputAction.CallbackContext ctx)
+    public void Interact()
     {
+        Sys.Assert(m_bInitialised, "Player Interaction hasn't been initialised");
         Interactable targetInteraction = CheckForInteraction();
         if (targetInteraction != null)
         {
-            if (targetInteraction is HouseDoor) targetInteraction.Interact(gameObject);
-            else if (targetInteraction is Market) targetInteraction.Interact();
-            else if (currentInteraction != null)
+            if (targetInteraction is HouseDoor) targetInteraction.Interact(m_FirstPersonPC);
+            else if (targetInteraction is Market)
             {
-                if (targetInteraction is WaterTank) targetInteraction.Interact(currentInteraction);
-                else if (currentInteraction is Holdable) InteractHoldable();
+                InteractionInfo info = targetInteraction.Interact();
+                if (info.OutArguments[0] is MarketMenu marketMenu)
+                    m_MenuPC.OnMenuOpen(m_FirstPersonPC, m_HUD, marketMenu.gameObject);
+            }
+            else if (m_CurrentInteraction != null)
+            {
+                if (m_CurrentInteraction is WaterTank) targetInteraction.Interact(m_CurrentInteraction);
+                else if (m_CurrentInteraction is Holdable) InteractHoldable();
             }
             else
             {
-                currentInteraction = targetInteraction;
-                if (currentInteraction is Holdable) InteractHoldable();
-                else if (currentInteraction.Interact().DoEndInteraction) currentInteraction = null;
+                m_CurrentInteraction = targetInteraction;
+                if (m_CurrentInteraction is Holdable) InteractHoldable();
+                else if (m_CurrentInteraction.Interact().EndInteraction) m_CurrentInteraction = null;
             }
         }
-        else if (currentInteraction != null)
+        else if (m_CurrentInteraction != null)
         {
-            if (currentInteraction is Holdable) InteractHoldable();
+            if (m_CurrentInteraction is Holdable) InteractHoldable();
         }
     }
 
     void InteractHoldable()
     {
-        if (currentInteraction is Holdable holdable)
+        if (m_CurrentInteraction is Holdable holdable)
         {
-            InteractionInfo drop = holdable.Interact(holdPos, holdLayer, GetComponent<CharacterController>() as Collider, cam);
-            if (drop.DoEndInteraction) currentInteraction = null;
+            InteractionInfo info = holdable.Interact(
+                m_HoldPos,
+                m_InteractSettings.HoldLayer,
+                m_CharacterController,
+                m_Camera
+            );
+            if (info.EndInteraction) m_CurrentInteraction = null;
         }
     }
 
-    void Use(InputAction.CallbackContext ctx)
+    public void Use()
     {
-        if (currentInteraction == null) return;
-        if (currentInteraction is Usable usable)
+        Sys.Assert(m_bInitialised, "Player Interaction hasn't been initialised");
+        if (m_CurrentInteraction == null) return;
+        if (m_CurrentInteraction is Usable usable)
         {
             Interactable targetInteraction = CheckForInteraction();
-            bool finishedUsing = usable.Use(targetInteraction);
-            if (finishedUsing)
+            UseInfo info = usable.Use(targetInteraction);
+            if (info.FinishedUsing)
             {
                 Destroy(usable.gameObject);
-                currentInteraction = null;
+                m_CurrentInteraction = null;
             }
         }
     }

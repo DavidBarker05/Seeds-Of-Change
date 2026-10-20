@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour, IEventListener
 {
@@ -12,40 +12,41 @@ public class PlayerInventory : MonoBehaviour, IEventListener
 
     public Dictionary<ItemScriptableObject, int> Inventory => new Dictionary<ItemScriptableObject, int>(items);
 
-    int _money;
+    int m_Money;
     public int Money
     {
-        get => _money;
+        get => m_Money;
         private set
         {
-            _money = value;
-            EventBus.Instance?.BroadcastEvent(GameEventType.MoneyChangedEvent, _money);
+            m_Money = value;
+            EventBus.Instance?.BroadcastEvent("MoneyChangedEvent", m_Money);
         }
     }
 
     void Awake()
     {
-        Money = startingMoney;
-        EventBus.Instance?.AddEventListener(GameEventType.ItemPurchasedEvent, this);
-        EventBus.Instance?.AddEventListener(GameEventType.ItemSoldEvent, this);
-        EventBus.Instance?.AddEventListener(GameEventType.GainCropEvent, this);
-        EventBus.Instance?.AddEventListener(GameEventType.ItemStoredEvent, this);
+        EventBus.Instance?.AddEventListener("ItemPurchasedEvent", this);
+        EventBus.Instance?.AddEventListener("ItemSoldEvent", this);
+        EventBus.Instance?.AddEventListener("GainCropEvent", this);
+        EventBus.Instance?.AddEventListener("ItemStoredEvent", this);
     }
 
     private void OnDestroy()
     {
-        EventBus.Instance?.RemoveEventListener(GameEventType.ItemPurchasedEvent, this);
-        EventBus.Instance?.RemoveEventListener(GameEventType.ItemSoldEvent, this);
-        EventBus.Instance?.RemoveEventListener(GameEventType.GainCropEvent, this);
-        EventBus.Instance?.RemoveEventListener(GameEventType.ItemStoredEvent, this);
+        EventBus.Instance?.RemoveEventListener("ItemPurchasedEvent", this);
+        EventBus.Instance?.RemoveEventListener("ItemSoldEvent", this);
+        EventBus.Instance?.RemoveEventListener("GainCropEvent", this);
+        EventBus.Instance?.RemoveEventListener("ItemStoredEvent", this);
     }
+
+    void Start() => Money = startingMoney;
 
     public void AddItem(ItemScriptableObject item, int amount = 1)
     {
         if (item == null || amount <= 0) return;
         if (items.ContainsKey(item)) items[item] += amount;
         else items.Add(item, amount);
-        EventBus.Instance?.BroadcastEvent(GameEventType.PlayerInventoryUpdateEvent, item, amount);
+        EventBus.Instance?.BroadcastEvent("PlayerInventoryUpdateEvent", item, amount);
     }
 
     public bool TryRemoveItem(ItemScriptableObject item, int amount = 1)
@@ -53,7 +54,7 @@ public class PlayerInventory : MonoBehaviour, IEventListener
         if (!items.ContainsKey(item) || amount <= 0) return false;
         items[item] -= amount;
         if (items[item] <= 0) items.Remove(item);
-        EventBus.Instance?.BroadcastEvent(GameEventType.PlayerInventoryUpdateEvent, item, -amount);
+        EventBus.Instance?.BroadcastEvent("PlayerInventoryUpdateEvent", item, -amount);
         return true;
     }
 
@@ -70,11 +71,11 @@ public class PlayerInventory : MonoBehaviour, IEventListener
 
     public int ItemAmount(ItemScriptableObject item) => items.ContainsKey(item) ? items[item] : 0;
 
-    public void OnEventReceived(GameEventType eventType, params object[] parameters)
+    public void OnEventReceived(string eventName, params object[] parameters)
     {
-        switch (eventType)
+        switch (eventName)
         {
-            case GameEventType.ItemPurchasedEvent:
+            case "ItemPurchasedEvent":
                 if (parameters[0] is ItemScriptableObject purchasedItem)
                 {
                     if (parameters[1] is int amount)
@@ -83,7 +84,7 @@ public class PlayerInventory : MonoBehaviour, IEventListener
                         {
                             AddItem(purchasedItem, amount);
                             Money -= purchasedItem.PurchasePrice * amount;
-                            EventBus.Instance?.BroadcastEvent(GameEventType.ItemSpawnEvent, purchasedItem, amount);
+                            EventBus.Instance?.BroadcastEvent("ItemSpawnEvent", purchasedItem, amount);
                         }
                     }
                     else
@@ -91,27 +92,27 @@ public class PlayerInventory : MonoBehaviour, IEventListener
                         if (Money <= purchasedItem.PurchasePrice) return;
                         AddItem(purchasedItem);
                         Money -= purchasedItem.PurchasePrice;
-                        EventBus.Instance?.BroadcastEvent(GameEventType.ItemSpawnEvent, purchasedItem, 1);
+                        EventBus.Instance?.BroadcastEvent("ItemSpawnEvent", purchasedItem, 1);
                     }
                 }
                 break;
-            case GameEventType.ItemSoldEvent:
+            case "ItemSoldEvent":
                 if (parameters[0] is ItemScriptableObject soldItem)
                 {
                     if (parameters[1] is int amount && TryRemoveItem(soldItem, amount))
                     {
                         Money += soldItem.SellPrice * amount;
-                        EventBus.Instance?.BroadcastEvent(GameEventType.SuccessfulSaleEvent, soldItem, amount);
+                        EventBus.Instance?.BroadcastEvent("SuccessfulSaleEvent", soldItem, amount);
                     }
                     else if (TryRemoveItem(soldItem))
                     {
                         Money += soldItem.SellPrice;
-                        EventBus.Instance?.BroadcastEvent(GameEventType.SuccessfulSaleEvent, soldItem, 1);
+                        EventBus.Instance?.BroadcastEvent("SuccessfulSaleEvent", soldItem, 1);
                     }
                 }
                 break;
-            case GameEventType.GainCropEvent:
-                if (parameters[0] is CropScriptableObject crop && parameters[1] is bool isDead && parameters[2] is int currentGrowStage && parameters[3] is float currentYield) 
+            case "GainCropEvent":
+                if (parameters[0] is CropScriptableObject crop && parameters[1] is bool isDead && parameters[2] is int currentGrowStage && parameters[3] is float currentYield)
                 {
                     if (currentGrowStage < 1) return;
                     ItemScriptableObject harvest = isDead ? crop.GrowthStages[currentGrowStage - 1].deadCrop.cropYield.yieldItem : crop.GrowthStages[currentGrowStage - 1].aliveCrop.cropYield.yieldItem;
@@ -121,11 +122,11 @@ public class PlayerInventory : MonoBehaviour, IEventListener
                     AddItem(harvest, amount);
                 }
                 break;
-            case GameEventType.ItemStoredEvent:
+            case "ItemStoredEvent":
                 if (parameters[0] is ItemScriptableObject storedItem)
                 {
-                    if (parameters[1] is int amount && TryRemoveItem(storedItem, amount)) EventBus.Instance?.BroadcastEvent(GameEventType.SuccessfulStoreEvent, storedItem, amount);
-                    else if (TryRemoveItem(storedItem)) EventBus.Instance?.BroadcastEvent(GameEventType.SuccessfulStoreEvent, storedItem, 1);
+                    if (parameters[1] is int amount && TryRemoveItem(storedItem, amount)) EventBus.Instance?.BroadcastEvent("SuccessfulStoreEvent", storedItem, amount);
+                    else if (TryRemoveItem(storedItem)) EventBus.Instance?.BroadcastEvent("SuccessfulStoreEvent", storedItem, 1);
                 }
                 break;
             default:

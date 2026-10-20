@@ -1,35 +1,39 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WateringCan : Usable
 {
-    [SerializeField]
-    float maximumCapacity = 1f;
-    [SerializeField]
-    float waterLostWhenWatering = 0.1f;
+    [SerializeField, FormerlySerializedAs("maximumCapacity")]
+    float m_MaximumCapacity = 1f;
+    [SerializeField, FormerlySerializedAs("waterLostWhenWatering")]
+    float m_WaterLostWhenWatering = 0.1f;
 
-    public float MaximumCapacity => maximumCapacity;
+    public float MaximumCapacity => m_MaximumCapacity;
     public float CurrentCapacity { get; set; }
 
-    public override bool Use(Interactable targetInteractable)
+    public override UseInfo Use(Interactable targetInteractable)
     {
-        if (CurrentCapacity >= waterLostWhenWatering)
+        if (CurrentCapacity >= m_WaterLostWhenWatering)
         {
             if (targetInteractable is FarmTile farmTile)
             {
                 farmTile.WaterPlant();
-                CurrentCapacity -= waterLostWhenWatering;
+                CurrentCapacity -= m_WaterLostWhenWatering;
             }
             else if (targetInteractable is CropScript crop)
             {
-                EventBus.Instance?.BroadcastEvent(GameEventType.PlantWateredEvent, crop.gameObject);
-                CurrentCapacity -= waterLostWhenWatering;
+                EventBus.Instance?.BroadcastEvent("PlantWateredEvent", crop.gameObject);
+                CurrentCapacity -= m_WaterLostWhenWatering;
             }
             else if (targetInteractable is PestScript pest)
             {
-                EventBus.Instance?.BroadcastEvent(GameEventType.PlantWateredEvent, pest.gameObject);
-                CurrentCapacity -= waterLostWhenWatering;
+                EventBus.Instance?.BroadcastEvent("PlantWateredEvent", pest.gameObject);
+                CurrentCapacity -= m_WaterLostWhenWatering;
             }
         }
-        return false; // Never delete
+        return new UseInfo()
+        {
+            FinishedUsing = false // Never delete
+        };
     }
 }

@@ -77,7 +77,7 @@ public class Holdable : Interactable
 #if UNITY_EDITOR
             Debug.LogWarning($"WARNING: Holdable objects needs 4 parameters. Received {parameters.Length} parameters");
 #endif
-            return new InteractionInfo() { DoEndInteraction = true }; // Drop object
+            return new InteractionInfo() { EndInteraction = true }; // Drop object
         }
         if (parameters[0] is Transform holdPos && parameters[1] is LayerMask holdLayer && parameters[2] is Collider playerCollider && parameters[3] is Camera cam)
         {
@@ -109,7 +109,7 @@ public class Holdable : Interactable
             gameObject.layer = held ? holdLayerIndex : startLayer;
             foreach (Transform child in childTransforms) child.gameObject.layer = gameObject.layer;
             if (isClipping) isClipping = false;
-            return new InteractionInfo() { DoEndInteraction = !held }; // Return true when drop, false when pick up
+            return new InteractionInfo() { EndInteraction = !held }; // Return true when drop, false when pick up
         }
         else
         {
@@ -119,7 +119,7 @@ public class Holdable : Interactable
             if (parameters[2] is not Collider) Debug.LogWarning($"WARNING: Parameter 2 needs to be the player collider. Received {parameters[2]} type {parameters[2].GetType()} as parameter 2");
             if (parameters[3] is not Camera) Debug.LogWarning($"WARNING: Parameter 3 needs to be the player camera. Received {parameters[3]} type {parameters[3].GetType()} as parameter 3");
 #endif
-            return new InteractionInfo() { DoEndInteraction = true }; // Drop object
+            return new InteractionInfo() { EndInteraction = true }; // Drop object
         }
     }
 

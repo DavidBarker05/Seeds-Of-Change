@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [System.Serializable]
 public enum Season
@@ -39,118 +40,115 @@ public class WorldManager : MonoBehaviour, IEventListener
 {
     public static WorldManager Instance { get; private set; }
 
-    [SerializeField]
-    TextMeshProUGUI dateText;
-    [SerializeField]
-    TextMeshProUGUI foodText;
-    [SerializeField]
-    TextMeshProUGUI disastersText;
-    [SerializeField]
-    GameObject rainVolume;
-    [SerializeField]
-    Material clearSkySkybox;
-    [SerializeField]
-    Material rainyDaySkybox;
-    [SerializeField, Min(1)]
-    int daysPerSeason = 10;
-    [SerializeField]
-    Season startingSeason = Season.RainySeason;
-    [SerializeField]
-    Weather startingWeather = Weather.ClearSky;
-    [SerializeField]
-    Difficulty startingDifficulty = Difficulty.Easy;
-    [SerializeField]
-    List<ItemFoodValue> itemFoodValues = new List<ItemFoodValue>();
-    [SerializeField, Min(0)]
-    int familyStartingFood = 30;
-    [SerializeField, Min(0)]
-    int communityStartingFood = 90;
-    [Header("Trailer")]
-    [SerializeField]
-    ItemScriptableObject seedPacket;
-    [SerializeField]
-    ItemScriptableObject btSpray;
-    [SerializeField]
-    GameObject hudReticle;
+    [SerializeField, FormerlySerializedAs("dateText")]
+    TMP_Text m_DateText;
+    [SerializeField, FormerlySerializedAs("foodText")]
+    TMP_Text m_FoodText;
+    [SerializeField, FormerlySerializedAs("disastersText")]
+    TMP_Text m_DisastersText;
+    [SerializeField, FormerlySerializedAs("rainVolume")]
+    GameObject m_RainVolume;
+    [SerializeField, FormerlySerializedAs("clearSkySkybox")]
+    Material m_ClearSkySkybox;
+    [SerializeField, FormerlySerializedAs("rainyDaySkybox")]
+    Material m_RainyDaySkybox;
+    [SerializeField, Min(1), FormerlySerializedAs("daysPerSeason")]
+    int m_DaysPerSeason = 10;
+    [SerializeField, FormerlySerializedAs("startingSeason")]
+    Season m_StartingSeason = Season.RainySeason;
+    [SerializeField, FormerlySerializedAs("startingWeather")]
+    Weather m_StartingWeather = Weather.ClearSky;
+    [SerializeField, FormerlySerializedAs("startingDifficulty")]
+    Difficulty m_StartingDifficulty = Difficulty.Easy;
+    [SerializeField, FormerlySerializedAs("itemFoodValues")]
+    List<ItemFoodValue> m_ItemFoodValues;
+    [SerializeField, Min(0), FormerlySerializedAs("familyStartingFood")]
+    int m_FamilyStartingFood = 30;
+    [SerializeField, Min(0), FormerlySerializedAs("communityStartingFood")]
+    int m_CommunityStartingFood = 90;
 
-    SeasonManager seasonManager;
-    WeatherManager weatherManager;
-    DisasterManager disasterManager;
-    FoodManager foodManager;
+    SeasonManager m_SeasonManager;
+    WeatherManager m_WeatherManager;
+    DisasterManager m_DisasterManager;
+    FoodManager m_FoodManager;
 
     public int CurrentDay { get; private set; }
     public int CurrentDayInSeason { get; private set; }
     public int CurrentYear { get; private set; }
-    public Season CurrentSeason => seasonManager.CurrentSeason;
-    public Weather CurrentWeather => weatherManager.CurrentWeather;
+    public Season CurrentSeason => m_SeasonManager.CurrentSeason;
+    public Weather CurrentWeather => m_WeatherManager.CurrentWeather;
     public Difficulty CurrentDifficulty { get; private set; }
 
-    bool canResetForcedWeather;
-    Weather forcedWeather = Weather.None;
-    bool canResetForcedDisaster;
-    Disaster forcedDisaster = Disaster.None;
-    int daysNeededToWin;
+    bool m_bCanResetForcedWeather;
+    Weather m_ForcedWeather = Weather.None;
+    bool m_bCanResetForcedDisaster;
+    Disaster m_bForcedDisaster = Disaster.None;
+    int m_DaysNeededToWin;
 
     void Awake()
     {
         if (Instance != null && Instance != this) Destroy(gameObject);
-        else Instance = this;
-        seasonManager = new SeasonManager(startingSeason);
-        weatherManager = new WeatherManager();
-        disasterManager = new DisasterManager();
-        foodManager = new FoodManager(familyStartingFood, communityStartingFood, itemFoodValues);
-        CurrentDifficulty = startingDifficulty;
-        Season[] seasons = System.Enum.GetValues(typeof(Season)) as Season[];
-        daysNeededToWin = daysPerSeason * seasons.Length / 2;
-        EventBus.Instance?.AddEventListener(GameEventType.DroughtDisasterEventStart, this);
-        EventBus.Instance?.AddEventListener(GameEventType.DroughtDisasterEventEnd, this);
-        EventBus.Instance?.AddEventListener(GameEventType.ClearSkyWeatherEvent, this);
-        EventBus.Instance?.AddEventListener(GameEventType.RainWeatherEvent, this);
-        EventBus.Instance?.AddEventListener(GameEventType.SuccessfulSaleEvent, this);
-        EventBus.Instance?.AddEventListener(GameEventType.SuccessfulStoreEvent, this);
+        else
+        {
+            Instance = this;
+            m_SeasonManager = new SeasonManager(m_StartingSeason);
+            m_WeatherManager = new WeatherManager();
+            m_DisasterManager = new DisasterManager();
+            m_FoodManager = new FoodManager(m_FamilyStartingFood, m_CommunityStartingFood, m_ItemFoodValues);
+            CurrentDifficulty = m_StartingDifficulty;
+            Season[] seasons = System.Enum.GetValues(typeof(Season)) as Season[];
+            m_DaysNeededToWin = m_DaysPerSeason * seasons.Length / 2;
+            EventBus.Instance?.AddEventListener("DroughtDisasterEventStart", this);
+            EventBus.Instance?.AddEventListener("DroughtDisasterEventEnd", this);
+            EventBus.Instance?.AddEventListener("ClearSkyWeatherEvent", this);
+            EventBus.Instance?.AddEventListener("RainWeatherEvent", this);
+            EventBus.Instance?.AddEventListener("SuccessfulSaleEvent", this);
+            EventBus.Instance?.AddEventListener("SuccessfulStoreEvent", this);
+        }
     }
 
     void Start()
     {
-        canResetForcedWeather = true;
-        canResetForcedDisaster = true;
+        if (Instance != this) return;
+        m_bCanResetForcedWeather = true;
+        m_bCanResetForcedDisaster = true;
         CurrentDay = 1;
         CurrentDayInSeason = 1;
         CurrentYear = 1;
-        forcedWeather = startingWeather;
+        m_ForcedWeather = m_StartingWeather;
         DoWeather();
     }
 
     void OnDestroy()
     {
-        EventBus.Instance?.RemoveEventListener(GameEventType.DroughtDisasterEventStart, this);
-        EventBus.Instance?.RemoveEventListener(GameEventType.DroughtDisasterEventEnd, this);
-        EventBus.Instance?.RemoveEventListener(GameEventType.ClearSkyWeatherEvent, this);
-        EventBus.Instance?.RemoveEventListener(GameEventType.RainWeatherEvent, this);
-        EventBus.Instance?.RemoveEventListener(GameEventType.SuccessfulSaleEvent, this);
-        EventBus.Instance?.RemoveEventListener(GameEventType.SuccessfulStoreEvent, this);
+        EventBus.Instance?.RemoveEventListener("DroughtDisasterEventStart", this);
+        EventBus.Instance?.RemoveEventListener("DroughtDisasterEventEnd", this);
+        EventBus.Instance?.RemoveEventListener("ClearSkyWeatherEvent", this);
+        EventBus.Instance?.RemoveEventListener("RainWeatherEvent", this);
+        EventBus.Instance?.RemoveEventListener("SuccessfulSaleEvent", this);
+        EventBus.Instance?.RemoveEventListener("SuccessfulStoreEvent", this);
     }
 
     public void MoveToNextDay()
     {
-        if (CurrentDay == daysNeededToWin) EventBus.Instance?.BroadcastEvent(GameEventType.GameWinEvent); // Only do once
+        if (CurrentDay == m_DaysNeededToWin) EventBus.Instance?.BroadcastEvent("GameWinEvent"); // Only do once
         ++CurrentDay;
         ++CurrentDayInSeason;
-        if (CurrentDayInSeason > daysPerSeason) DoSeasonChange();
-        EventBus.Instance?.BroadcastEvent(GameEventType.NewDayEvent);
+        if (CurrentDayInSeason > m_DaysPerSeason) DoSeasonChange();
+        EventBus.Instance?.BroadcastEvent("NewDayEvent");
         DoDisaster();
         DoWeather();
-        foodManager.DoFoodUsed(CurrentSeason);
-        dateText.text = $"CURRENT YEAR: {CurrentYear}\nCURRENT DAY: {CurrentDay}\nCURRENT SEASON: {CurrentSeason}";
-        foodText.text = $"Family has {foodManager.FamilyFood} food\nCommunity has {foodManager.CommunityFood} food";
-        disastersText.text = $"Drought = {(disasterManager.IsDroughtActive ? "Active" : "Inactive")}\n{(disasterManager.IsPestActive ? "Pests have spawned today" : "No pests spawned today")}";
+        m_FoodManager.DoFoodUsed(CurrentSeason);
+        m_DateText.text = $"CURRENT YEAR: {CurrentYear}\nCURRENT DAY: {CurrentDay}\nCURRENT SEASON: {CurrentSeason}";
+        m_FoodText.text = $"Family has {m_FoodManager.FamilyFood} food\nCommunity has {m_FoodManager.CommunityFood} food";
+        m_DisastersText.text = $"Drought = {(m_DisasterManager.IsDroughtActive ? "Active" : "Inactive")}\n{(m_DisasterManager.IsPestActive ? "Pests have spawned today" : "No pests spawned today")}";
     }
 
     void DoSeasonChange()
     {
-        seasonManager.DoSeasonChange(); // Change the season to next season
+        m_SeasonManager.DoSeasonChange(); // Change the season to next season
         CurrentDayInSeason = 1; // Now first day in new season
-        if (CurrentSeason == startingSeason)
+        if (CurrentSeason == m_StartingSeason)
         {
             ++CurrentYear; // Back to first season so new year
             if (CurrentYear >= 2) // Increase difficulty every year
@@ -163,50 +161,50 @@ public class WorldManager : MonoBehaviour, IEventListener
 
     void DoWeather()
     {
-        if (forcedWeather == Weather.None) weatherManager.DoWeather(CurrentSeason, CurrentDifficulty);
+        if (m_ForcedWeather == Weather.None) m_WeatherManager.DoWeather(CurrentSeason, CurrentDifficulty);
         else
         {
-            weatherManager.DoWeather(forcedWeather, CurrentDifficulty);
-            if (canResetForcedWeather) forcedWeather = Weather.None;
+            m_WeatherManager.DoWeather(m_ForcedWeather, CurrentDifficulty);
+            if (m_bCanResetForcedWeather) m_ForcedWeather = Weather.None;
         }
     }
 
     void DoDisaster()
     {
-        disasterManager.TickDisasters(CurrentDifficulty);
-        if (forcedDisaster == Disaster.None) disasterManager.DoDisaster(CurrentSeason, CurrentDifficulty);
+        m_DisasterManager.TickDisasters(CurrentDifficulty);
+        if (m_bForcedDisaster == Disaster.None) m_DisasterManager.DoDisaster(CurrentSeason, CurrentDifficulty);
         else
         {
-            disasterManager.DoDisaster(forcedDisaster, CurrentDifficulty);
-            if (canResetForcedDisaster) forcedDisaster = Disaster.None;
+            m_DisasterManager.DoDisaster(m_bForcedDisaster, CurrentDifficulty);
+            if (m_bCanResetForcedDisaster) m_bForcedDisaster = Disaster.None;
         }
     }
 
-    public void OnEventReceived(GameEventType eventType, params object[] parameters)
+    public void OnEventReceived(string eventName, params object[] parameters)
     {
-        switch (eventType)
+        switch (eventName)
         {
-            case GameEventType.DroughtDisasterEventStart:
-                canResetForcedWeather = false;
-                forcedWeather = Weather.ClearSky;
+            case "DroughtDisasterEventStart":
+                m_bCanResetForcedWeather = false;
+                m_ForcedWeather = Weather.ClearSky;
                 break;
-            case GameEventType.DroughtDisasterEventEnd:
-                canResetForcedWeather = true;
-                forcedWeather = Weather.Rain;
+            case "DroughtDisasterEventEnd":
+                m_bCanResetForcedWeather = true;
+                m_ForcedWeather = Weather.Rain;
                 break;
-            case GameEventType.ClearSkyWeatherEvent:
-                if (rainVolume != null) rainVolume.SetActive(false);
-                if (clearSkySkybox != null && RenderSettings.skybox != clearSkySkybox) RenderSettings.skybox = clearSkySkybox;
+            case "ClearSkyWeatherEvent":
+                if (m_RainVolume != null) m_RainVolume.SetActive(false);
+                if (m_ClearSkySkybox != null && RenderSettings.skybox != m_ClearSkySkybox) RenderSettings.skybox = m_ClearSkySkybox;
                 break;
-            case GameEventType.RainWeatherEvent:
-                if (rainVolume != null) rainVolume.SetActive(true);
-                if (rainyDaySkybox != null && RenderSettings.skybox != rainyDaySkybox) RenderSettings.skybox = rainyDaySkybox;
+            case "RainWeatherEvent":
+                if (m_RainVolume != null) m_RainVolume.SetActive(true);
+                if (m_RainyDaySkybox != null && RenderSettings.skybox != m_RainyDaySkybox) RenderSettings.skybox = m_RainyDaySkybox;
                 break;
-            case GameEventType.SuccessfulSaleEvent:
-                if (parameters[0] is ItemScriptableObject soldItem && parameters[1] is int soldAmount) foodManager.AddCommunityFood(soldItem, soldAmount);
+            case "SuccessfulSaleEvent":
+                if (parameters[0] is ItemScriptableObject soldItem && parameters[1] is int soldAmount) m_FoodManager.AddCommunityFood(soldItem, soldAmount);
                 break;
-            case GameEventType.SuccessfulStoreEvent:
-                if (parameters[0] is ItemScriptableObject storedItem && parameters[1] is int storedAmount) foodManager.AddFamilyFood(storedItem, storedAmount);
+            case "SuccessfulStoreEvent":
+                if (parameters[0] is ItemScriptableObject storedItem && parameters[1] is int storedAmount) m_FoodManager.AddFamilyFood(storedItem, storedAmount);
                 break;
             default:
                 break;
@@ -229,7 +227,7 @@ public class WorldManager : MonoBehaviour, IEventListener
 
     private class WeatherManager
     {
-        private static readonly Dictionary<Season, (float minChance, float maxChance)> baseRainChances = new Dictionary<Season, (float minChance, float maxChance)>()
+        private static readonly Dictionary<Season, (float minChance, float maxChance)> s_BaseRainChances = new Dictionary<Season, (float minChance, float maxChance)>()
         {
             { Season.RainySeason, (minChance: 0.45f, maxChance: 0.65f) },
             { Season.CoolSeason, (minChance: 0.25f, maxChance: 0.4f) },
@@ -237,24 +235,24 @@ public class WorldManager : MonoBehaviour, IEventListener
             { Season.DrySeason, (minChance: 0.03f, maxChance: 0.08f) }
         };
 
-        private static readonly Dictionary<Difficulty, float> difficultyModifiers = new Dictionary<Difficulty, float>()
+        private static readonly Dictionary<Difficulty, float> s_DifficultyModifiers = new Dictionary<Difficulty, float>()
         {
             { Difficulty.Easy, 1f },
             { Difficulty.Normal, 0.9f },
             { Difficulty.Hard, 0.7f }
         };
 
-        private static readonly Dictionary<Difficulty, (float minAccumulation, float maxAccumulation, float accumulationDecrease, float accumulationIncrease)> difficultyAccumulations = new Dictionary<Difficulty, (float minAccumulation, float maxAccumulation, float accumulationDecrease, float accumulationIncrease)>()
+        private static readonly Dictionary<Difficulty, (float minAccumulation, float maxAccumulation, float accumulationDecrease, float accumulationIncrease)> s_DifficultyAccumulations = new Dictionary<Difficulty, (float minAccumulation, float maxAccumulation, float accumulationDecrease, float accumulationIncrease)>()
         {
             { Difficulty.Easy, (minAccumulation: -0.05f, maxAccumulation: 0.15f, accumulationDecrease: -0.005f, accumulationIncrease: 0.015f) },
             { Difficulty.Normal, (minAccumulation: -0.1f, maxAccumulation: 0.1f, accumulationDecrease: -0.01f, accumulationIncrease: 0.01f) },
             { Difficulty.Hard, (minAccumulation: -0.15f, maxAccumulation: 0.05f, accumulationDecrease: -0.015f, accumulationIncrease: 0.005f) }
         };
 
-        private static readonly float DEVIATION = 0.1f; // 10%
-        private static readonly float TOLERANCE = 0.001f; // Amount a percentage can stray from 0 or 1 to be considered 0 or 1
+        private static readonly float s_Deviation = 0.1f; // 10%
+        private static readonly float s_Tolerance = 0.001f; // Amount a percentage can stray from 0 or 1 to be considered 0 or 1
 
-        private float currentAccumulation = 0f;
+        private float m_CurrentAccumulation = 0f;
 
         public Weather CurrentWeather { get; private set; }
 
@@ -264,54 +262,51 @@ public class WorldManager : MonoBehaviour, IEventListener
         {
             if (weather == Weather.ClearSky)
             {
-                if (currentAccumulation < 0f) currentAccumulation = 0f; // Reset accumulation
+                if (m_CurrentAccumulation < 0f) m_CurrentAccumulation = 0f; // Reset accumulation
                 else
                 {
-                    float maxAccumulation = Mathf.Max(difficultyAccumulations[currentDifficulty].maxAccumulation, 0f); // Ensure max >= 0
-                    float accumulationIncrease = Mathf.Max(difficultyAccumulations[currentDifficulty].accumulationIncrease, 0f); // Ensure increase >= 0
-                    currentAccumulation = Mathf.Clamp(currentAccumulation + accumulationIncrease, 0f, maxAccumulation);
+                    float maxAccumulation = Mathf.Max(s_DifficultyAccumulations[currentDifficulty].maxAccumulation, 0f); // Ensure max >= 0
+                    float accumulationIncrease = Mathf.Max(s_DifficultyAccumulations[currentDifficulty].accumulationIncrease, 0f); // Ensure increase >= 0
+                    m_CurrentAccumulation = Mathf.Clamp(m_CurrentAccumulation + accumulationIncrease, 0f, maxAccumulation);
                 }
             }
             else if (weather == Weather.Rain)
             {
-                if (currentAccumulation > 0f) currentAccumulation = 0f; // Reset accumulation
+                if (m_CurrentAccumulation > 0f) m_CurrentAccumulation = 0f; // Reset accumulation
                 else
                 {
-                    float minAccumulation = Mathf.Min(difficultyAccumulations[currentDifficulty].minAccumulation, 0f); // Ensure min <= 0
-                    float accumulationDecrease = Mathf.Min(difficultyAccumulations[currentDifficulty].accumulationDecrease, 0f); // Ensure decrease <= 0
-                    currentAccumulation = Mathf.Clamp(currentAccumulation + accumulationDecrease, minAccumulation, 0f);
+                    float minAccumulation = Mathf.Min(s_DifficultyAccumulations[currentDifficulty].minAccumulation, 0f); // Ensure min <= 0
+                    float accumulationDecrease = Mathf.Min(s_DifficultyAccumulations[currentDifficulty].accumulationDecrease, 0f); // Ensure decrease <= 0
+                    m_CurrentAccumulation = Mathf.Clamp(m_CurrentAccumulation + accumulationDecrease, minAccumulation, 0f);
                 }
             }
             CurrentWeather = weather;
-            GameEventType eventType = CurrentWeather switch
+            string eventName = CurrentWeather switch
             {
-                Weather.ClearSky => GameEventType.ClearSkyWeatherEvent,
-                Weather.Rain => GameEventType.RainWeatherEvent,
-                _ => GameEventType.None
+                Weather.ClearSky => "ClearSkyWeatherEvent",
+                Weather.Rain => "RainWeatherEvent",
+                _ => string.Empty
             };
-            EventBus.Instance?.BroadcastEvent(eventType);
+            EventBus.Instance?.BroadcastEvent(eventName);
         }
 
         public void DoWeather(Season currentSeason, Difficulty currentDifficulty = Difficulty.Normal)
         {
-            float minRainChance = Mathf.Clamp01(baseRainChances[currentSeason].minChance); // Ensures that if the value is ever modified it remains between 0 and 1
-            float maxRainChance = Mathf.Clamp01(baseRainChances[currentSeason].maxChance); // Ensures that if the value is ever modified it remains between 0 and 1
+            float minRainChance = Mathf.Clamp01(s_BaseRainChances[currentSeason].minChance); // Ensures that if the value is ever modified it remains between 0 and 1
+            float maxRainChance = Mathf.Clamp01(s_BaseRainChances[currentSeason].maxChance); // Ensures that if the value is ever modified it remains between 0 and 1
             float baseRainChance = Random.Range(minRainChance, maxRainChance); // Base rain chance between 0 and 1 no multipliers or accumulation
-
-            float deviation = Mathf.Max(Random.Range(1f - DEVIATION, 1f + DEVIATION), TOLERANCE); // Ensure the value > 0 for multiplication
-            float difficultyModifier = Mathf.Max(difficultyModifiers[currentDifficulty], TOLERANCE); // Ensure the value > 0 for multiplication
-
-            float totalRainChance = Mathf.Clamp01(baseRainChance * deviation * difficultyModifier + currentAccumulation); // Total chance with multipliers and accumulation between 0 and 1
-
-            if (totalRainChance <= TOLERANCE) DoWeather(Weather.ClearSky, currentDifficulty); // ~0% chance do clear sky
-            else if (totalRainChance >= 1f - TOLERANCE) DoWeather(Weather.Rain, currentDifficulty); // ~100% do rain
+            float deviation = Mathf.Max(Random.Range(1f - s_Deviation, 1f + s_Deviation), s_Tolerance); // Ensure the value > 0 for multiplication
+            float difficultyModifier = Mathf.Max(s_DifficultyModifiers[currentDifficulty], s_Tolerance); // Ensure the value > 0 for multiplication
+            float totalRainChance = Mathf.Clamp01(baseRainChance * deviation * difficultyModifier + m_CurrentAccumulation); // Total chance with multipliers and accumulation between 0 and 1
+            if (totalRainChance <= s_Tolerance) DoWeather(Weather.ClearSky, currentDifficulty); // ~0% chance do clear sky
+            else if (totalRainChance >= 1f - s_Tolerance) DoWeather(Weather.Rain, currentDifficulty); // ~100% do rain
             else DoWeather(Random.value > totalRainChance ? Weather.ClearSky : Weather.Rain, currentDifficulty); // Random weather
         }
     }
 
     private class DisasterManager
     {
-        private static readonly Dictionary<Season, Dictionary<Disaster, (float minChance, float maxChance)>> baseDisasterChances = new Dictionary<Season, Dictionary<Disaster, (float minChance, float maxChance)>>()
+        private static readonly Dictionary<Season, Dictionary<Disaster, (float minChance, float maxChance)>> s_BaseDisasterChances = new Dictionary<Season, Dictionary<Disaster, (float minChance, float maxChance)>>()
         {
             {
                 Season.RainySeason,
@@ -347,7 +342,7 @@ public class WorldManager : MonoBehaviour, IEventListener
             }
         };
 
-        private static readonly Dictionary<Season, List<Disaster>> disasterPriorities = new Dictionary<Season, List<Disaster>>()
+        private static readonly Dictionary<Season, List<Disaster>> s_DisasterPriorities = new Dictionary<Season, List<Disaster>>()
         {
             {
                 Season.RainySeason,
@@ -383,7 +378,7 @@ public class WorldManager : MonoBehaviour, IEventListener
             }
         };
 
-        private static readonly Dictionary<Disaster, Dictionary<Difficulty, (int minDays, int maxDays)>> disasterDurations = new Dictionary<Disaster, Dictionary<Difficulty, (int minDays, int maxDays)>>()
+        private static readonly Dictionary<Disaster, Dictionary<Difficulty, (int minDays, int maxDays)>> s_DisasterDurations = new Dictionary<Disaster, Dictionary<Difficulty, (int minDays, int maxDays)>>()
         {
             {
                 Disaster.Drought,
@@ -405,7 +400,7 @@ public class WorldManager : MonoBehaviour, IEventListener
             }
         };
 
-        private static readonly Dictionary<Disaster, Dictionary<Difficulty, (int minDays, int maxDays)>> daysBetweenDisasters = new Dictionary<Disaster, Dictionary<Difficulty, (int minDays, int maxDays)>>()
+        private static readonly Dictionary<Disaster, Dictionary<Difficulty, (int minDays, int maxDays)>> s_DaysBetweenDisasters = new Dictionary<Disaster, Dictionary<Difficulty, (int minDays, int maxDays)>>()
         {
             {
                 Disaster.Drought,
@@ -427,43 +422,43 @@ public class WorldManager : MonoBehaviour, IEventListener
             }
         };
 
-        private static readonly Dictionary<Difficulty, float> difficultyModifiers = new Dictionary<Difficulty, float>()
+        private static readonly Dictionary<Difficulty, float> s_DifficultyModifiers = new Dictionary<Difficulty, float>()
         {
             { Difficulty.Easy, 0.75f },
             { Difficulty.Normal, 1f },
             { Difficulty.Hard, 1.5f }
         };
 
-        private static readonly Dictionary<Difficulty, float> secondaryDisasterChance = new Dictionary<Difficulty, float>()
+        private static readonly Dictionary<Difficulty, float> s_SecondaryDisasterChance = new Dictionary<Difficulty, float>()
         {
             { Difficulty.Easy, 0.1f }, // 10% chance that if a second disaster can happen it will happen
             { Difficulty.Normal, 0.5f }, // 50/50 chance that if a second disaster can happen it will happen
             { Difficulty.Hard, 1f } // Guaranteed that if a second disaster can happen it will happen
         };
 
-        private static readonly float DEVIATION = 0.1f; // 10%
-        private static readonly float TOLERANCE = 0.001f; // Amount a percentage can stray from 0 or 1 to be considered 0 or 1
+        private static readonly float s_Deviation = 0.1f; // 10%
+        private static readonly float s_Tolerance = 0.001f; // Amount a percentage can stray from 0 or 1 to be considered 0 or 1
 
-        Dictionary<Disaster, int> activeDisasters = new Dictionary<Disaster, int>();
-        Dictionary<Disaster, int> disastersOnCooldown = new Dictionary<Disaster, int>();
+        readonly Dictionary<Disaster, int> m_ActiveDisasters = new Dictionary<Disaster, int>();
+        readonly Dictionary<Disaster, int> m_DisastersOnCooldown = new Dictionary<Disaster, int>();
 
-        public bool IsDroughtActive => activeDisasters.ContainsKey(Disaster.Drought);
-        public bool IsPestActive => activeDisasters.ContainsKey(Disaster.Pest);
+        public bool IsDroughtActive => m_ActiveDisasters.ContainsKey(Disaster.Drought);
+        public bool IsPestActive => m_ActiveDisasters.ContainsKey(Disaster.Pest);
 
         public void DoDisaster(Disaster disaster, Difficulty currentDifficulty = Difficulty.Normal)
         {
             if (disaster == Disaster.None) return;
-            if (!activeDisasters.ContainsKey(disaster) && !disastersOnCooldown.ContainsKey(disaster))
+            if (!m_ActiveDisasters.ContainsKey(disaster) && !m_DisastersOnCooldown.ContainsKey(disaster))
             {
-                if (activeDisasters.Count > 0)
+                if (m_ActiveDisasters.Count > 0)
                 {
-                    if (secondaryDisasterChance[currentDifficulty] <= TOLERANCE) return; // ~0% chance that a secondary disaster can happen so don't do it
-                    else if (secondaryDisasterChance[currentDifficulty] < 1f - TOLERANCE && Random.value > secondaryDisasterChance[currentDifficulty]) return;
+                    if (s_SecondaryDisasterChance[currentDifficulty] <= s_Tolerance) return; // ~0% chance that a secondary disaster can happen so don't do it
+                    else if (s_SecondaryDisasterChance[currentDifficulty] < 1f - s_Tolerance && Random.value > s_SecondaryDisasterChance[currentDifficulty]) return;
                 }
-                int minDays = Mathf.Max(disasterDurations[disaster][currentDifficulty].minDays, 1); // Ensure min >= 1
-                int maxDays = Mathf.Max(disasterDurations[disaster][currentDifficulty].maxDays, 1); // Ensure max >= 1
+                int minDays = Mathf.Max(s_DisasterDurations[disaster][currentDifficulty].minDays, 1); // Ensure min >= 1
+                int maxDays = Mathf.Max(s_DisasterDurations[disaster][currentDifficulty].maxDays, 1); // Ensure max >= 1
                 int duration = Random.Range(minDays, maxDays + 1);
-                activeDisasters.Add(disaster, duration);
+                m_ActiveDisasters.Add(disaster, duration);
                 BroadcastDisasterStarted(disaster);
             }
         }
@@ -474,20 +469,17 @@ public class WorldManager : MonoBehaviour, IEventListener
             foreach (Disaster disaster in System.Enum.GetValues(typeof(Disaster)))
             {
                 if (disaster == Disaster.None) continue;
-                float minChance = Mathf.Clamp01(baseDisasterChances[currentSeason][disaster].minChance); // Ensures that if the value is ever modified it remains between 0 and 1
-                float maxChance = Mathf.Clamp01(baseDisasterChances[currentSeason][disaster].maxChance); // Ensures that if the value is ever modified it remains between 0 and 1
+                float minChance = Mathf.Clamp01(s_BaseDisasterChances[currentSeason][disaster].minChance); // Ensures that if the value is ever modified it remains between 0 and 1
+                float maxChance = Mathf.Clamp01(s_BaseDisasterChances[currentSeason][disaster].maxChance); // Ensures that if the value is ever modified it remains between 0 and 1
                 float chance = Random.Range(minChance, maxChance); // Base rain chance between 0 and 1 no multipliers
-
-                float deviation = Mathf.Max(Random.Range(1f - DEVIATION, 1f + DEVIATION), TOLERANCE); // Ensure the value > 0 for multiplication
-                float difficultyModifier = Mathf.Max(difficultyModifiers[currentDifficulty], TOLERANCE); // Ensure the value > 0 for multiplication
-
+                float deviation = Mathf.Max(Random.Range(1f - s_Deviation, 1f + s_Deviation), s_Tolerance); // Ensure the value > 0 for multiplication
+                float difficultyModifier = Mathf.Max(s_DifficultyModifiers[currentDifficulty], s_Tolerance); // Ensure the value > 0 for multiplication
                 float totalChance = Mathf.Clamp01(chance * deviation * difficultyModifier); // Total chance with multipliers between 0 and 1
-
-                if (totalChance <= TOLERANCE) continue; // ~0% chance don't do disaster
-                else if (totalChance >= 1f - TOLERANCE) disastersToDo.Add(disaster); // ~100% do disaster
+                if (totalChance <= s_Tolerance) continue; // ~0% chance don't do disaster
+                else if (totalChance >= 1f - s_Tolerance) disastersToDo.Add(disaster); // ~100% do disaster
                 else if (Random.value <= totalChance) disastersToDo.Add(disaster); // Succeeded roll do disaster
             }
-            foreach (Disaster disaster in disasterPriorities[currentSeason]) // Do disasters based on seasonal priority
+            foreach (Disaster disaster in s_DisasterPriorities[currentSeason]) // Do disasters based on seasonal priority
             {
                 if (disastersToDo.Contains(disaster)) DoDisaster(disaster, currentDifficulty);
             }
@@ -495,47 +487,46 @@ public class WorldManager : MonoBehaviour, IEventListener
 
         public void TickDisasters(Difficulty currentDifficulty = Difficulty.Normal)
         {
-            foreach (Disaster disaster in disastersOnCooldown.Keys.ToList())
+            foreach (Disaster disaster in m_DisastersOnCooldown.Keys.ToList())
             {
-                --disastersOnCooldown[disaster];
-                if (disastersOnCooldown[disaster] <= 0) disastersOnCooldown.Remove(disaster);
+                --m_DisastersOnCooldown[disaster];
+                if (m_DisastersOnCooldown[disaster] <= 0) m_DisastersOnCooldown.Remove(disaster);
             }
-
-            foreach (Disaster disaster in activeDisasters.Keys.ToList())
+            foreach (Disaster disaster in m_ActiveDisasters.Keys.ToList())
             {
-                --activeDisasters[disaster];
-                if (activeDisasters[disaster] <= 0)
+                --m_ActiveDisasters[disaster];
+                if (m_ActiveDisasters[disaster] <= 0)
                 {
                     BroadcastDisasterEnded(disaster);
-                    int minDays = Mathf.Max(daysBetweenDisasters[disaster][currentDifficulty].minDays, 1); // Ensure min >= 1
-                    int maxDays = Mathf.Max(daysBetweenDisasters[disaster][currentDifficulty].maxDays, 1); // Ensure max >= 1
+                    int minDays = Mathf.Max(s_DaysBetweenDisasters[disaster][currentDifficulty].minDays, 1); // Ensure min >= 1
+                    int maxDays = Mathf.Max(s_DaysBetweenDisasters[disaster][currentDifficulty].maxDays, 1); // Ensure max >= 1
                     int cooldown = Random.Range(minDays, maxDays + 1);
-                    disastersOnCooldown.Add(disaster, cooldown);
-                    activeDisasters.Remove(disaster);
+                    m_DisastersOnCooldown.Add(disaster, cooldown);
+                    m_ActiveDisasters.Remove(disaster);
                 }
             }
         }
 
         void BroadcastDisasterStarted(Disaster disaster)
         {
-            GameEventType eventType = disaster switch
+            string eventName = disaster switch
             {
-                Disaster.Drought => GameEventType.DroughtDisasterEventStart,
-                Disaster.Pest => GameEventType.PestDisasterEventStart,
-                _ => GameEventType.None,
+                Disaster.Drought => "DroughtDisasterEventStart",
+                Disaster.Pest => "PestDisasterEventStart",
+                _ => string.Empty,
             };
-            EventBus.Instance?.BroadcastEvent(eventType);
+            EventBus.Instance?.BroadcastEvent(eventName);
         }
 
         void BroadcastDisasterEnded(Disaster disaster)
         {
-            GameEventType eventType = disaster switch
+            string eventName = disaster switch
             {
-                Disaster.Drought => GameEventType.DroughtDisasterEventEnd,
-                Disaster.Pest => GameEventType.PestDisasterEventEnd,
-                _ => GameEventType.None,
+                Disaster.Drought => "DroughtDisasterEventEnd",
+                Disaster.Pest => "PestDisasterEventEnd",
+                _ => string.Empty,
             };
-            EventBus.Instance?.BroadcastEvent(eventType);
+            EventBus.Instance?.BroadcastEvent(eventName);
         }
     }
 
@@ -544,7 +535,7 @@ public class WorldManager : MonoBehaviour, IEventListener
     // Unlike the others this does scale forever though
     private class FoodManager
     {
-        private static readonly Dictionary<Season, (int familyNeeds, int communityNeeds)> dailyFoodNeededPerSeason = new Dictionary<Season, (int familyNeeds, int communityNeeds)>()
+        private static readonly Dictionary<Season, (int familyNeeds, int communityNeeds)> s_DailyFoodNeededPerSeason = new Dictionary<Season, (int familyNeeds, int communityNeeds)>()
         {
             { Season.RainySeason, (familyNeeds: 4, communityNeeds: 12) },
             { Season.CoolSeason, (familyNeeds: 3, communityNeeds: 9) },
@@ -552,27 +543,27 @@ public class WorldManager : MonoBehaviour, IEventListener
             { Season.DrySeason, (familyNeeds: 2, communityNeeds: 6) }
         };
 
-        private static readonly Dictionary<Difficulty, float> difficultyModifiers = new Dictionary<Difficulty, float>()
+        private static readonly Dictionary<Difficulty, float> s_DifficultyModifiers = new Dictionary<Difficulty, float>()
         {
             { Difficulty.Easy, 1f },
             { Difficulty.Normal, 1.1f },
             { Difficulty.Hard, 1.2f }
         };
 
-        private static readonly Dictionary<Difficulty, int> interestStartingYears = new Dictionary<Difficulty, int>()
+        private static readonly Dictionary<Difficulty, int> s_InterestStartingYears = new Dictionary<Difficulty, int>()
         {
             { Difficulty.Easy, 4 }, // Started on easy means years 4+ apply interest
             { Difficulty.Normal, 3 }, // Started on normal means years 3+ apply interest
             { Difficulty.Hard, 2 } // Started on hard means years 2+ apply interest
         };
 
-        private static readonly float COMPOUND_INTEREST = 1.05f; // 5% more food every year after 3rd year
+        private static readonly float s_CompoundInterest = 1.05f; // 5% more food every year after 3rd year
 
         public int FamilyFood { get; private set; }
         public int CommunityFood { get; private set; }
 
-        Dictionary<ItemScriptableObject, int> itemFoodValues = new Dictionary<ItemScriptableObject, int>();
-        int interestStartingYear;
+        readonly Dictionary<ItemScriptableObject, int> m_ItemFoodValues = new Dictionary<ItemScriptableObject, int>();
+        private int m_InterestStartingYear;
 
         public FoodManager(int startingFamilyFood, int startingCommunityFood, List<ItemFoodValue> itemFoodValueList, Difficulty startingDifficulty = Difficulty.Easy)
         {
@@ -580,30 +571,30 @@ public class WorldManager : MonoBehaviour, IEventListener
             CommunityFood = startingCommunityFood;
             foreach (ItemFoodValue itemFoodValue in itemFoodValueList)
             {
-                if (!itemFoodValues.ContainsKey(itemFoodValue.item)) itemFoodValues.Add(itemFoodValue.item, itemFoodValue.foodValue);
+                if (!m_ItemFoodValues.ContainsKey(itemFoodValue.Item)) m_ItemFoodValues.Add(itemFoodValue.Item, itemFoodValue.FoodValue);
             }
-            interestStartingYear = interestStartingYears[startingDifficulty];
+            m_InterestStartingYear = s_InterestStartingYears[startingDifficulty];
         }
 
         public void DoFoodUsed(Season currentSeason, Difficulty currentDifficulty = Difficulty.Normal, int currentYear = 1)
         {
-            float difficultyModifier = difficultyModifiers[currentDifficulty];
-            float interest = currentYear < interestStartingYear ? 1f : COMPOUND_INTEREST; // First three years it doesn't scale after that it scales exponentially
-            int familyNeeds = (int)(dailyFoodNeededPerSeason[currentSeason].familyNeeds * difficultyModifier * interest); // Truncation is fine
-            int communityNeeds = (int)(dailyFoodNeededPerSeason[currentSeason].communityNeeds * difficultyModifier * interest); // Truncation is fine
+            float difficultyModifier = s_DifficultyModifiers[currentDifficulty];
+            float interest = currentYear < m_InterestStartingYear ? 1f : s_CompoundInterest; // First three years it doesn't scale after that it scales exponentially
+            int familyNeeds = (int)(s_DailyFoodNeededPerSeason[currentSeason].familyNeeds * difficultyModifier * interest); // Truncation is fine
+            int communityNeeds = (int)(s_DailyFoodNeededPerSeason[currentSeason].communityNeeds * difficultyModifier * interest); // Truncation is fine
             FamilyFood -= familyNeeds;
             CommunityFood -= communityNeeds;
-            if (FamilyFood <= 0 || CommunityFood <= 0) EventBus.Instance?.BroadcastEvent(GameEventType.GameLoseEvent, FamilyFood, CommunityFood);
+            if (FamilyFood <= 0 || CommunityFood <= 0) EventBus.Instance?.BroadcastEvent("GameLoseEvent", FamilyFood, CommunityFood);
         }
 
         public void AddFamilyFood(ItemScriptableObject food, int amount)
         {
-            if (itemFoodValues.ContainsKey(food)) FamilyFood += itemFoodValues[food] * amount;
+            if (m_ItemFoodValues.ContainsKey(food)) FamilyFood += m_ItemFoodValues[food] * amount;
         }
 
         public void AddCommunityFood(ItemScriptableObject food, int amount)
         {
-            if (itemFoodValues.ContainsKey(food)) CommunityFood += itemFoodValues[food] * amount;
+            if (m_ItemFoodValues.ContainsKey(food)) CommunityFood += m_ItemFoodValues[food] * amount;
         }
     }
 }
@@ -611,6 +602,8 @@ public class WorldManager : MonoBehaviour, IEventListener
 [System.Serializable]
 public struct ItemFoodValue
 {
-    public ItemScriptableObject item;
-    public int foodValue;
+    [FormerlySerializedAs("item")]
+    public ItemScriptableObject Item;
+    [FormerlySerializedAs("foodValue")]
+    public int FoodValue;
 }

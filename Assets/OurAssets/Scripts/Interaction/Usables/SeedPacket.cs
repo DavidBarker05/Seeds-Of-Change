@@ -5,15 +5,15 @@ public class SeedPacket : Usable
     [field: SerializeField]
     public SeedScribtableObject SeedData { get; private set; }
 
-    int currentNumberOfUses;
+    int m_CurrentNumberOfUses;
 
     new void Awake()
     {
         base.Awake();
-        currentNumberOfUses = SeedData?.NumberOfUses ?? 3;
+        m_CurrentNumberOfUses = SeedData.NumberOfUses;
     }
 
-    public override bool Use(Interactable targetInteractable)
+    public override UseInfo Use(Interactable targetInteractable)
     {
         if (targetInteractable == null)
         {
@@ -25,21 +25,12 @@ public class SeedPacket : Usable
         {
             if (targetInteractable is FarmTile farmTile)
             {
-                if (!farmTile.Interact(SeedData, 1).DoEndInteraction) --currentNumberOfUses;
+                if (farmTile.Interact(SeedData, 1).OutArguments[0] is AddItemInfo addItemInfo && addItemInfo.WasAdded) --m_CurrentNumberOfUses;
             }
         }
-        return currentNumberOfUses <= 0;
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        return new UseInfo()
+        {
+            FinishedUsing = m_CurrentNumberOfUses <= 0
+        };
     }
 }

@@ -1,36 +1,40 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BTSpray : Usable
 {
 
-    [SerializeField, Min(0)]
-    int numberOfUses = 10;
+    [SerializeField, Min(0), FormerlySerializedAs("numberOfUses")]
+    int m_NumberOfUses = 10;
 
-    int currentNumberOfUses;
+    int m_CurrentNumberOfUses;
 
     new void Awake()
     {
         base.Awake();
-        currentNumberOfUses = numberOfUses;
+        m_CurrentNumberOfUses = m_NumberOfUses;
     }
 
-    public override bool Use(Interactable targetInteractable)
+    public override UseInfo Use(Interactable targetInteractable)
     {
         if (targetInteractable is FarmTile farmTile)
         {
             farmTile.ApplyActivePesticide();
-            --currentNumberOfUses;
+            --m_CurrentNumberOfUses;
         }
         else if (targetInteractable is CropScript crop)
         {
-            EventBus.Instance?.BroadcastEvent(GameEventType.CropActivePestAppliedEvent, crop.gameObject);
-            --currentNumberOfUses;
+            EventBus.Instance?.BroadcastEvent("CropActivePestAppliedEvent", crop.gameObject);
+            --m_CurrentNumberOfUses;
         }
         else if (targetInteractable is PestScript pest)
         {
-            EventBus.Instance?.BroadcastEvent(GameEventType.PestActivePestAppliedEvent, pest.gameObject);
-            --currentNumberOfUses;
+            EventBus.Instance?.BroadcastEvent("PestActivePestAppliedEvent", pest.gameObject);
+            --m_CurrentNumberOfUses;
         }
-        return currentNumberOfUses <= 0;
+        return new UseInfo()
+        {
+            FinishedUsing = m_CurrentNumberOfUses <= 0
+        };
     }
 }

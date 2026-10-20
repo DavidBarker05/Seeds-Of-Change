@@ -1,19 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Util.SystemUtils;
 
 [RequireComponent(typeof(Button))]
 public class QuitButton : MonoBehaviour
 {
-    void Awake()
-    {
-        GetComponent<Button>().onClick.AddListener(
-            () => {
-                #if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
-                #else
-                    Application.Quit();
-                #endif
-            }
-        );  
-    }
+    void Awake() => GetComponent<Button>().onClick.AddListener(() => Sys.Exit(0));
 }
