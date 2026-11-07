@@ -1544,15 +1544,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7516664781170816947, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
       propertyPath: m_URL
-      value: https://sketchfab.com/3d-models/medieval-crate-ce974f5d0fb24ef2917977babb48acb6
+      value: https://assetstore.unity.com/packages/2d/textures-materials/sky/allsky-free-10-sky-skybox-set-146014
       objectReference: {fileID: 0}
     - target: {fileID: 7516664781170816947, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
       propertyPath: m_AssetName
-      value: Medieval Crate
+      value: AllSky Free - 10 Sky / Skybox Set
       objectReference: {fileID: 0}
     - target: {fileID: 7516664781170816947, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
       propertyPath: m_CreatorName
-      value: tumble3D
+      value: rpgwhitelock
       objectReference: {fileID: 0}
     - target: {fileID: 8153667043586000070, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3867,6 +3867,7 @@ RectTransform:
   - {fileID: 1120349523}
   - {fileID: 757963670}
   - {fileID: 290761969}
+  - {fileID: 1190676172}
   m_Father: {fileID: 795939909}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -6980,6 +6981,204 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
   m_PrefabInstance: {fileID: 1120349522}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1190676171
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 703018412}
+    m_Modifications:
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1183
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 111.729996
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 591.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2021.4548
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 504751353320153082, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_text
+      value: By tumble3D
+      objectReference: {fileID: 0}
+    - target: {fileID: 2601405456911591285, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_text
+      value: <color=#006CFF><u><link="https://sketchfab.com/3d-models/medieval-crate-ce974f5d0fb24ef2917977babb48acb6">https://sketchfab.com/3d-models/medieval-crate-ce974f5d0fb24ef2917977babb48acb6</link></u></color>
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645289005021156576, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645289005021156576, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645289005021156576, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1183
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645289005021156576, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 33.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645289005021156576, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 591.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645289005021156576, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -61.449997
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753229365408345379, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_Name
+      value: ThirdPartyCreditPrefab (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548006171830977736, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548006171830977736, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548006171830977736, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1183
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548006171830977736, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 33.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548006171830977736, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 591.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548006171830977736, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -94.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 6576091598990860589, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_text
+      value: Medieval Crate
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516664781170816947, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_URL
+      value: https://sketchfab.com/3d-models/medieval-crate-ce974f5d0fb24ef2917977babb48acb6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516664781170816947, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AssetName
+      value: Medieval Crate
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516664781170816947, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_CreatorName
+      value: tumble3D
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153667043586000070, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153667043586000070, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153667043586000070, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1183
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153667043586000070, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 44.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153667043586000070, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 591.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153667043586000070, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -22.345
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+--- !u!224 &1190676172 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 132995805225933634, guid: 8cf77cd5376750e4384e1c2f8b8b2312, type: 3}
+  m_PrefabInstance: {fileID: 1190676171}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1194049989
 GameObject:
