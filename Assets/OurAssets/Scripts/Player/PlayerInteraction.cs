@@ -72,11 +72,16 @@ public class PlayerInteraction : MonoBehaviour
         if (targetInteraction != null)
         {
             if (targetInteraction is HouseDoor) targetInteraction.Interact(m_FirstPersonPC);
-            else if (targetInteraction is Market)
+            else if (targetInteraction is Market or FamilyFoodStorage)
             {
                 InteractionInfo info = targetInteraction.Interact();
+                if (info.OutArguments == null || info.OutArguments.Length != 1) return;
+                GameObject menuToOpen = null;
                 if (info.OutArguments[0] is MarketMenu marketMenu)
-                    m_MenuPC.OnMenuOpen(m_FirstPersonPC, m_HUD, marketMenu.gameObject);
+                    menuToOpen = marketMenu.gameObject;
+                else if (info.OutArguments[0] is FamilyFoodMenu foodMenu)
+                    menuToOpen = foodMenu.gameObject;
+                if (menuToOpen) m_MenuPC.OnMenuOpen(m_FirstPersonPC, m_HUD, menuToOpen);
             }
             else if (m_CurrentInteraction != null)
             {
