@@ -85,7 +85,7 @@ public class PlayerInteraction : MonoBehaviour
             }
             else if (m_CurrentInteraction != null)
             {
-                if (m_CurrentInteraction is WaterTank) targetInteraction.Interact(m_CurrentInteraction);
+                if (targetInteraction is WaterTank) targetInteraction.Interact(m_CurrentInteraction);
                 else if (m_CurrentInteraction is Holdable) InteractHoldable();
             }
             else

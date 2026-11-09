@@ -28,7 +28,7 @@ public class Holdable : Interactable
     Vector3 lastPos;
     Vector3 releaseVel;
     int startLayer;
-    bool held = false;
+    public bool Held { get; private set; } = false;
     bool isClipping = false;
     bool isStartLayerAlsoGround;
 
@@ -62,7 +62,7 @@ public class Holdable : Interactable
 
     void FixedUpdate()
     {
-        if (!held) return; // Don't do calculations if not being held
+        if (!Held) return; // Don't do calculations if not being held
         if (lastPos == transform.position) return; // Don't do calculations if hasn't moved
         releaseVel = Vector3.ClampMagnitude((transform.position - lastPos) / Time.fixedDeltaTime, maxReleaseVelocity);
         lastPos = transform.position;
@@ -81,10 +81,10 @@ public class Holdable : Interactable
         }
         if (parameters[0] is Transform holdPos && parameters[1] is LayerMask holdLayer && parameters[2] is Collider playerCollider && parameters[3] is Camera cam)
         {
-            held = !held; // If held then release, if not held then hold
-            transform.parent = held ? holdPos : null; // If now held attach to the hold position transform otherwise detach it
-            Physics.IgnoreCollision(_collider, playerCollider, held);
-            if (held)
+            Held = !Held; // If held then release, if not held then hold
+            transform.parent = Held ? holdPos : null; // If now held attach to the hold position transform otherwise detach it
+            Physics.IgnoreCollision(_collider, playerCollider, Held);
+            if (Held)
             {
                 rb.isKinematic = true;
                 rb.detectCollisions = false; // Make sure we can't push other interactables through floor
@@ -106,10 +106,10 @@ public class Holdable : Interactable
                 else if (rb.linearVelocity != releaseVel) rb.linearVelocity = releaseVel;
             }
             int holdLayerIndex = ConvertLayerToIndex(holdLayer);
-            gameObject.layer = held ? holdLayerIndex : startLayer;
+            gameObject.layer = Held ? holdLayerIndex : startLayer;
             foreach (Transform child in childTransforms) child.gameObject.layer = gameObject.layer;
             if (isClipping) isClipping = false;
-            return new InteractionInfo() { EndInteraction = !held }; // Return true when drop, false when pick up
+            return new InteractionInfo() { EndInteraction = !Held }; // Return true when drop, false when pick up
         }
         else
         {
@@ -218,7 +218,7 @@ public class Holdable : Interactable
         if (transform.rotation != startRot) transform.rotation = startRot;
         if (transform.position != startPos) transform.position = startPos;
         if (gameObject.layer != startLayer) gameObject.layer = startLayer;
-        if (held) held = false;
+        if (Held) Held = false;
         if (isClipping) isClipping = false;
     }
 
